@@ -1,0 +1,93 @@
+.title-container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 850px;
+  width: 100%;
+  align-items: center;
+  outline: 3px solid red;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  overflow: hidden;
+}
+
+.a1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 458px;
+  height: 359px;
+  outline: 3px solid red;
+}
+
+.title-part {
+  display: inline-block;
+  opacity: 0; /* Стартовая невидимость */
+  position: relative;
+  animation: fly-in 1s ease-out forwards;
+  animation-delay: var(--delay, 0s); /* Используем переменную */
+  margin: 10px;
+}
+
+.title-part span {
+  color: aliceblue;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.title-part1 {
+  color: aliceblue;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.title-part:nth-child(1) {
+  animation-name: fly-in-left; /* Анимация для нечётных */
+}
+
+.title-part:nth-child(2) {
+  animation-name: fly-in-right; /* Анимация для чётных */
+}
+
+.title-part1 {
+  animation-name: fly-in-right; /* Анимация для чётных */
+}
+
+.title-part:nth-child(2) {
+  animation-name: fly-in-bottom; /* Анимация для чётных */
+}
+
+@keyframes fly-in-left {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fly-in-right {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fly-in-bottom {
+  0% {
+    transform: translateY(100px); /* Стартовая позиция ниже */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0); /* Финальная позиция */
+    opacity: 1;
+  }
+}

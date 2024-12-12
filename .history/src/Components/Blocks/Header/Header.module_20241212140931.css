@@ -1,0 +1,14 @@
+.headerContainer{
+    height: 98px;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.navigate{
+    display: flex;
+    height: 98px;
+    align-items: center;
+    justify-content: space-between;
+}
+

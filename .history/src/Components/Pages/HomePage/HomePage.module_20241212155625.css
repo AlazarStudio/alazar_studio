@@ -1,0 +1,21 @@
+.title-container {
+    display: inline-flex;
+  }
+  
+  .title-part {
+    animation: fly-in 1s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+  
+  @keyframes fly-in {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  

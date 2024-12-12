@@ -1,0 +1,49 @@
+.title-container {
+  display: inline-flex;
+  position: relative;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  overflow: hidden;
+}
+
+.title-part {
+  display: inline-block;
+  animation: fly-in 1s ease-out forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.title-part:nth-child(odd) {
+  animation-name: fly-in-left;
+}
+
+.title-part:nth-child(even) {
+  animation-name: fly-in-right;
+}
+
+.title-part {
+  animation-delay: var(--delay);
+}
+
+@keyframes fly-in-left {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fly-in-right {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

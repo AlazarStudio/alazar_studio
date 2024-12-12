@@ -1,0 +1,16 @@
+.headerContainer{
+    height: 98px;
+    align-items: center;
+    justify-content: center;
+    outline: 3px solid red;
+    background-color: black;
+}
+
+.navigate{
+    display: flex;
+    height: 98px;
+    align-items: center;
+    justify-content: space-between;
+    color: aliceblue;
+    outline: 3px solid red;
+}

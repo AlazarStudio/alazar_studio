@@ -1,0 +1,95 @@
+.headerContainer {
+    height: 98px;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+.navigate {
+    display: flex;
+    height: 98px;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+}
+
+.navigate a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.navigate img {
+    width: 176px;
+    height: 49px;
+    cursor: pointer;
+}
+
+
+.menuToggle {
+    display: none; /* Скрыть кнопку по умолчанию */
+    font-size: 24px; /* Размер иконки меню */
+    cursor: pointer; /* Указатель при наведении */
+}
+
+/* Показываем кнопку меню на мобильных устройствах */
+@media (max-width: 768px) {
+    .menuToggle {
+        display: block; /* Показываем кнопку меню */
+    }
+
+    .navigate {
+        display: none; /* Скрываем меню по умолчанию */
+        flex-direction: column; /* Вертикальное расположение */
+        width: 100%; /* Полная ширина */
+        background-color: black; /* Фон меню */
+    }
+
+    .navigate.showMenu {
+        display: flex; /* Показываем меню при открытии */
+    }
+}
+
+
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+    .navigate {
+        flex-direction: column; /* Изменение направления на колонку */
+        height: auto; /* Автоматическая высота */
+        align-items: flex-start; /* Выровнять элементы по левому краю */
+    }
+
+    .navigate a {
+        font-size: 14px; /* Уменьшение размера шрифта */
+        padding: 10px 0; /* Добавление отступов для кликабельности */
+    }
+
+    .navigate img {
+        width: 150px; /* Уменьшение размера логотипа */
+        height: auto; /* Автоматическая высота */
+    }
+
+    .menuToggle {
+        display: block; /* Показываем кнопку меню */
+    }
+
+    .navigate {
+        display: none; /* Скрываем меню по умолчанию */
+        flex-direction: column; /* Вертикальное расположение */
+        width: 100%; /* Полная ширина */
+        background-color: black; /* Фон меню */
+    }
+
+    .navigate.showMenu {
+        display: flex; /* Показываем меню при открытии */
+    }
+}

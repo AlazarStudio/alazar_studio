@@ -1,0 +1,114 @@
+.Container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 815px;
+  outline: 3px solid red;
+}
+
+.ContainerLeft {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding-left: 100px;
+  align-items: center;
+  justify-content: center;
+  outline: 3px solid red;
+}
+
+.ContainerLeft img:first-of-type {
+  display: flex;
+  width: 238px;
+  height: 68px;
+  margin-top: -170px;
+  margin-bottom: 40px;
+  outline: 3px solid red;
+}
+
+.ContainerLeft img:nth-of-type(2) {
+  width: 307px;
+  height: 385px;
+  outline: 3px solid red;
+}
+
+.ContainerRight {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  outline: 3px solid red;
+}
+
+.ContainerRight img {
+    width: 380px;
+    height: 600px;
+    transition: transform 0.3s ease-out; /* Плавность движения */
+  }
+
+.ContainerRight img:first-of-type {
+    margin-left: 90px;
+    margin-top: 400px;
+}
+
+.ContainerRight img:nth-of-type(2){
+    margin-left: 100px;
+    margin-top: -300px;
+}
+
+.ContainerRight img:nth-of-type(3){
+    margin-left: 100px;
+    margin-right: 20px;
+    margin-top: 500px;
+}
+
+.ContainerBottom {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    color: #fff;
+    outline: 3px solid red;
+    bottom: 0;
+}
+
+
+.ContainerBottom1{
+    display: flex;
+justify-content: center;
+    height: 50%;
+    width: 30%;
+    align-items: center;
+    font-size: 43px;
+    font-weight: 500;
+    outline: 3px solid red;
+}
+
+.ContainerBottom2{
+    display: flex;
+    height: 50%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    outline: 3px solid red;
+}
+
+.ContainerBottom2 span {
+    margin-left: 77px;
+    font-size: 20px;
+}
+
+.ContainerBottom2 button {
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: inherit;
+  color: #fff;
+  border: 0.2px solid #848484;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.ContainerBottom2 button:hover{
+    bac
+}
+
+

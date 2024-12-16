@@ -13,9 +13,8 @@
 .containerBaloon1 {
   position: absolute;
   width: 284px;
-  left: 1400px;
+  left: 100px;
   top: 840px;
-  /* z-index: 999; */
   animation: moveText 16s linear infinite;
 }
 

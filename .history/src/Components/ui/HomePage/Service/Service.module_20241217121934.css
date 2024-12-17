@@ -1,0 +1,10 @@
+.container {
+    width: 100%;
+    height: 670px;
+    outline: 3px solid red;
+}
+
+.containerLeft{
+    width: 300;
+    outline: 3px solid red;
+}

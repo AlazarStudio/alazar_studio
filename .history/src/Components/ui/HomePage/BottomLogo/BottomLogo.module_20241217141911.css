@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.container img:first-of-type{
+    width: 140px;
+    height: 120px;
+}
+
+.con

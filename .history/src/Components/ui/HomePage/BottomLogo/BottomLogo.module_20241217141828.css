@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+.container img:first-of-type{
+    
+}

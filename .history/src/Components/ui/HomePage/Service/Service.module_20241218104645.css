@@ -29,10 +29,9 @@
 .containerRight {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
   padding-left: 40px;
-  /* outline: 3px solid red; */
+  outline: 3px solid red;
 }
 
 .containerRightTop {
@@ -46,8 +45,7 @@
  display: grid;
  width: 1000px;
  grid-template-columns: repeat(2, 1fr); /* Два столбца */
- gap: 50px; /* Отступы между элементами */
- 
+ gap: 30px; /* Отступы между элементами */
 }
 
 .containerRightBottomBlock {

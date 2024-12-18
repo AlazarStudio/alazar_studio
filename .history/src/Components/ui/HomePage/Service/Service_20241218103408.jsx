@@ -5,7 +5,7 @@ function Service({ children, ...props }) {
   return (
     <>
       <div className={classes.container}>
-        <div className={classes.containerCenter}>
+        <div className=''
        <div className={classes.containerLeft}>
         <img src='/images/Service.png'/>
        </div>
@@ -39,7 +39,6 @@ function Service({ children, ...props }) {
             <span>ВИДЕО-ПРОДАКШН</span>
           </div>
         </div>
-       </div>
        </div>
       </div>
     </>

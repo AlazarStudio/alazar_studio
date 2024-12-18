@@ -40,7 +40,7 @@ function Service({ children, ...props }) {
           </div>
         </div>
        </div>
-       </div>
+       
       </div>
     </>
   );

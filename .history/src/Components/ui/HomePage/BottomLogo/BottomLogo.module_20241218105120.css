@@ -5,6 +5,7 @@
     align-items: center;
     color: #fff;
     margin-top: 150px;
+    overflow: hidden;
 }
 
 .container img:first-of-type{
@@ -39,11 +40,11 @@
     position: absolute;
     left: 0;
     height: 600px;
-    top: -200px;
+    top: -20px;
 }
 
 .container img:nth-of-type(4){
     position: absolute;
     right: 0;
-    top: -400px;
+    top: -200px;
 }

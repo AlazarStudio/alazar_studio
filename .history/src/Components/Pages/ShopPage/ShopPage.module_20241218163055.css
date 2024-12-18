@@ -1,0 +1,16 @@
+.container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    outline: 3px solid red;
+}
+
+.containerRightBottom {
+    display: grid;
+    width: 1000px;
+    jcs
+    grid-template-columns: repeat(2, 1fr); /* Два столбца */
+    gap: 50px; /* Отступы между элементами */
+    
+   }

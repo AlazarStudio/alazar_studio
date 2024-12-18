@@ -1,0 +1,10 @@
+
+
+.containerShop {
+    display: grid;
+    width: 100%;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
+    outline: 3px solid red;
+}
+

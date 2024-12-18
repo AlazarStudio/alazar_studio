@@ -1,0 +1,8 @@
+.card {
+  width: 600px;
+  height: 80px;
+  color: aliceblue;
+  margin-top: 40px;
+  outline: 3px solid red;
+}
+

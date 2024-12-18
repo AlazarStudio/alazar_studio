@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px;
+  margin-top: 10px;
+  outline: 3px solid blue;
+}
+
+.containerShop {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /* gap: 0px; */
+  justify-content: space-between;
+  /* grid-template-columns: repeat(2, 1fr); */
+  margin-top: 10px;
+  padding-left: 30px;
+  padding-right: 30pxw;
+  /* outline: 3px solid blue; */
+}

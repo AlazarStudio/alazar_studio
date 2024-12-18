@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import Non_Found_Page from './Components/Pages/Non_Found_Page';
 import Layout from './Components/Standart/Layout/Layout';
 import HomePage from './Components/Pages/HomePage/HomePage';
-import CasesPage from './Components/Pages/Cases/CasesPage';
 
 function App() {
   return (
@@ -14,7 +13,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/* <Route index element={<Main_Page />} /> */}
           <Route path="/" element={<HomePage />} />
-          <Route path="/cases" element={<CasesPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="*" element={<Non_Found_Page />} />
         </Route>
       </Routes>

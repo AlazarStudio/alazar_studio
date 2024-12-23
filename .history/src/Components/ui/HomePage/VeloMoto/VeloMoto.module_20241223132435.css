@@ -1,0 +1,208 @@
+.container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 815px;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/images/VeloBack.png');
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.container img:first-of-type {
+  position: absolute;
+  left: 230px;
+  top: 67px;
+  width: 184px;
+  height: 70px;
+}
+
+.container img:nth-of-type(2) {
+  position: absolute;
+  left: 1400px;
+  height: 240px;
+  animation: moveText 9s linear infinite;
+  align-items: center;
+}
+
+/* Анимация для движения текста */
+@keyframes moveText {
+  0% {
+    left: 1460px; /* Начальное положение за пределами экрана */
+  }
+  100% {
+    left: -3390px; /* Конечная позиция - за пределами экрана слева */
+  }
+}
+
+.container img:nth-of-type(3) {
+  position: absolute;
+  height: 660px;
+  z-index: 99999;
+  align-items: center;
+}
+
+.ContainerBottom {
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  color: #fff;
+  /* outline: 3px solid red; */
+  bottom: 0;
+  background: linear-gradient(to bottom, #444444, #343434);
+}
+
+.ContainerBottom1 {
+  display: flex;
+  height: 50%;
+  align-items: center;
+  font-size: 43px;
+  font-weight: 500;
+  margin-left: 70px;
+  /* outline: 3px solid red; */
+}
+
+.ContainerBottom2 {
+  display: flex;
+  height: 50%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  /* outline: 3px solid red; */
+}
+
+.ContainerBottom2 span {
+  margin-left: 70px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.ContainerBottom2 button {
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: inherit;
+  color: #fff;
+  border: 0.2px solid #848484;
+  margin-right: 70px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ContainerBottom2 button:hover {
+  background-color: #e5097f;
+  border: none;
+}
+
+.ContainerMediaBottom {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 555px;
+  }
+
+  .container img:first-of-type {
+    position: absolute;
+    left: 50px;
+    top: 27px;
+    width: 84px;
+    height: 30px;
+  }
+
+  .container img:nth-of-type(2) {
+    position: absolute;
+    left: 1400px;
+    top: 180px;
+    height: 90px;
+    animation: moveText 6s linear infinite;
+    align-items: center;
+  }
+
+  /* Анимация для движения текста */
+  @keyframes moveText {
+    0% {
+      left: 770px; /* Начальное положение за пределами экрана */
+    }
+    100% {
+      left: -1690px; /* Конечная позиция - за пределами экрана слева */
+    }
+  }
+
+  .container img:nth-of-type(3) {
+    position: absolute;
+    height: 300px;
+    top: 70px;
+    z-index: 99999;
+    align-items: center;
+  }
+
+  .ContainerBottom {
+    display: none;
+  }
+
+  .ContainerMediaBottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 220px;
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    );
+  }
+
+  .ContainerMediaBottom1 {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    width: 100%;
+    margin-left: 30px;
+    /* outline: 3px solid red; */
+  }
+
+  .ContainerMediaBottom1 span:first-of-type {
+    font-size: 27px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .ContainerMediaBottom1 span:nth-of-type(2) {
+    font-size: 17px;
+    font-weight: 400;
+  }
+
+  .ContainerMediaBottom2 {
+    display: flex;
+    height: 50%;
+    width: 100%;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    padding-left: 20px;
+    /* outline: 3px solid red; */
+  }
+
+  .ContainerMediaBottom2 button {
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 7px;
+    background-color: inherit;
+    color: #fff;
+    border: 0.2px solid #848484;
+    margin-right: 70px;
+    cursor: pointer;
+    background-color: #e5097f;
+    border: none;
+    /* transition: background-color 0.2s ease-in-out; */
+  }
+}

@@ -1,0 +1,52 @@
+.container2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 407px;
+  overflow-y: scroll; /* Сохраняем вертикальную прокрутку */
+  scroll-snap-type: y mandatory; /* Привязка к элементам */
+  scrollbar-width: none; /* Скрываем ползунок в Firefox */
+}
+
+.container2::-webkit-scrollbar {
+  display: none; /* Скрываем ползунок в Chrome, Safari */
+}
+
+.container2 img {
+  width: 100%;
+  height: 407px; /* Устанавливаем высоту равной контейнеру */
+  object-fit: cover; /* Сохраняем пропорции изображений */
+  scroll-snap-align: center; /* Центрируем изображение */
+}
+
+.containerMedia {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container2 {
+    display: none;
+  }
+
+  .containerMedia {
+    display: block; 
+    width: 100%;
+    height: 507px;
+    overflow: hidden;
+    overflow-x: scroll; /* Сохраняем горизонтальную прокрутку */
+    scroll-snap-type: x mandatory; /* Привязка по горизонтали */
+    scrollbar-width: none; /* Скрываем ползунок в Firefox */
+  }
+
+  .containerMedia img {
+    display: flex;
+    width: 100%;
+    
+    /* object-fit: cover;  */
+    /* scroll-snap-align: center;  */
+  }
+
+  .containerMedia::-webkit-scrollbar {
+    display: none; /* Скрываем ползунок в Chrome, Safari */
+  }
+}

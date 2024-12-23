@@ -189,7 +189,7 @@
     font-weight: 400;
     color: #fff;
     margin-bottom: 5px;
-    margin-right: 6px;
+    outline: 3px solid red;
   }
 
   .container2 span:nth-of-type(2) {
@@ -214,20 +214,18 @@
     margin-bottom: 50px;
   }
 
-  .container2Span span:first-of-type {
-    font-size: 28px !important;
+  .container2 span:nth-of-type(3) {
+    font-size: 28px;
     font-weight: 500;
     margin: 5px;
     color: #fff;
   }
 
-  .container2Span span:nth-of-type(2) {
-    font-size: 28px !important;
-    font-weight: 500;
-    color: #e5097f;
+  .container2 span:nth-of-type(4) {
+    color: #fff;
   }
 
-  .container2Span span:nth-of-type(3) {
+  .container2 span:nth-of-type(5) {
     font-size: 28px;
     font-weight: 500;
     margin: 5px;

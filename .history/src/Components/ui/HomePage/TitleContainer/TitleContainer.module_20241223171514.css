@@ -1,4 +1,5 @@
 .container1 {
+  
 }
 
 .title-container {
@@ -11,7 +12,7 @@
   font-size: 40px;
   font-weight: bold;
   color: #fff;
-
+ 
   /* overflow: hidden; */
 }
 
@@ -165,7 +166,7 @@
     display: none;
   }
 
-  .container2 {
+  .container2{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -173,64 +174,63 @@
     /* outline: 3px solid red; */
   }
 
-  .container2 img:first-of-type {
+  .container2 img:first-of-type{
     width: 178px;
     margin-top: 90px;
     margin-bottom: 50px;
   }
 
-  .container2 img:nth-of-type(2) {
+  .container2 img:nth-of-type(2){
     width: 263px;
-    margin-bottom: 40px;
-  }
-
-  .container2 span:first-of-type {
-    font-size: 16px !important;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 5px;
-    margin-right: 6px;
-  }
-
-  .container2 span:nth-of-type(2) {
-    font-size: 16px !important;
-    color: #fff;
-  }
-
-  .container2 button {
-    width: 263px;
-    height: 55px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #fff;
-    background-color: #e5097f;
-    border-radius: 8px;
-    border: none;
-    margin-top: 40px;
-  }
-
-  .container2Span {
-    margin-top: 100px;
     margin-bottom: 50px;
   }
 
-  .container2Span span:first-of-type {
-    font-size: 28px !important;
-    font-weight: 500;
-    margin: 5px;
-    color: #fff;
-  }
+.container2 span:firs{
+  font-size: 16px !important;
+  font-weight: 400;
+  color: #fff ;
+  outline: 3px solid red;
+}
 
-  .container2Span span:nth-of-type(2) {
-    font-size: 28px !important;
-    font-weight: 500;
-    color: #e5097f;
-  }
+.container2 span:nth-of-type(2){
+ 
+  color:#e5097f ;
 
-  .container2Span span:nth-of-type(3) {
-    font-size: 28px;
-    font-weight: 500;
-    margin: 5px;
-    color: #fff;
-  }
+}
+
+.container2 button{
+  width: 263px;
+  height: 55px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #e5097f;
+  border-radius: 8px;
+  border: none;
+  margin-top: 40px;
+}
+
+.container2Span{
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.container2 span:nth-of-type(3){
+  font-size: 28px;
+  font-weight: 500;
+  margin: 5px;
+  color: #fff;
+}
+
+.container2 span:nth-of-type(4){
+  color: #fff;
+}
+
+.container2 span:nth-of-type(5){
+  font-size: 28px;
+  font-weight: 500;
+  margin: 5px;
+  color: #fff;
+}
+
 }

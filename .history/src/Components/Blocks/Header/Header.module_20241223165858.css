@@ -6,7 +6,7 @@
   background-color: #131313;
   position: sticky;
   top: 0;
-  width: 99%;
+  width: 100%;
   left: 0;
   z-index: 10000000000;
 }
@@ -49,15 +49,16 @@
   display: none;
 }
 
-/* Для мобильных устройств */
+/* Медиа-запрос для мобильных устройств */
 @media (max-width: 768px) {
   .media {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 72px;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 37px;
+    padding-right: 57px;
+    outline: 3px solid red;
     background-color: #131313;
   }
 
@@ -93,6 +94,17 @@
     justify-content: space-between;
   }
 
+  .menuToggle {
+    display: block;
+    font-size: 24px; /* Размер иконки меню */
+    cursor: pointer;
+    width: 23px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    /* Указатель при наведении */
+  }
+
   .navigate {
     display: none; /* Скрываем меню по умолчанию */
     flex-direction: column;
@@ -102,8 +114,6 @@
 
   .navigate.showMenu {
     display: flex;
-    transform: translateX(0); /* Применяем анимацию для появления */
-    transition: transform 0.8s ease-in-out;
   }
 
   .navigate.showMenu img {
@@ -114,18 +124,12 @@
     position: absolute;
     width: 350px;
     top: 100%; /* Расположение под кнопкой меню */
-    left: 0; /* Слева от кнопки */
-    background-color: gray;
-    /* border: 1px solid gray; */
+    right: 0;
+    background-color: black;
+    border: 1px solid gray;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 10px;
-    transform: translateX(-100%); /* Скрываем меню за пределами экрана */
-    transition: transform 0.3s ease-in-out; /* Добавляем анимацию */
-  }
-
-  .dropdownMenu.show {
-    transform: translateX(0); /* При открытии меню оно будет сдвигаться */
   }
 
   .dropdownMenu ul {

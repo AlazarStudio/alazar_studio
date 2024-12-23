@@ -146,6 +146,7 @@
   animation: fly-in 1.5s ease-out forwards;
   animation-delay: var(--delay, 0s);
   margin: 10px;
+  
 }
 
 .title-part2 span:nth-of-type(2) {
@@ -177,6 +178,7 @@
     width: 178px;
     margin-top: 90px;
     margin-bottom: 50px;
+    
   }
 
   .container2 img:nth-of-type(2) {
@@ -215,16 +217,15 @@
   }
 
   .container2Span span:first-of-type {
-    font-size: 28px !important;
-    font-weight: 500;
+    font-size: 28px ;
+    font-weight: 400;
     margin: 5px;
     color: #fff;
   }
 
   .container2Span span:nth-of-type(2) {
-    font-size: 28px !important;
-    font-weight: 500;
-    color: #e5097f;
+    font-size: 28px;
+    color: #fff;
   }
 
   .container2Span span:nth-of-type(3) {

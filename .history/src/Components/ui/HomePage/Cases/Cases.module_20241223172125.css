@@ -58,10 +58,10 @@
   .container {
     display: flex;
     width: 100%;
-    height: 70px;
+    height: 120px;
+    margin-top: 40px;
     align-items: center;
     justify-content: center;
-    margin: 0;
   }
 
   .containerTop {
@@ -70,12 +70,12 @@
     align-items: center;
     justify-content: space-between;
     /* outline: 3px solid red; */
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 80px;
+    padding-right: 80px;
   }
 
   .containerTop span {
-    font-size: 28px;
+    font-size: 49px;
     font-weight: 500;
   }
 
@@ -90,7 +90,7 @@
   }
 
   .containerTop img {
-    width: 60px;
+    width: 10px;
     cursor: pointer;
   }
 }

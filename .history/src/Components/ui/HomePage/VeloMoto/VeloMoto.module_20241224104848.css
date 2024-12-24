@@ -104,40 +104,40 @@
     display: flex;
     position: relative;
     width: 100%;
-    height: 290px;
+    height: 555px;
   }
 
   .container img:first-of-type {
     position: absolute;
-    left: 38px;
-    top: 20px;
-    width: 56px;
-    height: 21px;
+    left: 50px;
+    top: 27px;
+    width: 84px;
+    height: 30px;
   }
 
   .container img:nth-of-type(2) {
     position: absolute;
     left: 1400px;
-    top: 80px;
-    height: 70px;
-    animation: moveText 7s linear infinite;
+    top: 180px;
+    height: 90px;
+    animation: moveText 6s linear infinite;
     align-items: center;
   }
 
   /* Анимация для движения текста */
   @keyframes moveText {
     0% {
-      left: 460px; /* Начальное положение за пределами экрана */
+      left: 770px; /* Начальное положение за пределами экрана */
     }
     100% {
-      left: -1010px; /* Конечная позиция - за пределами экрана слева */
+      left: -1690px; /* Конечная позиция - за пределами экрана слева */
     }
   }
 
   .container img:nth-of-type(3) {
     position: absolute;
-    height: 150px;
-    top: 27px;
+    height: 300px;
+    top: 70px;
     z-index: 99999;
     align-items: center;
   }
@@ -162,8 +162,7 @@
     flex-direction: column;
     height: 30%;
     width: 100%;
-    padding: 6px 0 0 30px;
-    /* margin-left: 30px; */
+    margin-left: 30px;
     /* outline: 3px solid red; */
   }
 
@@ -171,37 +170,33 @@
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 10px;
-    /* padding: 3px; */
   }
 
   .ContainerMediaBottom1 span:nth-of-type(2) {
     font-size: 12px;
-    /* flex-wrap: wrap; */
-    /* padding: 3px; */
+    flex-wrap: wrap;
+    pad
     font-weight: 500;
   }
 
   .ContainerMediaBottom2 {
     display: flex;
-    height: 74%;
     width: 100%;
-    align-items: center;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
-    justify-content: space-between;
-   /* padding-top: 15px; */
-    /* padding-left: 50px; */
+    padding-left: 20px;
     /* outline: 3px solid red; */
-    margin-top: 10px;
   }
 
   .ContainerMediaBottom2 button {
-    font-size: 10px;
+    font-size: 16px;
     padding: 10px;
+    margin-top: 25px;
     border-radius: 7px;
     background-color: inherit;
     color: #fff;
     border: 0.2px solid #848484;
-  margin: 0 35px 0 35px;
+    margin-right: 70px;
     cursor: pointer;
     background-color: #e5097f;
     border: none;

@@ -6,7 +6,7 @@
   background-color: #131313;
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 99%;
   left: 0;
   z-index: 10000000000;
 }
@@ -14,12 +14,15 @@
 .navigate {
   display: flex;
   width: 100%;
+  top: 0;
   height: 98px;
   align-items: center;
   justify-content: space-between;
   list-style-type: none;
   padding-left: 210px;
   padding-right: 210px;
+  position: sticky;
+  z-index: 10000000000;
 }
 
 .navigate a {
@@ -49,13 +52,10 @@
   display: none;
 }
 
-.dropdownMenu {
-  display: none;
-}
-
 /* Для мобильных устройств */
 @media (max-width: 768px) {
   .media {
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -115,7 +115,6 @@
   }
 
   .dropdownMenu {
-    display: flex;
     position: absolute;
     width: 350px;
     top: 100%; /* Расположение под кнопкой меню */

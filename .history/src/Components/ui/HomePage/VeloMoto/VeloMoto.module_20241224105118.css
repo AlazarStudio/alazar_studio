@@ -1,83 +1,65 @@
-.Container {
+.container {
   display: flex;
   position: relative;
   width: 100%;
   height: 815px;
-  background-color: #000000;
-  /* outline: 3px solid red; */
-}
-
-.ContainerLeft {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  padding-left: 100px;
   align-items: center;
   justify-content: center;
-  /* outline: 3px solid red; */
-}
-
-.ContainerLeft img:first-of-type {
-  display: flex;
-  width: 238px;
-  height: 68px;
-  margin-top: -170px;
-  margin-bottom: 40px;
-  /* outline: 3px solid red; */
-}
-
-.ContainerLeft img:nth-of-type(2) {
-  width: 307px;
-  height: 385px;
-  /* outline: 3px solid red; */
-}
-
-.ContainerRight {
-  display: flex;
+  background-image: url('/images/VeloBack.png');
+  font-weight: bold;
   overflow: hidden;
-  position: relative;
-  height: 100%;
-  /* outline: 3px solid red; */
 }
 
-.ContainerRight img {
-  width: 380px;
-  height: 600px;
-  transition: transform 0.3s ease-out; /* Плавность движения */
+.container img:first-of-type {
+  position: absolute;
+  left: 230px;
+  top: 67px;
+  width: 184px;
+  height: 70px;
 }
 
-.ContainerRight img:first-of-type {
-  margin-left: 90px;
-  margin-top: 400px;
+.container img:nth-of-type(2) {
+  position: absolute;
+  left: 1400px;
+  height: 240px;
+  animation: moveText 9s linear infinite;
+  align-items: center;
 }
 
-.ContainerRight img:nth-of-type(2) {
-  margin-left: 100px;
-  margin-top: -300px;
+/* Анимация для движения текста */
+@keyframes moveText {
+  0% {
+    left: 1460px; /* Начальное положение за пределами экрана */
+  }
+  100% {
+    left: -3390px; /* Конечная позиция - за пределами экрана слева */
+  }
 }
 
-.ContainerRight img:nth-of-type(3) {
-  margin-left: 100px;
-  margin-right: 20px;
-  margin-top: 500px;
+.container img:nth-of-type(3) {
+  position: absolute;
+  height: 660px;
+  z-index: 99999;
+  align-items: center;
 }
 
 .ContainerBottom {
   width: 100%;
-  height: 200px;
+  height: 150px;
   position: absolute;
   color: #fff;
   /* outline: 3px solid red; */
   bottom: 0;
+  background: linear-gradient(to bottom, #444444, #343434);
 }
 
 .ContainerBottom1 {
   display: flex;
   height: 50%;
-  margin-left: 70px;
   align-items: center;
   font-size: 43px;
   font-weight: 500;
+  margin-left: 70px;
   /* outline: 3px solid red; */
 }
 
@@ -113,73 +95,75 @@
   border: none;
 }
 
-.ContainerMedia {
+.ContainerMediaBottom {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .Container {
-    display: none;
-  }
-
-  .ContainerMedia {
+  .container {
     display: flex;
     position: relative;
     width: 100%;
-    height: 290px;
-    background-color: #000000;
-    /* outline: 3px solid red; */
+    height: 555px;
   }
 
-  .ContainerMediaRight {
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-    /* outline: 3px solid red; */
+  .container img:first-of-type {
+    position: absolute;
+    left: 50px;
+    top: 27px;
+    width: 84px;
+    height: 30px;
   }
 
-  .ContainerMediaRight img {
-    width: 112px;
-    height: 220px;
-    transition: transform 0.3s ease-out; /* Плавность движения */
+  .container img:nth-of-type(2) {
+    position: absolute;
+    left: 1400px;
+    top: 180px;
+    height: 90px;
+    animation: moveText 6s linear infinite;
+    align-items: center;
   }
 
-  .ContainerMediaRight img:first-of-type {
-    margin-left: 20px;
-    margin-top: 290px;
+  /* Анимация для движения текста */
+  @keyframes moveText {
+    0% {
+      left: 770px; /* Начальное положение за пределами экрана */
+    }
+    100% {
+      left: -1690px; /* Конечная позиция - за пределами экрана слева */
+    }
   }
 
-  .ContainerMediaRight img:nth-of-type(2) {
-    margin-left: 20px;
-    margin-top: -210px;
+  .container img:nth-of-type(3) {
+    position: absolute;
+    height: 300px;
+    top: 70px;
+    z-index: 99999;
+    align-items: center;
   }
 
-  .ContainerMediaRight img:nth-of-type(3) {
-    margin-left: 20px;
-    margin-right: 30px;
-    margin-top: 390px;
+  .ContainerBottom {
+    display: none;
   }
 
   .ContainerMediaBottom {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 130px;
     position: absolute;
     color: #fff;
     bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    );
+    background: linear-gradient(to bottom, #444444, #343434);
   }
 
   .ContainerMediaBottom1 {
     display: flex;
     flex-direction: column;
     height: 30%;
-
-    margin-left: 30px;
+    width: 100%;
+    padding: 20px 0 0 30px;
+    /* margin-left: 30px; */
     /* outline: 3px solid red; */
   }
 
@@ -187,10 +171,13 @@
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 10px;
+    /* padding: 3px; */
   }
 
   .ContainerMediaBottom1 span:nth-of-type(2) {
     font-size: 12px;
+    /* flex-wrap: wrap; */
+    /* padding: 3px; */
     font-weight: 500;
   }
 

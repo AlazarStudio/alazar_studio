@@ -152,7 +152,7 @@
 
   .ContainerMediaRight img:nth-of-type(2) {
     margin-left: 20px;
-    margin-top: -210px;
+    margin-top: -29a0px;
   }
 
   .ContainerMediaRight img:nth-of-type(3) {
@@ -196,25 +196,24 @@
 
   .ContainerMediaBottom2 {
     display: flex;
-    height: 74%;
+    /* height: 50%; */
     width: 100%;
     align-items: center;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
-    justify-content: space-between;
-   /* padding-top: 15px; */
-    /* padding-left: 50px; */
+    padding-left: 20px;
     /* outline: 3px solid red; */
-    margin-top: 10px;
   }
 
   .ContainerMediaBottom2 button {
     font-size: 10px;
     padding: 10px;
+    margin-top: 15px;
     border-radius: 7px;
     background-color: inherit;
     color: #fff;
     border: 0.2px solid #848484;
-  margin: 0 35px 0 35px;
+    margin-right: 70px;
     cursor: pointer;
     background-color: #e5097f;
     border: none;

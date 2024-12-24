@@ -1,12 +1,12 @@
 .headerContainer {
-  /* display: flex; */
+  display: flex;
   height: 98px;
   align-items: center;
   justify-content: center;
   background-color: #131313;
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 99%;
   left: 0;
   z-index: 10000000000;
 }

@@ -196,16 +196,20 @@
 
   .ContainerMediaBottom2 {
     display: flex;
+    flex-wrap: wrap; /* Разрешает оборачивание элементов */
+    justify-content: space-between; /* Распределяет элементы по строкам */
+    padding-top: 15px;
+    padding-left: 20px;
+    margin-top: 10px;
     height: 74%;
     width: 100%;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
-   /* padding-top: 15px; */
-    /* padding-left: 50px; */
-    /* outline: 3px solid red; */
-    margin-top: 10px;
   }
+  
+  .ContainerMediaBottom2 > * {
+    width: calc(49% - 10px); /* Устанавливаем ширину каждого элемента на 50%, с учетом отступа между элементами */
+    margin-bottom: 10px; /* Отступ между строками */
+  }
+  
 
   .ContainerMediaBottom2 button {
     font-size: 10px;
@@ -214,7 +218,7 @@
     background-color: inherit;
     color: #fff;
     border: 0.2px solid #848484;
-  margin: 0 35px 0 35px;
+    margin-right: 70px;
     cursor: pointer;
     background-color: #e5097f;
     border: none;

@@ -1,0 +1,12 @@
+.container4 {
+  width: 100%;
+  color: #fff;
+}
+
+.container4Title span:first-of-type{
+font-size: 96px;
+color: #fff;
+}
+
+@media (max-width: 768px) {
+}

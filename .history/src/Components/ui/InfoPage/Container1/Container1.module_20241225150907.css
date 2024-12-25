@@ -1,0 +1,25 @@
+.container1 {
+  display: flex;
+  align-items: center;
+  color: aliceblue;
+}
+
+.container1 img {
+  width: 908px;
+  height: 500px;
+  margin-left: 20px;
+  margin-right: 50px;
+  outline: 3px solid red;
+}
+
+.container1 span {
+    display: flex;
+  width: 636px;
+  height: 330px;
+  font-size: 20px;
+  font-weight: 400;
+  outline: 3px solid red;
+}
+
+@media (max-width: 768px) {
+}

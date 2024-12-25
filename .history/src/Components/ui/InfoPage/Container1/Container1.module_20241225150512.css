@@ -1,0 +1,10 @@
+.container1{
+    display: flex;
+    color: aliceblue;
+}
+
+.container1 img{
+    width: ;
+}
+
+@media (max-width: 768px) {}

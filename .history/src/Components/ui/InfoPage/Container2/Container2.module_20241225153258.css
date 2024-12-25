@@ -1,0 +1,45 @@
+.container2{
+    width: 100%;
+    margin-top: 30px;
+    color: aliceblue;
+}
+
+.container2Title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    padding-right: 150px;
+}
+
+.container2Title span:first-of-type{
+    font-size: 96px;
+    font-weight: 500;
+    color: #E5097F;
+}
+
+.container2Title span:nth-of-type(2){
+    font-size: 96px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.container2Info{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.
+
+.container2InfoBLockElement img{
+    width: 32px;
+    height: 32px;
+}
+
+.container2InfoBLockElement span{}
+
+
+
+@media (max-width: 768px) {}

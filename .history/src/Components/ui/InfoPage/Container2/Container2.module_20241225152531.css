@@ -1,0 +1,23 @@
+.container2{
+    width: 100%;
+    margin-top: 30px;
+    color: aliceblue;
+}
+
+.container2Title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    padding-right: 200px;
+    outline: 3px solid red;
+}
+
+.container2Title span:first-of-type{
+    font-size: 96px;
+    
+}
+
+
+
+@media (max-width: 768px) {}

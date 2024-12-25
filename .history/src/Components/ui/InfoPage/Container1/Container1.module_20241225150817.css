@@ -1,0 +1,23 @@
+.container1 {
+  display: flex;
+  align-items: center;
+  color: aliceblue;
+}
+
+.container1 img {
+  width: 908px;
+  height: 500px;
+  margin-left: 20px;
+  margin
+  outline: 3px solid red;
+}
+
+.container1 span {
+  width: 636px;
+  height: 330px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+}

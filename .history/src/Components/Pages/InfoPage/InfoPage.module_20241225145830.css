@@ -1,0 +1,12 @@
+.title{
+    width: 100%;
+    padding-left: 170px;
+    color: #fff;
+    margin-top: 100px;
+}
+
+.title span:first-of-type{
+    font-size: ;
+}
+
+@media (max-width: 768px) {}

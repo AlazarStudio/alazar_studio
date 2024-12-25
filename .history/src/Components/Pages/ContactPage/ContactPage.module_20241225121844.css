@@ -1,0 +1,28 @@
+.container{
+width: 100%;
+color: #fff;
+margin-top: 100px;
+padding-left: 210px;
+}
+
+.containerTitle{
+    font-size: 96px;
+    font-weight: ;
+    margin-top: 70px;
+}
+
+.containerTitle span:first-of-type{
+    margin-right: 20px;
+    color: #fff;
+}
+
+.containerTitle span:nth-of-type(2){
+    color: #E5097F;
+}
+
+.card{
+    width: 100%;
+    color: #fff;
+    margin-top: 100px;
+    }
+

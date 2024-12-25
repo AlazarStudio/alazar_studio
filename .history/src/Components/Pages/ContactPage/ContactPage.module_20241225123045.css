@@ -1,0 +1,102 @@
+.container {
+  width: 100%;
+  color: #fff;
+  margin-top: 40px;
+  padding-left: 210px;
+}
+
+.containerTitle {
+  font-size: 96px;
+  font-weight: 500;
+  margin-top: 70px;
+}
+
+.containerTitle span:first-of-type {
+  margin-right: 20px;
+  color: #fff;
+}
+
+.containerTitle span:nth-of-type(2) {
+  color: #e5097f;
+}
+
+.containerAddress {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.containerAddress span:first-of-type {
+  font-size: 20px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+.containerAddress span:nth-of-type(2) {
+  font-size: 36px;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.containerNumber {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.containerNumber span:first-of-type {
+  font-size: 20px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+.containerNumber span:nth-of-type(2) {
+  font-size: 36px;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.containerLinks{
+    display: flex;
+    margin-top: 40px;
+}
+
+.containerLinks button{
+    display: flex;
+    align-items: center;
+    color: #e5097f;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.containerLinks button img {
+    width: 50px;
+    height: ;
+}
+
+.containerEmail {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.containerEmail span:first-of-type {
+  font-size: 20px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+.containerEmail span:nth-of-type(2) {
+  font-size: 36px;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.card {
+  width: 100%;
+  color: #fff;
+  margin-top: 100px;
+}

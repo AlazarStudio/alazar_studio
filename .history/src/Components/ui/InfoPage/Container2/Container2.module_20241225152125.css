@@ -1,0 +1,13 @@
+.container2{
+    width: 100%;
+    margin-top: 30px;
+    color: aliceblue;
+}
+
+.container2Title{
+    display: flex;
+}
+
+
+
+@media (max-width: 768px) {}

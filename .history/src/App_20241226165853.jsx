@@ -23,9 +23,8 @@ function App() {
           <Route path="/contacts" element={<ContactPage />} />
           <Route path="/information" element={<InfoPage />} />
           <Route path="*" element={<Non_Found_Page />} />
- 
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
-        <Route path="/admin/*" element={<AdminPage />} />
       </Routes>
     </>
   );

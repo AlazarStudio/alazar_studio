@@ -9,7 +9,6 @@ import CasesPage from './Components/Pages/CasesPage/CasesPage';
 import ShopPage from './Components/Pages/ShopPage/ShopPage';
 import ContactPage from './Components/Pages/ContactPage/ContactPage';
 import InfoPage from './Components/Pages/InfoPage/InfoPage';
-import AdminPage from './Components/Pages/AdminPage/AdminPage';
 
 function App() {
   return (
@@ -23,9 +22,8 @@ function App() {
           <Route path="/contacts" element={<ContactPage />} />
           <Route path="/information" element={<InfoPage />} />
           <Route path="*" element={<Non_Found_Page />} />
- 
+          
         </Route>
-        <Route path="/admin/*" element={<AdminPage />} />
       </Routes>
     </>
   );

@@ -17,20 +17,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
     "react-swipeable": "^7.0.2",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/material": "^6.1.7",
-    "atob": "^2.1.2",
-    "axios": "^1.7.8",
-    "js-cookie": "^3.0.5",
-    "jwt-decode": "^4.0.0",
-    "ra-core": "^5.3.4",
-    "ra-data-json-server": "^5.3.4",
-    "ra-data-simple-rest": "^5.4.0",
-    "ra-language-russian": "^4.14.2",
-    "react-modal": "^3.16.1",
-    "react-paginate": "^8.2.0",
-    "swiper": "^11.1.14"
+    
   },
   "devDependencies": {
     "@types/react": "^18.2.55",

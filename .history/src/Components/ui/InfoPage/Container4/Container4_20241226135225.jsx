@@ -100,7 +100,6 @@ function Container4({ children, ...props }) {
         </div>
         <img src="/images/Azamat1.png" />
         <img src="/images/Alim1.png" />
-        <img src='/images/Muhammad1.png'/>
         <img src="/images/Ruslan1.png" />
         <img src="/images/Amina1.png" />
         <img src="/images/Viktoriya1.png" />
@@ -116,7 +115,6 @@ function Container4({ children, ...props }) {
             индивидуальное решение для вашего проекта ♡
           </span>
         </div>
-        <ProjectForm/>
       </div>
     </>
   );

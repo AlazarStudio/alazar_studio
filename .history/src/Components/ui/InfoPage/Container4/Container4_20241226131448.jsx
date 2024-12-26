@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './Container4.module.css';
-import ProjectForm from '../../HomePage/ProjectForm/ProjectForm';
 
 function Container4({ children, ...props }) {
   return (
@@ -80,7 +79,7 @@ function Container4({ children, ...props }) {
         <div className={classes.container4PeopleRight}></div>
         <img
           src="/images/infoTer.png"
-          className={`${classes.lineLeft} ${classes.line} ${classes.lineBottom}`}
+          className={`${classes.lineLeft} ${classes.line} `}
         />
         <div className={classes.container4Bottom}>
           <span>
@@ -90,7 +89,6 @@ function Container4({ children, ...props }) {
             индивидуальное решение для вашего проекта ♡
           </span>
         </div>
-        <ProjectForm />
       </div>
 
       <div className={classes.container4Media}>
@@ -98,25 +96,6 @@ function Container4({ children, ...props }) {
           <span>НАША</span>
           <span>КОМАНДА</span>
         </div>
-        <img src="/images/Azamat1.png" />
-        <img src="/images/Alim1.png" />
-        <img src='/images/Muhammad1.png'/>
-        <img src="/images/Ruslan1.png" />
-        <img src="/images/Amina1.png" />
-        <img src="/images/Viktoriya1.png" />
-        <img src="/images/Kseniya1.png" />
-        <img src="/images/Musa1.png" />
-        <img src="/images/Hallu1.png" />
-        <img src="/images/Adamey1.png" />
-        <div className={classes.container4Bottom}>
-          <span>
-            Если у вас есть какие-либо вопросы или вы хотите обсудить
-            возможности сотрудничества, пожалуйста, свяжитесь с нами в заявке
-            ниже. Мы будем рады ответить на все ваши вопросы и предложить
-            индивидуальное решение для вашего проекта ♡
-          </span>
-        </div>
-        <ProjectForm/>
       </div>
     </>
   );

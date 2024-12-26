@@ -96,30 +96,7 @@ margin-left: 230px;
 }
 
 .container4MediaTitle{
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 30px;
-}
-
-.container4MediaTitle span:first-of-type{
-  font-size: 28px;
-  font-weight: 500;
-  color: #e5097f;
-  margin-right: 10px;
-}
-
-.container4MediaTitle span:nth-of-type(2){
-  font-size: 28px;
-  font-weight: 500;
-  color: #FFFFFF;
-}
-
-.container4Media img{
-  width: 100%;
-  margin-bottom: 40px;
 }
 
 .container4Bottom{

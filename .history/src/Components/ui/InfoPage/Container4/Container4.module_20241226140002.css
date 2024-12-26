@@ -100,8 +100,7 @@ margin-left: 230px;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: ;
 }
 
 .container4MediaTitle span:first-of-type{
@@ -115,11 +114,6 @@ margin-left: 230px;
   font-size: 28px;
   font-weight: 500;
   color: #FFFFFF;
-}
-
-.container4Media img{
-  width: 100%;
-  margin-bottom: 40px;
 }
 
 .container4Bottom{

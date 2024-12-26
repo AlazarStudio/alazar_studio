@@ -98,25 +98,16 @@ function Container4({ children, ...props }) {
           <span>НАША</span>
           <span>КОМАНДА</span>
         </div>
-        <img src="/images/Azamat1.png" />
-        <img src="/images/Alim1.png" />
-        <img src='/images/Muhammad1.png'/>
-        <img src="/images/Ruslan1.png" />
-        <img src="/images/Amina1.png" />
-        <img src="/images/Viktoriya1.png" />
-        <img src="/images/Kseniya1.png" />
-        <img src="/images/Musa1.png" />
-        <img src="/images/Hallu1.png" />
-        <img src="/images/Adamey1.png" />
-        <div className={classes.container4Bottom}>
-          <span>
-            Если у вас есть какие-либо вопросы или вы хотите обсудить
-            возможности сотрудничества, пожалуйста, свяжитесь с нами в заявке
-            ниже. Мы будем рады ответить на все ваши вопросы и предложить
-            индивидуальное решение для вашего проекта ♡
-          </span>
-        </div>
-        <ProjectForm/>
+        <img src='/images/Azamat1.png'/>
+        <img src='/images/Alim1.png'/>
+        <img src='/images/Ruslan1.png'/>
+        <img src='/images/Amina1.png'/>
+        <img src='/images/Viktoriya1.png'/>
+        <img src='/images/Kseniya1.png'/>
+        <img src='/images/Musa1.png'/>
+        <img src='/images/Hallu1.png'/>
+        <img src='/images/Adamey1.png'/>
+        
       </div>
     </>
   );

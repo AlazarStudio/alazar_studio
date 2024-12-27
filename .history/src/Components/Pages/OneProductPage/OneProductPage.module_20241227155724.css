@@ -1,0 +1,21 @@
+.container{
+    width: 100%;
+    color: #fff;
+    margin-top: 170px;
+}
+
+.containerTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 200px;
+    padding-right: 200px;
+    outline: 2px solid red;
+}
+
+.containerTopLeft{
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid red;
+}

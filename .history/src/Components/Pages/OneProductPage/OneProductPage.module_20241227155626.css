@@ -1,0 +1,14 @@
+.container{
+    width: 100%;
+    color: #fff;
+    margin-top: 170px;
+}
+
+.containerTop{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 200px;
+    paddin
+    outline: 2px solid red;
+}

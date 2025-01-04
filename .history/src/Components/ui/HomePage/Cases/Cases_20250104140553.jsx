@@ -7,6 +7,8 @@ function Cases({ children, ...props }) {
   const navigate = useNavigate();
 
 
+  const [currentPage, setCurrentPage] = useState(0);
+
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -57,7 +59,7 @@ function Cases({ children, ...props }) {
            <button
              key={el.id}
              onClick={() =>
-               navigate(`/cases/${el.id}`)
+               navigate('/cases/:id')
              }
            >
              {el.title}

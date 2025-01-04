@@ -5,7 +5,10 @@ import serverConfig from '../../../../serverConfig';
 
 function Cases({ children, ...props }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isShopPage = location.pathname.includes('/shop');
 
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -57,7 +60,7 @@ function Cases({ children, ...props }) {
            <button
              key={el.id}
              onClick={() =>
-               navigate(`/cases/${el.id}`)
+               navigate(/cases/${el.id}'')
              }
            >
              {el.title}

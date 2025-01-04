@@ -57,7 +57,7 @@ function Cases({ children, ...props }) {
            <button
              key={el.id}
              onClick={() =>
-               navigate(`/cases/${el.id}`)
+               navigate(`/cases/${}`)
              }
            >
              {el.title}

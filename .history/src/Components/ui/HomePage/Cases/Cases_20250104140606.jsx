@@ -6,10 +6,7 @@ import serverConfig from '../../../../serverConfig';
 function Cases({ children, ...props }) {
   const navigate = useNavigate();
 
-
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,18 +49,13 @@ function Cases({ children, ...props }) {
             onClick={() => navigate('/cases')}
           />
         </div>
-  <div className={classes.containerBottom}>
-         {categories.map((el) => (
-           <button
-             key={el.id}
-             onClick={() =>
-               navigate(`/cases/${el.id}`)
-             }
-           >
-             {el.title}
-           </button>
-         ))}
-       </div>
+        <div className={classes.containerBottom}>
+          {categories.map((el) => (
+            <button key={el.id} onClick={() => navigate('/cases/:id')}>
+              {el.title}
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );

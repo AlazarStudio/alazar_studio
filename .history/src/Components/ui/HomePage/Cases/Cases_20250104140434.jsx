@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Cases.module.css';
 import { useNavigate } from 'react-router-dom';
-import serverConfig from '../../../../serverConfig';
 
 function Cases({ children, ...props }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isShopPage = location.pathname.includes('/shop');
 
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -52,18 +54,14 @@ function Cases({ children, ...props }) {
             onClick={() => navigate('/cases')}
           />
         </div>
-  <div className={classes.containerBottom}>
-         {categories.map((el) => (
-           <button
-             key={el.id}
-             onClick={() =>
-               navigate(`/cases/${el.id}`)
-             }
-           >
-             {el.title}
-           </button>
-         ))}
-       </div>
+        <div className={classes.containerBottom}>
+          <button>ЛОГОТИП И ФИРСТИЛЬ</button>
+          <button>WEB-ДИЗАЙН</button>
+          <button>МОБИЛЬНЫЕ ПРИЛОЖЕНИЯ</button>
+          <button>ПРЕЗЕНТАЦИИ</button>
+          <button>РЕКЛАМНАЯ ПРОДУКЦИЯ</button>
+          <button>ВИДЕО</button>
+        </div>
       </div>
     </>
   );

@@ -35,7 +35,7 @@ function ProjectForm({ children, ...props }) {
     }
 
     try {
-      const response = await fetch(`${serverConfig}/discussion`, {
+      const response = await fetch(`${serverConfig}/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

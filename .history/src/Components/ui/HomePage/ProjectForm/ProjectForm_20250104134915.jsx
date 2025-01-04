@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classes from './ProjectForm.module.css';
 import { Checkbox } from '@mui/material';
-import serverConfig from '../../../../serverConfig';
 
 function ProjectForm({ children, ...props }) {
   const [formData, setFormData] = useState({
@@ -13,34 +12,28 @@ function ProjectForm({ children, ...props }) {
     message: '',
   });
 
-  const [agree, setAgree] = useState(false);
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
-  };
-
-  const handleCheckboxChange = (e) => {
-    setAgree(e.target.checked);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Предотвращение перезагрузки страницы
-    if (!agree) {
+    if (!formData.agree) {
       alert('Вы должны согласиться с правилами обработки данных');
       return;
     }
 
     try {
-      const response = await fetch(`${serverConfig}/discussion`, {
+      const response = await fetch('https://your-server-endpoint.com/api/form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), // Отправляем только данные формы
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -52,8 +45,8 @@ function ProjectForm({ children, ...props }) {
           company: '',
           budget: '',
           message: '',
+          agree: false,
         });
-        setAgree(false);
       } else {
         alert('Ошибка при отправке данных. Попробуйте еще раз.');
       }
@@ -121,8 +114,9 @@ function ProjectForm({ children, ...props }) {
           <div className={classes.containerBottom}>
             <button type="submit">ОТПРАВИТЬ</button>
             <Checkbox
-              checked={agree}
-              onChange={handleCheckboxChange}
+              name="agree"
+              checked={formData.agree}
+              onChange={handleChange}
               sx={{
                 color: '#fff',
                 '&.Mui-checked': {
@@ -189,8 +183,9 @@ function ProjectForm({ children, ...props }) {
           <div className={classes.containerBottomMedia}>
             <div className={classes.containerBottomMedia1}>
               <Checkbox
-                checked={agree}
-                onChange={handleCheckboxChange}
+                name="agree"
+                checked={formData.agree}
+                onChange={handleChange}
                 sx={{
                   color: '#fff',
                   '&.Mui-checked': {

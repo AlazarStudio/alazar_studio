@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classes from './ProjectForm.module.css';
 import { Checkbox } from '@mui/material';
-import serverConfig from '../../../../serverConfig';
 
 function ProjectForm({ children, ...props }) {
   const [formData, setFormData] = useState({
@@ -35,7 +34,7 @@ function ProjectForm({ children, ...props }) {
     }
 
     try {
-      const response = await fetch(`${serverConfig}/discussion`, {
+      const response = await fetch('https://your-server-endpoint.com/api/form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

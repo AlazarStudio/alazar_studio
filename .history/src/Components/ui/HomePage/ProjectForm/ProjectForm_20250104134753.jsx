@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classes from './ProjectForm.module.css';
 import { Checkbox } from '@mui/material';
-import serverConfig from '../../../../serverConfig';
 
 function ProjectForm({ children, ...props }) {
   const [formData, setFormData] = useState({
@@ -11,36 +10,31 @@ function ProjectForm({ children, ...props }) {
     company: '',
     budget: '',
     message: '',
+    agree: false,
   });
 
-  const [agree, setAgree] = useState(false);
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
-  const handleCheckboxChange = (e) => {
-    setAgree(e.target.checked);
-  };
-
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Предотвращение перезагрузки страницы
-    if (!agree) {
+    e.preventDefault(); // Prevent default form submission
+    if (!formData.agree) {
       alert('Вы должны согласиться с правилами обработки данных');
       return;
     }
 
     try {
-      const response = await fetch(`${serverConfig}/discussion`, {
+      const response = await fetch('https://your-server-endpoint.com/api/form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), // Отправляем только данные формы
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -52,8 +46,8 @@ function ProjectForm({ children, ...props }) {
           company: '',
           budget: '',
           message: '',
+          agree: false,
         });
-        setAgree(false);
       } else {
         alert('Ошибка при отправке данных. Попробуйте еще раз.');
       }
@@ -121,12 +115,13 @@ function ProjectForm({ children, ...props }) {
           <div className={classes.containerBottom}>
             <button type="submit">ОТПРАВИТЬ</button>
             <Checkbox
-              checked={agree}
-              onChange={handleCheckboxChange}
+              checked={formData.agree}
+              name="agree"
+              onChange={handleChange}
               sx={{
-                color: '#fff',
+                color: '#fff', // Цвет чекбокса
                 '&.Mui-checked': {
-                  color: '#e5097f',
+                  color: '#e5097f', // Цвет при активном состоянии
                 },
               }}
             />
@@ -134,76 +129,6 @@ function ProjectForm({ children, ...props }) {
               Я согласен с правилами{' '}
               <a href="/">обработки персональных данных</a>
             </span>
-          </div>
-        </div>
-
-        <div className={classes.containerCenterMedia}>
-          <div className={classes.containerNameMedia}>
-            <span>ОБСУДИТЬ</span>
-            <span>ПРОЕКТ</span>
-          </div>
-          <div className={classes.containerInputMedia}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Ваше имя"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Телефон"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="E-mail"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="company"
-              placeholder="Компания"
-              value={formData.company}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="budget"
-              placeholder="Бюджет"
-              value={formData.budget}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="message"
-              placeholder="Сообщение"
-              value={formData.message}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={classes.containerBottomMedia}>
-            <div className={classes.containerBottomMedia1}>
-              <Checkbox
-                checked={agree}
-                onChange={handleCheckboxChange}
-                sx={{
-                  color: '#fff',
-                  '&.Mui-checked': {
-                    color: '#e5097f',
-                  },
-                }}
-              />
-              <span>
-                Я согласен с правилами{' '}
-                <a href="/">обработки персональных данных</a>
-              </span>
-            </div>
-            <button type="submit">ОТПРАВИТЬ</button>
           </div>
         </div>
       </div>

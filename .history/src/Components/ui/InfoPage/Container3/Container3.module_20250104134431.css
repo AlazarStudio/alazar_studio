@@ -108,7 +108,7 @@
   .container3RightMedia{
     display: flex;
     flex-direction: column;
-    color: black;
+    color: ;
     padding-right: 23px;
     gap: 38px;
   }

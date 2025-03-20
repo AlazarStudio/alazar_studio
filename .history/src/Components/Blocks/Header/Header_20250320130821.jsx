@@ -20,19 +20,11 @@ function Header() {
 
   return (
     <div className={classes.container}>
-      <div
-        className={`${classes.containerNav} ${
-          isScrolled ? classes.scrolled : ''
-        }`}
-      >
+   <div className={`${classes.containerNav} ${isScrolled ? classes.scrolled : ''}`}>
         <ul>
           <li>
             {' '}
-            <img
-              src="/images/headerLogo.png"
-              alt="Логотип"
-              className={classes.logo}
-            />
+            <img src="/images/headerLogo.png" alt="Логотип" className={classes.lo} />
           </li>
 
           <li>

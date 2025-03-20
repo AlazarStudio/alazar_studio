@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 
 
-export default function HomePage() {
+function HomePage() {
  
 
   return (
-<></>
+123123
   );
 }
 
+export default HomePage;

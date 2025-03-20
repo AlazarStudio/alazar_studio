@@ -28,11 +28,7 @@ function Header() {
         <ul>
           <li>
             {' '}
-            <img
-              src="/images/headerLogo.png"
-              alt="Логотип"
-              className={classes.logo}
-            />
+            <img src="/images/headerLogo.png" alt="Логотип" className='' />
           </li>
 
           <li>

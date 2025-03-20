@@ -12,14 +12,14 @@
 
 .containerNav {
   display: flex;
-  width: 100%;
+width: 1400px;
   align-items: center;
   justify-content: center; /* Логотип слева, меню справа */
-  outline: 1px solid red;
+
   height: 98px;
   background: transparent; /* Начально прозрачный */
   transition: background 0.3s ease-in-out;
-  padding: 0;
+  padding: 0 20px;
 }
 
 .scrolled {
@@ -32,7 +32,6 @@
 
 ul {
   display: flex;
-  width: 100%;
   max-width: 1400px;
   align-items: center;
   justify-content: space-between;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import classes from './Header.module.css';
 import { Link } from 'react-router-dom';
 
@@ -20,21 +20,9 @@ function Header() {
 
   return (
     <div className={classes.container}>
-      <div
-        className={`${classes.containerNav} ${
-          isScrolled ? classes.scrolled : ''
-        }`}
-      >
+      <div className={classes.containerNav}>
         <ul>
-          <li>
-            {' '}
-            <img
-              src="/images/headerLogo.png"
-              alt="Логотип"
-              className={classes.logo}
-            />
-          </li>
-
+          <img src="/images/headerLogo.png" alt="Логотип" />
           <li>
             <Link to="/">ГЛАВНАЯ</Link>
           </li>

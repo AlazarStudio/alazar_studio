@@ -12,7 +12,7 @@
 
 .containerNav {
   display: flex;
-  width: 100%;
+  max-width: 1400px;
   align-items: center;
   justify-content: center; /* Логотип слева, меню справа */
   outline: 1px solid red;
@@ -32,10 +32,9 @@
 
 ul {
   display: flex;
-  width: 100%;
   max-width: 1400px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between ;
   list-style: none;
   padding: 0;
   margin: 0;

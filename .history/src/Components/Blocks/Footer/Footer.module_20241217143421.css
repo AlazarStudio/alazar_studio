@@ -1,9 +1,0 @@
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  color: #fff;
-  border-top: 1px solid rgba(ff, green, blue, alpha);
-  margin-top: 80px;
-}

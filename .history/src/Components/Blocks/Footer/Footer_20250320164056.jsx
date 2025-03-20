@@ -6,7 +6,8 @@ import WidthBlock from '../../Standart/WidthBlock/WidthBlock';
 function Footer({ children, ...props }) {
   return (
     <>
-
+      <CenterBlock>
+        <WidthBlock>
           <div className={classes.container}>
             <span>©2024 ALAZAR STUDIO. ALL RIGHT RESERVED.</span>
           </div>

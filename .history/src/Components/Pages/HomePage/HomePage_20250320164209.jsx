@@ -6,9 +6,7 @@ export default function HomePage() {
 
   return (
 <>
-<div className={classes.container}>
-123
-</div>
+<div className={}
 </>
   );
 }

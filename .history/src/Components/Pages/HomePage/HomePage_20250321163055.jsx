@@ -15,17 +15,12 @@ export default function HomePage() {
           <span>СТУДИЯ WEB-РАЗРАБОТКИ И ГРАФИЧЕСКОГО ДИЗАЙНА</span>
         </div>
         <div className={classes.containerCase}>
-          <div className={classes.containerCaseTop}>
-            <div className={classes.containerCaseTopName}>
+          <div className={classes.containerCaseName}>
             <span>НАШИ</span>
             <span>КЕЙСЫ</span>
           </div>
-          <img src='/images/Arrow 1.png'/>
+          <img src='/images/Arrow 1'
         </div>
-        <div className={classes.containerCaseMenu}>
-          
-        </div>
-      </div>
       </div>
     </>
   );

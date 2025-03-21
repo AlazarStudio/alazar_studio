@@ -21,11 +21,7 @@ export default function HomePage() {
             <span>КЕЙСЫ</span>
           </div>
           <img src='/images/Arrow 1.png'/>
-        </div>
-        <div className={classes.containerCaseMenu}>
-          
-        </div>
-      </div>
+
       </div>
     </>
   );

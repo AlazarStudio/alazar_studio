@@ -16,16 +16,12 @@ export default function HomePage() {
         </div>
         <div className={classes.containerCase}>
           <div className={classes.containerCaseTop}>
-            <div className={classes.containerCaseTopName}>
+            <div className={classes.container}>
             <span>НАШИ</span>
             <span>КЕЙСЫ</span>
           </div>
           <img src='/images/Arrow 1.png'/>
         </div>
-        <div className={classes.containerCaseMenu}>
-          
-        </div>
-      </div>
       </div>
     </>
   );

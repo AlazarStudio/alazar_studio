@@ -22,9 +22,7 @@ export default function HomePage() {
           </div>
           <img src='/images/Arrow 1.png'/>
         </div>
-        <div className={classes.containerCaseMenu}>
-          
-        </div>
+        <div className={classes.containerCase}
       </div>
       </div>
     </>

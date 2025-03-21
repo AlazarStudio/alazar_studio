@@ -8,24 +8,13 @@ export default function HomePage() {
         <div className={classes.containerLogo}>
           <img src="/images/logoA.png" />
           <div className={classes.containerLogoCenter}>
+            {' '}
             <img src="/images/logoAlazar.png" />
             <img src="/images/logoStudio.png" />
           </div>
 
           <span>СТУДИЯ WEB-РАЗРАБОТКИ И ГРАФИЧЕСКОГО ДИЗАЙНА</span>
         </div>
-        <div className={classes.containerCase}>
-          <div className={classes.containerCaseTop}>
-            <div className={classes.containerCaseTopName}>
-            <span>НАШИ</span>
-            <span>КЕЙСЫ</span>
-          </div>
-          <img src='/images/Arrow 1.png'/>
-        </div>
-        <div className={classes.containerCaseMenu}>
-          
-        </div>
-      </div>
       </div>
     </>
   );

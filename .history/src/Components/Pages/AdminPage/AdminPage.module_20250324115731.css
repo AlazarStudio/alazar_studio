@@ -1,0 +1,6 @@
+/* Добавьте в ваш CSS */
+.ra-layout-side .MuiListItem-root {
+    display: inline-block;
+    margin-right: 10px; /* Подкорректируйте отступы по необходимости */
+  }
+  

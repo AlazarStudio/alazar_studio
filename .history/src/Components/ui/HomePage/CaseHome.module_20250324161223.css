@@ -1,0 +1,12 @@
+.containerCaseMenu {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1609px;
+  margin-top: 80px;
+}
+
+.caseItem {
+  display: flex;
+  width: ;
+}

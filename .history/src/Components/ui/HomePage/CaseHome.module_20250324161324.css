@@ -1,0 +1,19 @@
+.containerCaseMenu {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1609px;
+  margin-top: 80px;
+}
+
+.caseItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 507px;
+}
+
+.caseItem img{
+    width: 100%;
+}

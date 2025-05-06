@@ -1,0 +1,128 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background 0.3s ease-in-out;
+  
+}
+
+.containerNav {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center; /* Логотип слева, меню справа */
+  /* outline: 1px solid red; */
+  height: 98px;
+  background: transparent; /* Начально прозрачный */
+  transition: background 0.3s ease-in-out;
+  padding: 0;
+}
+
+.scrolled {
+  background: #131313; /* Черный фон при скролле */
+}
+
+.logo {
+  height: 49px;
+}
+
+ul {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* gap: 20px; */
+}
+
+li a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-family: 'Mulish', sans-serif;
+}
+
+.containerNavMobile {
+  display: none;
+}
+
+/* li a:hover {
+  color: #81212D;
+} */
+
+
+@media (max-width: 1280px) {
+
+  .container {
+    padding: 0px;
+    
+  }
+
+  .containerNavMobile {
+    display: none;
+  }
+  
+
+}
+
+@media (max-width: 768px) {
+
+  .containerNav {
+    display: none;
+  }
+
+  .containerNavMobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 50px
+  }
+
+  /* Добавляем стиль для меню */
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background: #131313;
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu.open {
+  right: 0;
+}
+
+.menu ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.menu li {
+  margin: 15px 0;
+}
+
+.menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
+}

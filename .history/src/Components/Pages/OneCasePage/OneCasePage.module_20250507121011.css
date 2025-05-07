@@ -1,0 +1,17 @@
+.container {
+  padding: 20px;
+}
+
+.caseDetails {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.caseImage img {
+  width: 100%;
+  height: auto;
+}
+
+.caseDescription {
+  margin-top: 20px;
+}

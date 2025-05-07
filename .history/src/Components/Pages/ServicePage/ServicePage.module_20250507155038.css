@@ -1,0 +1,171 @@
+.container {
+  width: 100%;
+}
+
+.containerTop {
+  display: flex;
+  width: 100%;
+  height: 1192px;
+  position: relative;
+  background-image: url('images/serviceLeft.png');
+  background-repeat: no-repeat;
+  background-position: -100px 30px;
+  background-size: 100%;
+}
+
+.containerTopService {
+  position: absolute;
+  left: 45%;
+  margin-top: 106px;
+}
+
+.containerTopServiceTitle {
+  display: flex;
+  gap: 50px;
+}
+
+.containerTopServiceTitle span:nth-of-type(1) {
+  font-size: 96px;
+  font-weight: 500;
+}
+
+.containerTopServiceTitle span:nth-of-type(2) {
+  font-size: 96px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+.containerTopServiceType {
+  font-size: 36px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+.containerTopServiceElements {
+  display: flex;
+  gap: 95px;
+  margin-top: 38px;
+  margin-bottom: 50px;
+}
+
+.containerTopServiceElementsLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.containerTopServiceElementsItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.containerTopServiceElementsItem img {
+  width: 20px !important;
+}
+
+.containerTopServiceElementsRight {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.grayText {
+  color: #ffffff80;
+  margin: -10px 0;
+}
+
+.containerTopServiceElementsProg {
+  display: flex;
+  width: 750px;
+  gap: 16px 93px;
+  margin-top: 46px;
+}
+
+.containerBottom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputBlock {
+  display: flex;
+  gap: 66px;
+}
+
+.inputBlockLeft {
+  display: flex;
+  flex-direction: column;
+  width: 615px;
+}
+
+.inputBlockRight {
+  display: flex;
+  flex-direction: column;
+  width: 615px;
+}
+
+.inputBlock input {
+  background-color: inherit;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  padding: 40px 5px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.inputBlockBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 80px;
+  gap: 15px;
+}
+
+.containerBottom button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 285px;
+  height: 55px;
+  color: #fff;
+  background-color: #e5097f90;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.containerBottom button:hover {
+  background-color: #e5097f;
+}
+
+.containerBottom span {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.containerBottom span span {
+  color: #e5097f;
+}
+
+
+@media (max-width: 1280px) {
+
+}
+
+@media (max-width: 480px) {
+
+
+  
+  
+  

@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+}
+
+.containerTop {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.containerTopImg {
+  position: absolute;
+}

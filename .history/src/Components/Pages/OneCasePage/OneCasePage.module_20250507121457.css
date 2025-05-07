@@ -1,0 +1,12 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.caseDetails{
+  display: flex;
+}

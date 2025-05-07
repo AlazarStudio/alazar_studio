@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+
+}
+
+.containerTop {
+  display: flex;
+  width: 100%;
+  height: 1192px;
+  position: relative;
+  background-image: url('images/serviceLeft.png');
+  background-repeat: no-repeat;
+  background-position: -180px 0;
+  background-size: ;
+}
+
+.containerTopService{
+position: absolute;
+left: 50%;
+}

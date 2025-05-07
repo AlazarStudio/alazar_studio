@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.caseDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100% ;
+}
+
+.caseDetailsTitle {
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.caseImages {
+  width: 100% ;
+  margin-top: 70px;
+}
+
+
+.caseImage {
+  width: 100% ;
+  /* outline: 1px solid red; */
+}
+
+.caseImage img {
+  /* width: 100% ; */
+  /* outline: 1px solid red; */
+}
+
+.developersSection{
+  width: 100%;
+}
+
+.developersTitle{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 200px;
+}
+
+.developersTitle span{
+
+.developersList{
+  display: flex;
+}

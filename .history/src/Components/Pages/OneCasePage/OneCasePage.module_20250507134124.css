@@ -1,0 +1,177 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.caseDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.caseDetailsTitle {
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.caseImages {
+  width: 100%;
+  margin-top: 70px;
+}
+
+.caseImage {
+  width: 100%;
+  /* outline: 1px solid red; */
+}
+
+.caseImage img {
+  width: 100%;
+  object-fit: contain;
+  /* outline: 1px solid red; */
+}
+
+.developersSection {
+  width: 100%;
+}
+
+.developersTitle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 200px;
+  gap: 10px;
+  border-bottom: 1px solid #e5097f;
+  padding-bottom: 40px;
+  margin-top: 100px;
+}
+
+.developersTitle span {
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.developersTitle span:nth-of-type(2) {
+  color: #e5097f;
+}
+
+.developersList {
+  display: flex;
+  gap: 100px;
+  padding-top: 50px;
+  padding-left: 200px;
+}
+
+.developer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.developer img {
+  width: 115px;
+  height: 115px;
+  border-radius: 150px;
+}
+
+.developerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.developerInfo span:nth-of-type(1) {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.developerInfo span:nth-of-type(2) {
+  font-size: 22px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+
+@media (max-width: 1280px) {
+
+}
+
+@media (max-width: 480px) {
+
+  .container {
+    margin-top: 80px;
+  }
+  
+  .caseDetails {
+    margin-top: 10px;
+  
+  }
+  
+  .caseDetailsTitle {
+    font-size: 20px;
+  }
+  
+  .caseImages {
+    margin-top: 30px;
+  }
+ 
+  
+  .developersTitle {
+    margin: 0;
+    justify-content: center;
+    padding: 20px 0 20px 0;
+  }
+  
+  .developersTitle span {
+    font-size: 24px;
+  }
+  
+  
+  .developersList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 100px;
+    padding-top: 50px;
+    padding-left: 0;
+  }
+  
+  .developer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .developer img {
+    width: 115px;
+    height: 115px;
+    border-radius: 150px;
+  }
+  
+  .developerInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .developerInfo span:nth-of-type(1) {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  
+  .developerInfo span:nth-of-type(2) {
+    font-size: 22px;
+    font-weight: 500;
+    color: #e5097f;
+  }
+
+}

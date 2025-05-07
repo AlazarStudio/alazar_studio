@@ -1,0 +1,54 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import serverConfig from '../../../serverConfig'; // Ваш серверный конфиг
+import classes from './OneCasePage.module.css'; // Стили для страницы кейса
+
+export default function OneCasePage() {
+  const { categoryTitle, id } = useParams(); // Получаем categoryTitle и id из URL
+  const [caseData, setCaseData] = useState(null); // Для хранения данных о кейсе
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+  const [error, setError] = useState(null); // Ошибка, если что-то пойдет не так
+
+  useEffect(() => {
+    const fetchCaseData = async () => {
+      setLoading(true);
+      try {
+        // Замените URL на ваш серверный эндпоинт для получения данных по ID кейса
+        const response = await fetch(`${serverConfig}/casesHome/${id}`);
+        if (!response.ok) {
+          throw new Error('Ошибка при загрузке данных');
+        }
+        const data = await response.json();
+        setCaseData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCaseData();
+  }, [id]); // Загрузка данных при изменении ID
+
+  if (loading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка: {error}</div>;
+
+  return (
+    <div className={classes.container}>
+      {caseData ? (
+        <div className={classes.caseDetails}>
+          <h1>{caseData.name}</h1>
+          <div className={classes.caseImage}>
+            <img src={`${uploadsConfig}${item.img[0]}`} alt={item.name}  />
+          </div>
+          <div className={classes.caseDescription}>
+            <p>{caseData.description}</p>
+          </div>
+          {/* Вы можете добавить больше данных из caseData, если необходимо */}
+        </div>
+      ) : (
+        <div>Кейс не найден</div>
+      )}
+    </div>
+  );
+}

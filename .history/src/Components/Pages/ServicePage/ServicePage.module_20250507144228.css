@@ -1,0 +1,86 @@
+.container {
+  width: 100%;
+}
+
+.containerTop {
+  display: flex;
+  width: 100%;
+  height: 1192px;
+  position: relative;
+  background-image: url('images/serviceLeft.png');
+  background-repeat: no-repeat;
+  background-position: -100px 30px;
+  background-size: 100%;
+}
+
+.containerTopService {
+  position: absolute;
+  left: 45%;
+  margin-top: 146px;
+}
+
+.containerTopServiceTitle {
+  display: flex;
+  gap: 50px;
+}
+
+.containerTopServiceTitle span:nth-of-type(1) {
+  font-size: 96px;
+  font-weight: 500;
+}
+
+.containerTopServiceTitle span:nth-of-type(2) {
+  font-size: 96px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+.containerTopServiceType {
+  font-size: 36px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+.containerTopServiceElements {
+  display: flex;
+  gap: 95px;
+  margin-top: 38px;
+  margin-bottom: 50px;
+}
+
+.containerTopServiceElementsLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.containerTopServiceElementsItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.containerTopServiceElementsItem img {
+  width: 20px !important;
+}
+
+.containerTopServiceElementsRight {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: 400px;
+    font-size: 20px;
+  }
+
+  .grayText{
+   color: #FFFFFF80;
+  }
+
+  .containerTopServiceElementsProg{
+    display: flex;
+    width: 750px;
+    flex-wrap: wrap;
+    gap: 16px 93px ;
+  }

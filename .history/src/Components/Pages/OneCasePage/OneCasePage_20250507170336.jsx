@@ -62,21 +62,6 @@ export default function OneCasePage() {
             <div className={classes.developersTitle}>
               <span>РАЗРАБОТЧИКИ</span>
               <span>ПРОЕКТА</span>
-              <div className={classes.developersList}>
-                {caseData.developers.map((developer, index) => (
-                  <div key={index} className={classes.developer}>
-                     <img
-                      src={`${uploadsConfig}${developer.img[0]}`}
-                      alt={developer.name}
-                     
-                    />
-                    <div className={classes.developerInfo}>
-                    <span>{developer.name} </span>
-                    <span>{developer.position} </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
     
              

@@ -288,6 +288,8 @@
   animation: slideDownFadeOut 0.4s ease-in forwards;
 }
 
+/**/
+
 @media (max-width: 768px) {
   .modalContent {
     width: 90%;

@@ -2,12 +2,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from './CaseModal.module.css';
 import uploadsConfig from '../../../uploadsConfig';
+import DiscussionModal from '../DiscussionModal/DiscussionModal';
 
 export default function CaseModal({ caseId, onClose }) {
   const [caseData, setCaseData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isHiding, setIsHiding] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
@@ -23,6 +25,9 @@ export default function CaseModal({ caseId, onClose }) {
       window.open('https://wa.me/+79283995384', '_blank');
     } else if (type === 'email') {
       window.location.href = 'mailto:info@alazarstudio.ru';
+    } else if (type === 'form') {
+      setShowMenu(false);
+      setShowForm(true);
     }
   };
 
@@ -187,12 +192,28 @@ export default function CaseModal({ caseId, onClose }) {
                         </svg>
                         E-Mail
                       </span>
+                      <span onClick={() => handleContactClick('form')}>
+                        <svg
+                          width="24"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="#000"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 6.34c.38-.38.38-1.01 0-1.39l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.85z" />
+                        </svg>
+                        Оставить заявку
+                      </span>
                     </div>
                   )}
                 </div>
               </div>
             </div>
             <div className={classes.images}>
+              {showForm && (
+                <DiscussionModal onClose={() => setShowForm(false)} />
+              )}
+
               {caseData.img.map((img, idx) => (
                 <img key={idx} src={`${uploadsConfig}${img}`} alt="case" />
               ))}

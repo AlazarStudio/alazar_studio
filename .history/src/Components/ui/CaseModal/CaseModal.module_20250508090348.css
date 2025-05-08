@@ -1,0 +1,50 @@
+.modalOverlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modalContent {
+    display: flex;
+    
+    background: #fff;
+    color: #000;
+    max-width: 90%;
+    max-height: 84vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    position: relative;
+    overflow: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+  }
+
+  .modalContent::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
+  .modalContent span{
+    margin-top: 20px;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .images img {
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+  

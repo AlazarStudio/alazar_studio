@@ -53,9 +53,14 @@ function transliterate(str) {
 export default function HomePage() {
   const [caseHomes, setCaseHomes] = useState([]);
   const [categories, setCategories] = useState([]);
-  const { categoryTitle } = useParams();
   const navigate = useNavigate();
-  const { id: selectedCaseId } = useParams(); // ← читаем ID из URL
+
+  const params = useParams();
+  const selectedCaseId = params.id;
+  const categoryTitle =
+    params.categoryTitle?.toLowerCase() === 'case'
+      ? null
+      : params.categoryTitle;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,16 +90,16 @@ export default function HomePage() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.containerLogo}>
+      {/* <div className={classes.containerLogo}>
         <img src="/images/logoA.png" alt="Logo A" />
         <div className={classes.containerLogoCenter}>
           <img src="/images/logoAlazar.png" alt="Logo Alazar" />
           <img src="/images/logoStudio.png" alt="Logo Studio" />
         </div>
         <span>СТУДИЯ WEB-РАЗРАБОТКИ И ГРАФИЧЕСКОГО ДИЗАЙНА</span>
-      </div>
+      </div> */}
 
-      <div className={classes.containerCase}>
+      {/* <div className={classes.containerCase}>
         <div className={classes.containerCaseTop}>
           <div className={classes.containerCaseTopName}>
             <span>НАШИ</span>
@@ -120,17 +125,32 @@ export default function HomePage() {
             </span>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <CaseHomeCard
         caseHomes={filteredCaseHomes}
-        onClickCase={(id) => navigate(`/case/${id}`)}
+        onClickCase={(id, caseObj) => {
+          const category = caseObj.categories?.[0]?.title;
+          const translitCategory = transliterate(category?.toLowerCase() || '');
+
+          const path = categoryTitle
+            ? `/${translitCategory}/${id}`
+            : `/case/${id}`;
+
+          navigate(path);
+        }}
       />
 
       {selectedCaseId && (
         <CaseModal
           caseId={selectedCaseId}
-          onClose={() => navigate(-1)} // возвращаемся назад
+          onClose={() => {
+            if (categoryTitle) {
+              navigate(`/${categoryTitle}`);
+            } else {
+              navigate('/');
+            }
+          }}
         />
       )}
     </div>

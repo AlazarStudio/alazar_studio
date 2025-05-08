@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.91);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,17 +14,18 @@
 .modalContent {
   display: flex;
   flex-direction: column;
-  background: #fff;
-  color: #000;
+  /* background: #fff; */
+  color: #fff;
   width: 75%;
-  height: 85dvh;
+  height: 95dvh;
+  bottom: 0 !important;
   overflow-y: auto;
-  border-radius: 12px;
-  position: relative;
+  border-radius: 20px 20px 0 0;
+  position: absolute;
   overflow: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .modalContent::-webkit-scrollbar {
@@ -35,10 +36,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 43px 0 20px;
-  margin-top: -30px;
-  padding-top: 5px;
-  padding-bottom: 10px;
+  padding: 20px;
+
+  background-color: inherit;
 }
 
 .infoLeft {
@@ -49,8 +49,16 @@
   /* padding-bottom: 10px; */
 }
 
+.infoRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 .categoriesList {
   display: flex;
+  align-items: center;
   gap: 20px;
   padding: 0;
 }
@@ -76,27 +84,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: sticky;
+  position: absolute;
   height: 35px;
   width: 35px;
-  top: 0;
-  margin-left: auto; /* прижимаем вправо */
-  background-color: #fff;
-  border-radius: 0 0 0 10px;
-  padding-bottom: 3px;
-  font-size: 30px;
+  top: 5%;
+  right: 5%;
+  /* прижимаем вправо */
+  background-color: #222222;
+  color: #fff;
+  border-radius: 50px;
+  padding-bottom: 4px;
+  font-size: 25px;
   font-weight: 600;
   border: none;
   cursor: pointer;
   z-index: 10000000;
 }
 
+.contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 12%;
+  right: 9%;
+  gap: 10px;
+  z-index: 10000000;
+}
+
+.contactsTitle {
+  display: none;
+}
+
 .images {
   display: flex;
   flex-direction: column;
+  /* position: relative; */
   gap: 0;
   margin: 0;
   padding: 0;
+  background: #fff;
 }
 
 .images img {
@@ -140,55 +168,12 @@
   background-color: #69a64b;
 }
 
-.menu {
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  gap: 10px;
-  width: 200px;
-  right: 0;
-  top: 104%;
-  background: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.menuActive {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.menu span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.menu span:hover {
-  color: #e5097f;
-  transform: translateX(5px);
-}
-
 .developersTitle {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  /* padding: 0 200px; */
   gap: 10px;
-  /* border-bottom: 1px solid #e5097f; */
-  /* padding-bottom: 40px; */
-  /* margin-top: 20px; */
-  padding-bottom: 10px;
 }
 
 .developersTitle span {
@@ -198,20 +183,6 @@
 
 .developersTitle span:nth-of-type(2) {
   color: #e5097f;
-}
-
-.developersList {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.developer {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
 }
 
 .developerInfoTop span:nth-of-type(1) {
@@ -225,18 +196,30 @@
     color: #e5097f;
   } */
 
+/* ======================================================== */
+
+/* DevelopersList */
+/* DevelopersList */
+
+.developersList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.developer {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
 .developer img {
   width: 55px;
   height: 55px;
   border-radius: 150px;
-}
-
-.developersTitleBottom {
-  display: none;
-}
-
-.developersListBottom {
-  display: none;
 }
 
 .developerInfo {
@@ -255,6 +238,132 @@
   font-weight: 500;
   color: #e5097f;
 }
+
+/* DevelopersList */
+/* DevelopersList */
+
+/* ======================================================== */
+
+/* DevelopersListAll */
+/* DevelopersListAll */
+
+.developersListAll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* gap: 20px; */
+}
+
+.developerAll {
+  position: relative;
+  z-index: -1;
+  margin-left: -25px;
+}
+
+.developerAll:first-child {
+  /* margin-left: 40px;  */
+  z-index: 1;
+}
+
+.developerAll img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+/* DevelopersListAll */
+/* DevelopersListAll */
+
+/* ======================================================== */
+
+/* DevelopersListMenu */
+/* DevelopersListMenu */
+
+.developersListAllSpan {
+  display: flex;
+  position: relative;
+  margin-left: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.developersMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  color: #000;
+  background-color: #fff;
+  position: absolute;
+  top: 110px;
+  right: 0;
+  border-radius: 10px;
+  padding: 20px 30px;
+  gap: 20px;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.developersMenu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.developersMenuEl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.developersMenuEl img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+}
+
+.developersMenuElInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.developersMenuElInfo span:nth-of-type(1) {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.developersMenuElInfo span:nth-of-type(2) {
+  font-size: 18px;
+  font-weight: 500;
+  color: #e5097f;
+}
+
+/* DevelopersListMenu */
+/* DevelopersListMenu */
+
+/* ======================================================== */
+
+/* DevelopersListBottom */
+/* DevelopersListBottom */
+
+.developersTitleBottom {
+  display: none;
+}
+
+.developersListBottom {
+  display: none;
+}
+
+  .contactsMobile {
+    display: none;
+  }
+
+/* DevelopersListBottom */
+/* DevelopersListBottom */
 
 /* Появление */
 @keyframes slideUpFadeIn {
@@ -295,6 +404,8 @@
     width: 90%;
     height: 90dvh;
     margin-top: 0;
+    background: #fff;
+    color: #000;
   }
 
   .info {
@@ -303,7 +414,7 @@
     flex-direction: column;
 
     padding: 0 43px 0 20px;
-    margin-top: -30px;
+    margin-top: 0;
   }
 
   .infoLeft {
@@ -380,6 +491,8 @@
     justify-content: center;
     gap: 10px;
     margin: 20px 0;
+      border-top: 1px solid #e5097f;
+    padding-top: 10px;
   }
 
   .developersTitleBottom span {
@@ -428,5 +541,43 @@
     font-size: 14px;
     font-weight: 500;
     color: #e5097f;
+  }
+
+  .developersListAll {
+    display: none;
+  }
+
+  .developersListAllSpan {
+    display: none;
+  }
+
+  .contacts {
+    display: none;
+  }
+
+  .contactsMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 30px;
+    border-top: 1px solid #e5097f;
+    padding-top: 10px;
+  }
+
+  .contactsMobile span:nth-of-type(1) {
+    font-size: 18px;
+  }
+
+  .contactsMobile span:nth-of-type(2) {
+    font-size: 18px;
+    color: #e5097f;
+  }
+
+  .contactsMobileIcons{
+    display: flex;
+    gap: 40px;
   }
 }

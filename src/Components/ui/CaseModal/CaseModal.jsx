@@ -91,14 +91,61 @@ export default function CaseModal({ caseId, onClose }) {
 
   return (
     <div className={classes.modalOverlay} onClick={handleClose}>
+      <button className={classes.closeButton} onClick={handleClose}>
+        ×
+      </button>
+      <div className={classes.contacts} onClick={(e) => e.stopPropagation()}>
+        <span onClick={() => handleContactClick('telegram')}>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="#0088cc"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M9.99979 15.2L9.70514 19.3497C10.1385 19.3497 10.3273 19.1582 10.5526 18.9405L12.7785 16.8614L17.051 19.9396C17.8395 20.3728 18.3971 20.1472 18.606 19.2484L21.9543 4.31383C22.1979 3.20818 21.4968 2.74439 20.7365 3.04155L2.81532 10.1855C1.73863 10.6263 1.74901 11.2349 2.6332 11.4972L7.34998 12.8804L17.1535 6.69872C17.6031 6.42269 18.0142 6.57756 17.6796 6.87656L9.99979 15.2Z" />
+          </svg>
+        </span>
+        <span onClick={() => handleContactClick('whatsapp')}>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="#25D366"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M20.52 3.48A11.938 11.938 0 0 0 12.005 0C5.37 0 .009 5.36 0 11.995c0 2.114.553 4.19 1.6 6.02L0 24l6.182-1.62a11.985 11.985 0 0 0 5.82 1.48h.003c6.63 0 12-5.37 12-12 0-3.192-1.243-6.2-3.48-8.52zM12.005 22.004h-.003c-1.74 0-3.44-.46-4.945-1.328l-.355-.207-3.67.963.985-3.58-.23-.367a9.962 9.962 0 0 1-1.553-5.49c.008-5.51 4.487-9.988 9.998-9.988a9.932 9.932 0 0 1 7.08 2.937 9.935 9.935 0 0 1 2.937 7.068c0 5.512-4.488 10-10 10z" />
+            <path d="M17.46 14.58l-2.41-1.21c-.33-.16-.72-.09-.98.18l-.73.74a7.4 7.4 0 0 1-3.89-3.88l.74-.74c.25-.25.33-.63.18-.97l-1.21-2.41c-.18-.36-.63-.51-.98-.36l-1.57.63c-.34.14-.56.47-.56.84a9.46 9.46 0 0 0 9.45 9.45c.37 0 .7-.22.84-.56l.63-1.57c.15-.35 0-.8-.36-.98z" />
+          </svg>
+        </span>
+        <span onClick={() => handleContactClick('email')}>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="#EA4335"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M20 4H4C2.897 4 2 4.897 2 6V18C2 19.103 2.897 20 4 20H20C21.103 20 22 19.103 22 18V6C22 4.897 21.103 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8L20.002 18H4Z" />
+          </svg>
+        </span>
+        <span onClick={() => handleContactClick('form')}>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            color="fff"
+            style={{ fill: '#fff' }}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 6.34c.38-.38.38-1.01 0-1.39l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.85z" />
+          </svg>
+        </span>
+      </div>
       <div
         className={`${classes.modalContent} ${isHiding ? classes.hide : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button className={classes.closeButton} onClick={handleClose}>
-          ×
-        </button>
-
         {loading ? (
           <p>Загрузка...</p>
         ) : caseData ? (
@@ -120,90 +167,64 @@ export default function CaseModal({ caseId, onClose }) {
               </div>
               <div className={classes.infoRight}>
                 <div>
-                  <div className={classes.developersTitle}>
-                    <span>РАЗРАБОТЧИКИ</span>
-                    <span>ПРОЕКТА</span>
-                  </div>
-                  <div className={classes.developersList}>
-                    {caseData.developers.map((developer, index) => (
-                      <div key={index} className={classes.developer}>
-                        <img
-                          src={`${uploadsConfig}${developer.img[0]}`}
-                          alt={developer.name}
-                        />
-                        <div className={classes.developerInfo}>
-                          <span>{developer.name} </span>
-                          <span>{developer.position} </span>
+                  {caseData.developers && caseData.developers.length === 1 && (
+                    <div className={classes.developersList}>
+                      {caseData.developers.map((developer, index) => (
+                        <div key={index} className={classes.developer}>
+                          <img
+                            src={`${uploadsConfig}${developer.img[0]}`}
+                            alt={developer.name}
+                          />
+                          <div className={classes.developerInfo}>
+                            <span>{developer.name}</span>
+                            <span>{developer.position}</span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className={classes.connectMenu}>
-                  <button
-                    className={classes.connect}
-                    onClick={toggleMenu}
-                    ref={buttonRef}
-                  >
-                    Связаться с нами
-                  </button>
+                      ))}
+                    </div>
+                  )}
 
-                  {showMenu && (
-                    <div
-                      className={`${classes.menu} ${
-                        showMenu ? classes.menuActive : classes.menuHide
-                      }`}
-                      ref={menuRef}
-                    >
-                      <span onClick={() => handleContactClick('telegram')}>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="#0088cc"
-                          xmlns="http://www.w3.org/2000/svg"
+                  {caseData.developers && caseData.developers.length === 2 && (
+                    <div className={classes.developersListAll}>
+                      {caseData.developers.map((developer, index) => (
+                        <div key={index} className={classes.developerAll}>
+                          <img
+                            src={`${uploadsConfig}${developer.img[0]}`}
+                            alt={developer.name}
+                          />
+                        </div>
+                      ))}
+                      <span
+                        className={classes.developersListAllSpan}
+                        onClick={toggleMenu}
+                        ref={buttonRef}
+                      >
+                        Разработчики проекта 🠋
+                      </span>{' '}
+                      {showMenu && (
+                        <div
+                          ref={menuRef}
+                          className={`${classes.developersMenu} ${
+                            showMenu ? classes.show : ''
+                          }`}
                         >
-                          <path d="M9.99979 15.2L9.70514 19.3497C10.1385 19.3497 10.3273 19.1582 10.5526 18.9405L12.7785 16.8614L17.051 19.9396C17.8395 20.3728 18.3971 20.1472 18.606 19.2484L21.9543 4.31383L21.955 4.3131C22.1979 3.20818 21.4968 2.74439 20.7365 3.04155L2.81532 10.1855C1.73863 10.6263 1.74901 11.2349 2.6332 11.4972L7.34998 12.8804L17.1535 6.69872C17.6031 6.42269 18.0142 6.57756 17.6796 6.87656L9.99979 15.2Z" />
-                        </svg>
-                        Telegram
-                      </span>
-                      <span onClick={() => handleContactClick('whatsapp')}>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="#25D366"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M12.0043 2.00391C6.478 2.00391 2.00391 6.478 2.00391 12.0043C2.00391 13.9681 2.59799 15.7851 3.63346 17.2941L2.00391 22L6.81669 20.4064C8.25977 21.2424 9.99566 21.7351 11.8521 21.7351C17.3784 21.7351 21.8525 17.261 21.8525 11.7347C21.8525 6.20838 17.3784 2.00391 12.0043 2.00391ZM12.0043 19.7351C10.5084 19.7351 9.08926 19.3212 7.90748 18.5793L7.6363 18.4031L5.17025 19.2355L5.99812 16.7594L5.82663 16.4855C4.95179 15.0605 4.51884 13.4018 4.51884 11.7347C4.51884 7.69598 7.96549 4.24933 12.0043 4.24933C16.0431 4.24933 19.4898 7.69598 19.4898 11.7347C19.4898 15.7735 16.0431 19.7351 12.0043 19.7351Z" />
-                          <path d="M16.3474 13.3706L14.3922 12.3789C14.1135 12.2407 13.7966 12.2308 13.5072 12.3523C13.2178 12.4737 12.984 12.7159 12.8573 13.0284C12.7252 13.3541 12.4055 13.6255 12.086 13.6753C11.7234 13.7336 11.2311 13.5889 10.5692 13.0471C9.72152 12.3603 9.35604 11.7892 9.08889 11.2774C8.97999 11.0663 9.05626 10.8609 9.20698 10.7199C9.29077 10.6407 9.35897 10.5425 9.40807 10.4317C9.46182 10.3097 9.48163 10.1762 9.46421 10.0429C9.44679 9.90952 9.39282 9.78062 9.30847 9.66867L8.274 8.29688C8.15177 8.1301 7.97134 8.02598 7.77434 8.00458C7.57734 7.98318 7.37917 8.04532 7.22513 8.17615C6.54015 8.75604 6.20864 9.49989 6.275 10.2969C6.34136 11.0939 6.74507 12.1463 8.11467 13.3133C9.82184 14.8329 11.2697 15.2642 12.5026 14.9993C13.3012 14.8311 13.9984 14.3123 14.4743 13.5181C14.6003 13.3076 14.6807 13.0652 14.6568 12.8176C14.6486 12.7357 14.6822 12.6562 14.7463 12.6063C14.8104 12.5563 14.8973 12.5438 14.9744 12.5747L16.7398 13.3494C16.8264 13.3876 16.9235 13.3972 17.0167 13.3771C17.1098 13.357 17.1946 13.3083 17.2574 13.2383C17.3202 13.1682 17.3586 13.0809 17.3661 12.9882C17.3736 12.8955 17.35 12.8034 17.2984 12.7256C17.2468 12.6477 17.1692 12.5871 17.0776 12.5535C16.986 12.5199 16.8852 12.5153 16.7923 12.5402L16.3474 13.3706Z" />
-                        </svg>
-                        WhatsApp
-                      </span>
-                      <span onClick={() => handleContactClick('email')}>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="#EA4335"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M20 4H4C2.897 4 2 4.897 2 6V18C2 19.103 2.897 20 4 20H20C21.103 20 22 19.103 22 18V6C22 4.897 21.103 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8L20.002 18H4Z" />
-                        </svg>
-                        E-Mail
-                      </span>
-                      <span onClick={() => handleContactClick('form')}>
-                        <svg
-                          width="24"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="#000"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 6.34c.38-.38.38-1.01 0-1.39l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.85z" />
-                        </svg>
-                        Оставить заявку
-                      </span>
+                          {caseData.developers.map((developer, index) => (
+                            <div
+                              key={index}
+                              className={classes.developersMenuEl}
+                            >
+                              <img
+                                src={`${uploadsConfig}${developer.img[0]}`}
+                                alt={developer.name}
+                              />
+                              <div className={classes.developersMenuElInfo}>
+                                <span>{developer.name}</span>
+                                <span>{developer.position}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -236,6 +257,60 @@ export default function CaseModal({ caseId, onClose }) {
                 </div>
               ))}
             </div>
+                  <div className={classes.contactsMobile} onClick={(e) => e.stopPropagation()}>
+        <div className={classes.contactsMobileTitle}>
+          <span>СВЯЗАТЬСЯ </span>
+          <span>С НАМИ </span>
+        </div>
+        <div className={classes.contactsMobileIcons}>
+        <span onClick={() => handleContactClick('telegram')}>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="#0088cc"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M9.99979 15.2L9.70514 19.3497C10.1385 19.3497 10.3273 19.1582 10.5526 18.9405L12.7785 16.8614L17.051 19.9396C17.8395 20.3728 18.3971 20.1472 18.606 19.2484L21.9543 4.31383C22.1979 3.20818 21.4968 2.74439 20.7365 3.04155L2.81532 10.1855C1.73863 10.6263 1.74901 11.2349 2.6332 11.4972L7.34998 12.8804L17.1535 6.69872C17.6031 6.42269 18.0142 6.57756 17.6796 6.87656L9.99979 15.2Z" />
+          </svg>
+        </span>
+        <span onClick={() => handleContactClick('whatsapp')}>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="#25D366"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M20.52 3.48A11.938 11.938 0 0 0 12.005 0C5.37 0 .009 5.36 0 11.995c0 2.114.553 4.19 1.6 6.02L0 24l6.182-1.62a11.985 11.985 0 0 0 5.82 1.48h.003c6.63 0 12-5.37 12-12 0-3.192-1.243-6.2-3.48-8.52zM12.005 22.004h-.003c-1.74 0-3.44-.46-4.945-1.328l-.355-.207-3.67.963.985-3.58-.23-.367a9.962 9.962 0 0 1-1.553-5.49c.008-5.51 4.487-9.988 9.998-9.988a9.932 9.932 0 0 1 7.08 2.937 9.935 9.935 0 0 1 2.937 7.068c0 5.512-4.488 10-10 10z" />
+            <path d="M17.46 14.58l-2.41-1.21c-.33-.16-.72-.09-.98.18l-.73.74a7.4 7.4 0 0 1-3.89-3.88l.74-.74c.25-.25.33-.63.18-.97l-1.21-2.41c-.18-.36-.63-.51-.98-.36l-1.57.63c-.34.14-.56.47-.56.84a9.46 9.46 0 0 0 9.45 9.45c.37 0 .7-.22.84-.56l.63-1.57c.15-.35 0-.8-.36-.98z" />
+          </svg>
+        </span>
+        <span onClick={() => handleContactClick('email')}>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="#EA4335"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M20 4H4C2.897 4 2 4.897 2 6V18C2 19.103 2.897 20 4 20H20C21.103 20 22 19.103 22 18V6C22 4.897 21.103 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8L20.002 18H4Z" />
+          </svg>
+        </span>
+        <span onClick={() => handleContactClick('form')}>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            color="fff"
+            style={{ fill: '#000' }}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 6.34c.38-.38.38-1.01 0-1.39l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.85z" />
+          </svg>
+        </span>
+        </div>
+      </div>
           </>
         ) : (
           <p>Кейс не найден</p>

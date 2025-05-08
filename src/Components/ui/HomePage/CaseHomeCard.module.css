@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   width: 100%;
   max-width: 1609px;
-  margin-top: 30px;
+  margin-top: 80px;
   /* gap: 43px; */
 }
 
@@ -84,7 +84,7 @@
 @media (max-width: 768px) {
   .containerCaseMenu {
     /* max-width: 480px; */
-    margin-top: -30px !important;
+    margin-top: 40px !important;
   }
 
   .caseItem {

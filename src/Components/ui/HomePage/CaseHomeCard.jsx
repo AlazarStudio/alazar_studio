@@ -9,12 +9,10 @@ export default function CaseHomeCard({ caseHomes, onClickCase }) {
         <div
           key={item.id}
           className={classes.caseItem}
-          onClick={() => onClickCase && onClickCase(item.id)} // защита от ошибки
+          onClick={() => onClickCase(item.id, item)}
+          // защита от ошибки
         >
-          <img
-            src={`${uploadsConfig}${item.img[0]}`}
-            alt={item.name}
-          />
+          <img src={`${uploadsConfig}${item.img[0]}`} alt={item.name} />
         </div>
       ))}
     </div>

@@ -16,15 +16,15 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/:categoryTitle" element={<HomePage />} />
+          <Route path="/:categoryTitle/:id" element={<HomePage />} />
           <Route path="/case/:id" element={<HomePage />} />
-          <Route path="/cases" element={<CasesPage />} />
+          {/* <Route path="/cases" element={<CasesPage />} />
           <Route path="/cases/:categoryTitle" element={<CasesPage />} />
-          <Route path="/cases/:id" element={<CasesPage />} />
+          <Route path="/cases/:id" element={<CasesPage />} /> */}
 
+          {/* <Route path="/service" element={<ServicePage />} /> */}
 
-          <Route path="/service" element={<ServicePage />} />
-
-          <Route path="/case/:id" element={<OneCasePage />} />
+          {/* <Route path="/case/:id" element={<OneCasePage />} /> */}
 
           <Route path="*" element={<Non_Found_Page />} />
         </Route>

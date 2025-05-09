@@ -94,25 +94,7 @@ export default function CaseModal({ caseId, onClose }) {
       <button className={classes.closeButton} onClick={handleClose}>
         ×
       </button>
-      <div className={classes.contacts} onClick={(e) => e.stopPropagation()}>
-        <span onClick={() => handleContactClick('telegram')}>
-                  <img src="/images/tg11.png" />
-                </span>
-                <span onClick={() => handleContactClick('whatsapp')}>
-                  <img src="/images/whatsApp.png" />
-                </span>
-        <span onClick={() => handleContactClick('form')}>
-          <svg
-            width="50"
-            height="50"
-            viewBox="0 0 24 24"
-            fill="#EA4335"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M20 4H4C2.897 4 2 4.897 2 6V18C2 19.103 2.897 20 4 20H20C21.103 20 22 19.103 22 18V6C22 4.897 21.103 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8L20.002 18H4Z" />
-          </svg>
-        </span>
-      </div>
+
       <div
         className={`${classes.modalContent} ${isHiding ? classes.hide : ''}`}
         onClick={(e) => e.stopPropagation()}
@@ -206,6 +188,18 @@ export default function CaseModal({ caseId, onClose }) {
                 <DiscussionModal onClose={() => setShowForm(false)} />
               )}
 
+                    <div className={classes.contacts} onClick={(e) => e.stopPropagation()}>
+        <span onClick={() => handleContactClick('telegram')}>
+          <img src="/images/telegram.svg" />
+        </span>
+        <span onClick={() => handleContactClick('whatsapp')}>
+          <img src="/images/whatsapp.svg" />
+        </span>
+        <span onClick={() => handleContactClick('form')}>
+          <img src="/images/convert.svg" />
+        </span>
+      </div>
+
               {caseData.img.map((img, idx) => (
                 <img key={idx} src={`${uploadsConfig}${img}`} alt="case" />
               ))}
@@ -237,23 +231,15 @@ export default function CaseModal({ caseId, onClose }) {
                 <span>С НАМИ </span>
               </div>
               <div className={classes.contactsMobileIcons}>
-                <span onClick={() => handleContactClick('telegram')}>
-                  <img src="/images/tg11.png" />
-                </span>
-                <span onClick={() => handleContactClick('whatsapp')}>
-                  <img src="/images/whatsApp.png" />
-                </span>
-                <span onClick={() => handleContactClick('form')}>
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 24 24"
-                    fill="#EA4335"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M20 4H4C2.897 4 2 4.897 2 6V18C2 19.103 2.897 20 4 20H20C21.103 20 22 19.103 22 18V6C22 4.897 21.103 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8L20.002 18H4Z" />
-                  </svg>
-                </span>
+                     <span onClick={() => handleContactClick('telegram')}>
+          <img src="/images/telegram.svg" />
+        </span>
+        <span onClick={() => handleContactClick('whatsapp')}>
+          <img src="/images/whatsapp.svg" />
+        </span>
+        <span onClick={() => handleContactClick('form')}>
+          <img src="/images/convert.svg" />
+        </span>
               </div>
             </div>
           </>

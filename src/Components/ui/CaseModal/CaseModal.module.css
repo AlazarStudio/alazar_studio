@@ -20,7 +20,7 @@
   height: 100dvh;
   bottom: 0 !important;
   overflow-y: auto;
-  border-radius: 20px 20px 0 0;
+  border-radius: 0;
   position: absolute;
   overflow: auto;
   scrollbar-width: none; /* Firefox */
@@ -104,11 +104,12 @@
 .contacts {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 20%;
-  right: 8%;
+  /* align-items: center; */
+  /* justify-content: center; */
+  position: fixed;
+  /* top: 20%; */
+  right: 7%;
+  
   gap: 50px;
   z-index: 10000000;
 }
@@ -125,7 +126,7 @@
 .images {
   display: flex;
   flex-direction: column;
-  /* position: relative; */
+  position: relative;
   gap: 0;
   margin: 0;
   padding: 0;
@@ -304,7 +305,7 @@
   border-radius: 10px;
   padding: 20px 30px;
   gap: 20px;
-
+z-index: 12;
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;

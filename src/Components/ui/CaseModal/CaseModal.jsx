@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import classes from './CaseModal.module.css';
 import uploadsConfig from '../../../uploadsConfig';
 import DiscussionModal from '../DiscussionModal/DiscussionModal';
+import serverConfig from '../../../serverConfig';
 
 export default function CaseModal({ caseId, onClose }) {
   const [caseData, setCaseData] = useState(null);
@@ -67,9 +68,7 @@ export default function CaseModal({ caseId, onClose }) {
   useEffect(() => {
     const fetchCase = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:5000/api/casesHome/${caseId}`
-        );
+        const res = await fetch(`${serverConfig}/casesHome/${caseId}`);
         const data = await res.json();
         setCaseData(data);
       } catch (err) {
@@ -188,17 +187,20 @@ export default function CaseModal({ caseId, onClose }) {
                 <DiscussionModal onClose={() => setShowForm(false)} />
               )}
 
-                    <div className={classes.contacts} onClick={(e) => e.stopPropagation()}>
-        <span onClick={() => handleContactClick('telegram')}>
-          <img src="/images/telegram.svg" />
-        </span>
-        <span onClick={() => handleContactClick('whatsapp')}>
-          <img src="/images/whatsapp.svg" />
-        </span>
-        <span onClick={() => handleContactClick('form')}>
-          <img src="/images/convert.svg" />
-        </span>
-      </div>
+              <div
+                className={classes.contacts}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span onClick={() => handleContactClick('telegram')}>
+                  <img src="/images/telegram.svg" />
+                </span>
+                <span onClick={() => handleContactClick('whatsapp')}>
+                  <img src="/images/whatsapp.svg" />
+                </span>
+                <span onClick={() => handleContactClick('form')}>
+                  <img src="/images/convert.svg" />
+                </span>
+              </div>
 
               {caseData.img.map((img, idx) => (
                 <img key={idx} src={`${uploadsConfig}${img}`} alt="case" />
@@ -231,15 +233,15 @@ export default function CaseModal({ caseId, onClose }) {
                 <span>С НАМИ </span>
               </div>
               <div className={classes.contactsMobileIcons}>
-                     <span onClick={() => handleContactClick('telegram')}>
-          <img src="/images/telegram.svg" />
-        </span>
-        <span onClick={() => handleContactClick('whatsapp')}>
-          <img src="/images/whatsapp.svg" />
-        </span>
-        <span onClick={() => handleContactClick('form')}>
-          <img src="/images/convert.svg" />
-        </span>
+                <span onClick={() => handleContactClick('telegram')}>
+                  <img src="/images/telegram.svg" />
+                </span>
+                <span onClick={() => handleContactClick('whatsapp')}>
+                  <img src="/images/whatsapp.svg" />
+                </span>
+                <span onClick={() => handleContactClick('form')}>
+                  <img src="/images/convert.svg" />
+                </span>
               </div>
             </div>
           </>

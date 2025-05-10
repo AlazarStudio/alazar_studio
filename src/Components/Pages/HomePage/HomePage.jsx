@@ -69,6 +69,7 @@ export default function HomePage() {
           fetch(`${serverConfig}/casesHome`),
           fetch(`${serverConfig}/categories`),
         ]);
+         console.log('Categories:', fetchData); 
         setCaseHomes(await casesHomeRes.json());
         setCategories(await categoriesRes.json());
       } catch (err) {
@@ -127,19 +128,25 @@ export default function HomePage() {
         </div>
       </div> */}
 
-      <CaseHomeCard
-        caseHomes={filteredCaseHomes}
-        onClickCase={(id, caseObj) => {
-          const category = caseObj.categories?.[0]?.title;
-          const translitCategory = transliterate(category?.toLowerCase() || '');
-
-          const path = categoryTitle
-            ? `/${translitCategory}/${id}`
-            : `/case/${id}`;
-
-          navigate(path);
-        }}
-      />
+      {filteredCaseHomes.length === 0 ? (
+        <p style={{ color: '#fff', textAlign: 'center' }}>
+          Кейсы пока не добавлены
+        </p>
+      ) : (
+        <CaseHomeCard
+          caseHomes={filteredCaseHomes}
+          onClickCase={(id, caseObj) => {
+            const category = caseObj.categories?.[0]?.title;
+            const translitCategory = transliterate(
+              category?.toLowerCase() || ''
+            );
+            const path = categoryTitle
+              ? `/${translitCategory}/${id}`
+              : `/case/${id}`;
+            navigate(path);
+          }}
+        />
+      )}
 
       {selectedCaseId && (
         <CaseModal

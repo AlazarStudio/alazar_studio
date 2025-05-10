@@ -1,15 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Header.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-
+import serverConfig from '../../../serverConfig';
 
 function transliterate(str) {
   const ru = {
-    а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'yo', ж: 'zh',
-    з: 'z', и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o',
-    п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'kh', ц: 'ts',
-    ч: 'ch', ш: 'sh', щ: 'shch', ы: 'y', э: 'e', ю: 'yu', я: 'ya',
-    ' ': '-', ь: '', ъ: '', 
+    а: 'a',
+    б: 'b',
+    в: 'v',
+    г: 'g',
+    д: 'd',
+    е: 'e',
+    ё: 'yo',
+    ж: 'zh',
+    з: 'z',
+    и: 'i',
+    й: 'y',
+    к: 'k',
+    л: 'l',
+    м: 'm',
+    н: 'n',
+    о: 'o',
+    п: 'p',
+    р: 'r',
+    с: 's',
+    т: 't',
+    у: 'u',
+    ф: 'f',
+    х: 'kh',
+    ц: 'ts',
+    ч: 'ch',
+    ш: 'sh',
+    щ: 'shch',
+    ы: 'y',
+    э: 'e',
+    ю: 'yu',
+    я: 'ya',
+    ' ': '-',
+    ь: '',
+    ъ: '',
   };
   return str
     .split('')
@@ -17,28 +46,24 @@ function transliterate(str) {
     .join('');
 }
 
-
-
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-useEffect(() => {
-  const fetchCategories = async () => {
-    try {
-      const res = await fetch('http://localhost:5000/api/categories');
-      const data = await res.json();
-      setCategories(data);
-    } catch (err) {
-      console.error('Ошибка загрузки категорий:', err);
-    }
-  };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(`http://${serverConfig}/categories`);
+        const data = await res.json();
+        setCategories(data);
+      } catch (err) {
+        console.error('Ошибка загрузки категорий:', err);
+      }
+    };
 
-  fetchCategories();
-}, []);
-
-
+    fetchCategories();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -70,28 +95,27 @@ useEffect(() => {
           isScrolled ? classes.scrolled : ''
         }`}
       >
-<ul>
-  <li>
-    <img
-      src="/images/headerLogo.png"
-      alt="Логотип"
-      className={classes.logo}
-      onClick={() => navigate('/')}
-    />
-  </li>
-  <li>
-    <Link to="/">ВСЕ</Link>
-  </li>
+        <ul>
+          <li>
+            <img
+              src="/images/headerLogo.png"
+              alt="Логотип"
+              className={classes.logo}
+              onClick={() => navigate('/')}
+            />
+          </li>
+          <li>
+            <Link to="/">ВСЕ</Link>
+          </li>
 
-  {categories.map((cat) => (
-    <li key={cat.id}>
-      <Link to={`/${transliterate(cat.title.toLowerCase())}`}>
-        {cat.title}
-      </Link>
-    </li>
-  ))}
-</ul>
-
+          {categories.map((cat) => (
+            <li key={cat.id}>
+              <Link to={`/${transliterate(cat.title.toLowerCase())}`}>
+                {cat.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Мобильная версия */}
@@ -100,14 +124,12 @@ useEffect(() => {
           isScrolled ? classes.scrolled : ''
         }`}
       >
-      
-          <img
-            src="/images/LogoAlazarM.png"
-            alt="Логотип"
-            className={classes.logoMobile}
-            onClick={() => navigate('/')}
-          />
-  
+        <img
+          src="/images/LogoAlazarM.png"
+          alt="Логотип"
+          className={classes.logoMobile}
+          onClick={() => navigate('/')}
+        />
 
         {/* Иконка меню, по клику открывается меню */}
         <img
@@ -122,19 +144,18 @@ useEffect(() => {
           className={`${classes.menu} ${isMenuOpen ? classes.open : ''}`}
           onClick={closeMenu}
         >
-<ul>
-  <li>
-    <Link to="/">ВСЕ</Link>
-  </li>
-  {categories.map((cat) => (
-    <li key={cat.id}>
-      <Link to={`/${transliterate(cat.title.toLowerCase())}`}>
-        {cat.title}
-      </Link>
-    </li>
-  ))}
-</ul>
-
+          <ul>
+            <li>
+              <Link to="/">ВСЕ</Link>
+            </li>
+            {categories.map((cat) => (
+              <li key={cat.id}>
+                <Link to={`/${transliterate(cat.title.toLowerCase())}`}>
+                  {cat.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

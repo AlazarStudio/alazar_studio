@@ -19,10 +19,20 @@ import {
   Edit,
   FunctionField,
   DateInput,
-  DateField 
+  DateField,
 } from 'react-admin';
 import { handleSave, handleSaveWithImages } from '../JS/fileUploadUtils';
 import uploadsConfig from '../../../../uploadsConfig';
+
+const DeveloperNames = ({ record }) =>
+  record?.developers?.length
+    ? record.developers.map((dev) => dev.name).join(', ')
+    : 'Нет разработчиков';
+
+const CategoryTitles = ({ record }) =>
+  record?.categories?.length
+    ? record.categories.map((cat) => cat.title).join(', ')
+    : 'Нет категорий';
 
 // Список
 export const CaseList = (props) => (
@@ -32,27 +42,10 @@ export const CaseList = (props) => (
       <TextField source="name" label="Название" />
       <TextField source="website" label="Сайт" />
       <DateField source="date" label="Дата" showTime={false} />
-    
 
       {/* Исправлено: один разработчик */}
-      <FunctionField
-        label="Разработчики"
-        render={(record) =>
-          record.developers?.length
-            ? record.developers.map((dev) => dev.name).join(', ')
-            : 'Нет разработчиков'
-        }
-      />
-
-      {/* Исправлено: категории отображаются строкой */}
-      <FunctionField
-        label="Категории"
-        render={(record) =>
-          record.categories?.length
-            ? record.categories.map((cat) => cat.title).join(', ')
-            : 'Нет категорий'
-        }
-      />
+      <FunctionField label="Разработчики" render={DeveloperNames} />
+      <FunctionField label="Категории" render={CategoryTitles} />
 
       <EditButton />
       <DeleteButton />
@@ -72,6 +65,7 @@ export const CaseCreate = (props) => (
         source="developerIds"
         reference="developers"
         label="Разработчики"
+        perPage={10}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -80,6 +74,7 @@ export const CaseCreate = (props) => (
         source="categoryIds"
         reference="categories"
         label="Категории"
+        perPage={10}
       >
         <SelectArrayInput optionText="title" />
       </ReferenceArrayInput>
@@ -103,6 +98,7 @@ export const CaseEdit = (props) => (
         source="developerIds"
         reference="developers"
         label="Разработчики"
+        perPage={10}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -110,6 +106,7 @@ export const CaseEdit = (props) => (
         source="categoryIds"
         reference="categories"
         label="Категории"
+        perPage={10}
       >
         <SelectArrayInput optionText="title" />
       </ReferenceArrayInput>

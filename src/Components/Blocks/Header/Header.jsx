@@ -54,7 +54,7 @@ function Header() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch(`http://${serverConfig}/categories`);
+        const res = await fetch(`${serverConfig}/categories`);
         const data = await res.json();
         setCategories(data);
       } catch (err) {

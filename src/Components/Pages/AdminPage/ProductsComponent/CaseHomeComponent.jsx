@@ -24,6 +24,17 @@ import {
 import { handleSave, handleSaveWithImages } from '../JS/fileUploadUtils';
 import uploadsConfig from '../../../../uploadsConfig';
 
+
+const DeveloperNames = ({ record }) =>
+  record?.developers?.length
+    ? record.developers.map((dev) => dev.name).join(', ')
+    : 'Нет разработчиков';
+
+const CategoryTitles = ({ record }) =>
+  record?.categories?.length
+    ? record.categories.map((cat) => cat.title).join(', ')
+    : 'Нет категорий';
+
 // Список
 export const CaseHomeList = (props) => (
   <List {...props}>
@@ -34,24 +45,8 @@ export const CaseHomeList = (props) => (
       <DateField source="date" label="Дата" showTime={false} />
 
       {/* Исправлено: один разработчик */}
-      <FunctionField
-        label="Разработчики"
-        render={(record) =>
-          record.developers?.length
-            ? record.developers.map((dev) => dev.name).join(', ')
-            : 'Нет разработчиков'
-        }
-      />
-
-      {/* Исправлено: категории отображаются строкой */}
-      <FunctionField
-        label="Категории"
-        render={(record) =>
-          record.categories?.length
-            ? record.categories.map((cat) => cat.title).join(', ')
-            : 'Нет категорий'
-        }
-      />
+      <FunctionField label="Разработчики" render={DeveloperNames} />
+      <FunctionField label="Категории" render={CategoryTitles} />
 
       <EditButton />
       <DeleteButton />
@@ -71,6 +66,7 @@ export const CaseHomeCreate = (props) => (
         source="developerIds"
         reference="developers"
         label="Разработчики"
+        perPage={10}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -78,6 +74,7 @@ export const CaseHomeCreate = (props) => (
         source="categoryIds"
         reference="categories"
         label="Категории"
+        perPage={10}
       >
         <SelectArrayInput optionText="title" />
       </ReferenceArrayInput>
@@ -100,6 +97,7 @@ export const CaseHomeEdit = (props) => (
         source="developerIds"
         reference="developers"
         label="Разработчики"
+        perPage={10}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -107,6 +105,7 @@ export const CaseHomeEdit = (props) => (
         source="categoryIds"
         reference="categories"
         label="Категории"
+        perPage={10}
       >
         <SelectArrayInput optionText="title" />
       </ReferenceArrayInput>

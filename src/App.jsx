@@ -4,10 +4,19 @@ import Non_Found_Page from './Components/Pages/Non_Found_Page';
 import Layout from './Components/Standart/Layout/Layout';
 // import AdminPage from './Components/Pages/AdminPage/AdminPage';
 import HomePage from './Components/Pages/HomePage/HomePage';
-import AdminPage from './Components/Pages/AdminPage/AdminPage';
-import CasesPage from './Components/Pages/CasesPage/CasesPage';
 import OneCasePage from './Components/Pages/OneCasePage/OneCasePage';
 import ServicePage from './Components/Pages/ServicePage/ServicePage';
+import ProtectedRoute from './Components/Pages/AdminNew/ProtectedRoute';
+import AdminPage from './Components/Pages/AdminPage';
+import LoginPage from './Components/Pages/LoginPage';
+import CategoriesPage from './Components/Pages/AdminNew/CategoriesPage/CategoriesPage';
+import DevelopersPage from './Components/Pages/DevelopersPage';
+import CasesPage from './Components/Pages/AdminNew/AdminCasesPage/CasesPage';
+import ShopPage from './Components/Pages/ShopPage/ShopPage';
+import AboutPage from './Components/Pages/AboutPage/AboutPage';
+import { ContactPage } from '@mui/icons-material';
+import ContactsPage from './Components/Pages/ContacsPage/ContactsPage';
+import DiscussionTable from './Components/Pages/AdminNew/DiscussionPage/DiscussionTable';
 
 function App() {
   return (
@@ -16,19 +25,36 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/:categoryTitle" element={<HomePage />} />
-          <Route path="/:categoryTitle/:id" element={<HomePage />} />
-          <Route path="/case/:id" element={<HomePage />} />
+          <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} />
+          <Route path="/case/:caseTitle" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
           {/* <Route path="/cases" element={<CasesPage />} />
           <Route path="/cases/:categoryTitle" element={<CasesPage />} />
           <Route path="/cases/:id" element={<CasesPage />} /> */}
 
-          {/* <Route path="/service" element={<ServicePage />} /> */}
+          <Route path="/service" element={<ServicePage />} />
 
           {/* <Route path="/case/:id" element={<OneCasePage />} /> */}
+          <Route path="/login" element={<LoginPage />} />
 
           <Route path="*" element={<Non_Found_Page />} />
         </Route>
-        <Route path="/admin/*" element={<AdminPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<CategoriesPage />} />
+          <Route path="categories" element={<CategoriesPage />} />
+          <Route path="developers" element={<DevelopersPage />} />
+          <Route path="cases" element={<CasesPage />} />
+          <Route path="discussion" element={<DiscussionTable />} />
+        </Route>
       </Routes>
     </>
   );

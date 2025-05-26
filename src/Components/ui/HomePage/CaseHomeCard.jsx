@@ -1,26 +1,34 @@
-// src/components/ui/HomePage/CaseHomeCard.jsx
 import classes from './CaseHomeCard.module.css';
+import serverConfig from '../../../serverConfig';
 import uploadsConfig from '../../../uploadsConfig';
 
-export default function CaseHomeCard({ caseHomes, onClickCase }) {
-  return (
-    <div className={classes.containerCaseMenu}>
-      {caseHomes.map((item) => {
-        const imageUrl =
-          Array.isArray(item.img) && item.img.length > 0
-            ? `${uploadsConfig}${item.img[0]}`
-            : '/images/placeholder.png'; // fallback картинка
+export default function CaseHomeCard({ caseItem, allCategories }) {
+ const bg = caseItem.preview
+  ? `url(${uploadsConfig}/uploads/${caseItem.preview})`
+  : undefined;
 
-        return (
-          <div
-            key={item.id}
-            className={classes.caseItem}
-            onClick={() => onClickCase(item.id, item)}
-          >
-            <img src={imageUrl} alt={item.name || 'Кейс'} />
-          </div>
-        );
-      })}
+
+  const matchedCategories = allCategories.filter((cat) =>
+    caseItem.categoryIds?.includes(cat.id)
+  );
+  return (
+    <div className={classes.card} style={{ backgroundImage: bg }}>
+      {/* Затемняющий слой */}
+      <div className={classes.overlay} />
+
+      {/* Категории */}
+      <div className={classes.categories}>
+        {matchedCategories.map((cat) => (
+          <span key={cat.id} className={classes.categoryText}>
+            {cat.name}
+          </span>
+        ))}
+      </div>
+
+      {/* Название */}
+      <div className={classes.titleWrapper}>
+        <span className={classes.title}>{caseItem.title}</span>
+      </div>
     </div>
   );
 }

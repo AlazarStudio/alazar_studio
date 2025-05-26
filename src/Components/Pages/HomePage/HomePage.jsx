@@ -4,7 +4,7 @@ import classes from './HomePage.module.css';
 import serverConfig from '../../../serverConfig';
 import CaseHomeCard from '../../ui/HomePage/CaseHomeCard';
 import CaseModal from '../../ui/CaseModal/CaseModal';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function transliterate(str) {
   const ru = {
@@ -36,11 +36,12 @@ function transliterate(str) {
     ш: 'sh',
     щ: 'shch',
     ы: 'y',
+    ь: "'",
     э: 'e',
     ю: 'yu',
     я: 'ya',
     ' ': '-',
-    ь: '',
+    ь: "'",
     ъ: '',
     ё: 'yo',
   };
@@ -51,56 +52,146 @@ function transliterate(str) {
 }
 
 export default function HomePage() {
-  const [caseHomes, setCaseHomes] = useState([]);
+  const [cases, setCases] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [developers, setDevelopers] = useState([]);
+  const [selectedCase, setSelectedCase] = useState(null);
+  const [activeCategoryId, setActiveCategoryId] = useState(null);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const params = useParams();
-  const selectedCaseId = params.id;
-  const categoryTitle =
-    params.categoryTitle?.toLowerCase() === 'case'
-      ? null
-      : params.categoryTitle;
+  const encodeSlug = (str) => str.replace(/\s+/g, '-');
+  const decodeSlug = (str) => str.replace(/-/g, ' ');
 
+  // Загрузка данных
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [casesHomeRes, categoriesRes] = await Promise.all([
-          fetch(`${serverConfig}/casesHome`),
-          fetch(`${serverConfig}/categories`),
-        ]);
-         console.log('Categories:', fetchData); 
-        setCaseHomes(await casesHomeRes.json());
-        setCategories(await categoriesRes.json());
-      } catch (err) {
-        console.error('Ошибка загрузки данных:', err);
-      }
-    };
-    fetchData();
+    Promise.all([
+      fetch(`${serverConfig}/cases`).then((res) => res.json()),
+      fetch(`${serverConfig}/categories`).then((res) => res.json()),
+      fetch(`${serverConfig}/developers`).then((res) => res.json()),
+    ]).then(([caseData, categoryData, developerData]) => {
+      setCases(caseData);
+      setCategories(categoryData);
+      setDevelopers(developerData);
+    });
   }, []);
 
-  const filteredCaseHomes = categoryTitle
-    ? caseHomes.filter((caseHome) =>
-        caseHome.categories.some(
-          (category) =>
-            transliterate(category.title.toLowerCase()) ===
-            categoryTitle.toLowerCase()
-        )
-      )
-    : caseHomes;
+  // Анализ pathname → category / case
+useEffect(() => {
+  if (!categories.length || !cases.length) return;
+
+  const path = decodeURIComponent(location.pathname).slice(1);
+  const parts = path.split('/').filter(Boolean);
+  const [part1, part2] = parts;
+
+  const category = categories.find(
+    (cat) => transliterate(cat.name.toLowerCase()) === part1?.toLowerCase()
+  );
+  const caseFromFirst = cases.find(
+    (c) => transliterate(c.title.toLowerCase()) === part1?.toLowerCase()
+  );
+  const caseFromSecond = cases.find(
+    (c) => transliterate(c.title.toLowerCase()) === part2?.toLowerCase()
+  );
+
+  if (category && activeCategoryId !== category.id) {
+    setActiveCategoryId(category.id);
+  }
+
+  const targetCase = caseFromSecond || caseFromFirst;
+
+  if (targetCase) {
+    setSelectedCase(targetCase);
+    setDrawerVisible(true); // теперь drawer открывается ТОЛЬКО здесь
+  }
+}, [location.pathname, categories, cases]);
+
+
+  const filteredCases = activeCategoryId
+    ? cases.filter((c) => c.categoryIds.includes(activeCategoryId))
+    : cases;
+
+  const handleCategorySelect = (id) => {
+    const category = categories.find((cat) => cat.id === id);
+    if (!category) return;
+
+    // СРАЗУ ставим активную категорию
+    setActiveCategoryId(id);
+
+    // Навигация нужна только если хотим синхронизировать URL
+    navigate(`/${transliterate(category.name.toLowerCase())}`);
+  };
+
+  const handleCaseClick = (c) => {
+    const caseSlug = transliterate(c.title.toLowerCase());
+    const category = categories.find((cat) => cat.id === activeCategoryId);
+    const currentPath = decodeURIComponent(location.pathname);
+
+    const targetPath = category
+      ? `/${transliterate(category.name.toLowerCase())}/${caseSlug}`
+      : `/${caseSlug}`;
+
+    if (currentPath !== targetPath) {
+      navigate(targetPath); // URL обновится, useEffect сработает
+    } else {
+      // если URL не меняется, принудительно обнови state
+      setSelectedCase(c);
+      setDrawerVisible(true);
+    }
+  };
+
+ const handleCloseModal = () => {
+  const category = categories.find((cat) => cat.id === activeCategoryId);
+
+  // Сначала навигируем на URL без кейса
+  if (category) {
+    navigate(`/${transliterate(category.name.toLowerCase())}`);
+  } else {
+    navigate(`/`);
+  }
+
+  // После этого скрываем модалку и сбрасываем selectedCase
+  setTimeout(() => {
+    setDrawerVisible(false);
+    setSelectedCase(null);
+  }, 300); // длительность анимации
+};
+
+
+  const pseudoRandom = (id) => {
+    const str = String(id);
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash % 10000);
+  };
+
+  const pinnedCases = filteredCases
+    .filter((c) => c.positionTop && !isNaN(Number(c.positionTop)))
+    .sort((a, b) => Number(a.positionTop) - Number(b.positionTop));
+
+  const unpinnedCases = filteredCases
+    .filter((c) => !c.positionTop || isNaN(Number(c.positionTop)))
+    .sort((a, b) => pseudoRandom(a.id) - pseudoRandom(b.id));
+
+  const finalCases = [...pinnedCases, ...unpinnedCases];
 
   return (
     <div className={classes.container}>
-      {/* <div className={classes.containerLogo}>
+      <div className={classes.containerLogo}>
         <img src="/images/logoA.png" alt="Logo A" />
         <div className={classes.containerLogoCenter}>
           <img src="/images/logoAlazar.png" alt="Logo Alazar" />
           <img src="/images/logoStudio.png" alt="Logo Studio" />
         </div>
         <span>СТУДИЯ WEB-РАЗРАБОТКИ И ГРАФИЧЕСКОГО ДИЗАЙНА</span>
-      </div> */}
+      </div>
 
-      {/* <div className={classes.containerCase}>
+      <div className={classes.containerCase}>
         <div className={classes.containerCaseTop}>
           <div className={classes.containerCaseTopName}>
             <span>НАШИ</span>
@@ -114,52 +205,50 @@ export default function HomePage() {
         </div>
 
         <div className={classes.categoryMenu}>
+          <span
+            className={`${classes.categoryItem} ${
+              activeCategoryId === null ? classes.active : ''
+            }`}
+            onClick={() => {
+              setActiveCategoryId(null);
+              navigate('/');
+            }}
+          >
+            Все
+          </span>
           {categories.map((cat) => (
             <span
               key={cat.id}
-              className={classes.categoryItem}
-              onClick={() =>
-                navigate(`/${transliterate(cat.title.toLowerCase())}`)
-              }
+              className={`${classes.categoryItem} ${
+                activeCategoryId === cat.id ? classes.active : ''
+              }`}
+              onClick={() => handleCategorySelect(cat.id)}
             >
-              {cat.title}
+              {cat.name}
             </span>
           ))}
         </div>
-      </div> */}
+      </div>
+      <div className={classes.casesContainer}>
+        {finalCases.map((c) => (
+          <div
+            key={c.id}
+            className={classes.caseBox}
+            onClick={() => handleCaseClick(c)}
+          >
+            <CaseHomeCard caseItem={c} allCategories={categories} />
+          </div>
+        ))}
+      </div>
 
-      {filteredCaseHomes.length === 0 ? (
-        <p style={{ color: '#fff', textAlign: 'center' }}>
-          Кейсы пока не добавлены
-        </p>
-      ) : (
-        <CaseHomeCard
-          caseHomes={filteredCaseHomes}
-          onClickCase={(id, caseObj) => {
-            const category = caseObj.categories?.[0]?.title;
-            const translitCategory = transliterate(
-              category?.toLowerCase() || ''
-            );
-            const path = categoryTitle
-              ? `/${translitCategory}/${id}`
-              : `/case/${id}`;
-            navigate(path);
-          }}
-        />
-      )}
-
-      {selectedCaseId && (
-        <CaseModal
-          caseId={selectedCaseId}
-          onClose={() => {
-            if (categoryTitle) {
-              navigate(`/${categoryTitle}`);
-            } else {
-              navigate('/');
-            }
-          }}
-        />
-      )}
+      <CaseModal
+        key={selectedCase?.id}
+        open={drawerVisible}
+        onClose={handleCloseModal}
+        caseItem={selectedCase}
+        allDevelopers={developers}
+        allCategories={categories}
+      />
     </div>
   );
 }

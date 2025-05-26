@@ -1,94 +1,60 @@
-.containerCaseMenu {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 1609px;
-  margin-top: 80px;
-  /* gap: 43px; */
-}
-
-.caseItem {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  align-items: center;
-  width: 32%;
-  height: 407px;
-  cursor: pointer;
-  margin-top: 48px;
-  border-radius: 10px;
-}
-
-.caseItem img {
+.card {
+  /* width: 430px;
+    height: 430px; */
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  object-fit: cover;
-}
-
-.caseItem span {
+  overflow: hidden;
+  background-size: cover; /* ✅ заполняет полностью */
+  background-repeat: no-repeat; /* ✅ без повторов */
+  background-position: center;
+  position: relative;
+  color: white;
+  padding: 16px;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   text-align: center;
-  position: absolute;
-  top: 72px;
-  font-size: 30px;
-  font-weight: 700;
-  margin-right: 50px;
-  margin-left: 50px;
+  background-blend-mode: darken;
+  /* outline: 1px solid red; */
 }
 
-@media (max-width: 1280px) {
-  
-  .containerCaseMenu {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 1609px;
-    margin-top: 30px;
-    /* gap: 43px; */
-  }
-  
-  .caseItem {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
-    width: 47%;
-    height: 407px;
-    cursor: pointer;
-    margin-top: 48px;
-    border-radius: 10px;
-  }
-  
-  .caseItem img {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-  }
-  
-  .caseItem span {
-    display: flex;
-    text-align: center;
-    position: absolute;
-    top: 72px;
-    font-size: 30px;
-    font-weight: 700;
-    margin-right: 50px;
-    margin-left: 50px;
-  }
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
 
+.categories {
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 28px;
+}
+
+.categoryText {
+  font-size: 13px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  color: #ffffffb2;
+}
+
+.titleWrapper {
+  z-index: 2;
+}
+
+.title {
+  font-weight: 700 !important;
+  font-size: 30px;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 2;
 }
 
 @media (max-width: 768px) {
-  .containerCaseMenu {
-    /* max-width: 480px; */
-    margin-top: 40px !important;
-  }
-
-  .caseItem {
-    width: 100%;
-    height: 367px;
-  }
 }

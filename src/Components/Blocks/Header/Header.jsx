@@ -49,21 +49,6 @@ function transliterate(str) {
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch(`${serverConfig}/categories`);
-        const data = await res.json();
-        setCategories(data);
-      } catch (err) {
-        console.error('Ошибка загрузки категорий:', err);
-      }
-    };
-
-    fetchCategories();
-  }, []);
 
   const navigate = useNavigate();
 
@@ -105,16 +90,23 @@ function Header() {
             />
           </li>
           <li>
-            <Link to="/">ВСЕ</Link>
+            <Link to="/">ГЛАВНАЯ</Link>
           </li>
-
-          {categories.map((cat) => (
-            <li key={cat.id}>
-              <Link to={`/${transliterate(cat.title.toLowerCase())}`}>
-                {cat.title}
-              </Link>
-            </li>
-          ))}
+          <li>
+            <Link to="/service">УСЛУГИ</Link>
+          </li>
+          <li>
+            <Link to="/cases">КЕЙСЫ</Link>
+          </li>
+          <li>
+            <Link to="/shop">МАГАЗИН</Link>
+          </li>
+          <li>
+            <Link to="/about">О НАС</Link>
+          </li>
+          <li>
+            <Link to="/contacts">КОНТАКТЫ</Link>
+          </li>
         </ul>
       </div>
 
@@ -146,15 +138,35 @@ function Header() {
         >
           <ul>
             <li>
-              <Link to="/">ВСЕ</Link>
+              <Link to="/" onClick={closeMenu}>
+                ГЛАВНАЯ
+              </Link>
             </li>
-            {categories.map((cat) => (
-              <li key={cat.id}>
-                <Link to={`/${transliterate(cat.title.toLowerCase())}`}>
-                  {cat.title}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link to="/service" onClick={closeMenu}>
+                УСЛУГИ
+              </Link>
+            </li>
+            <li>
+              <Link to="/cases" onClick={closeMenu}>
+                КЕЙСЫ
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" onClick={closeMenu}>
+                МАГАЗИН
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" onClick={closeMenu}>
+                О НАС
+              </Link>
+            </li>
+            <li>
+              <Link to="/contacts" onClick={closeMenu}>
+                КОНТАКТЫ
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

@@ -1,0 +1,103 @@
+/* DeveloperTable.module.css */
+.wrapper {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.addButton {
+  background-color: #f40087;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addButton:hover {
+  background-color: #d10075;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: left;
+}
+
+.table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table th.sortable:hover {
+  text-decoration: underline;
+}
+
+.table th {
+  background-color: #757575;
+}
+
+.table td {
+  background-color: #333;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.actionButton {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+
+}
+
+.actionButton:hover {
+  opacity: 0.7;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 6px;
+}
+
+.pageButton {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pageButton.active {
+  background-color: #f40087;
+  color: white;
+  border-color: #f40087;
+}

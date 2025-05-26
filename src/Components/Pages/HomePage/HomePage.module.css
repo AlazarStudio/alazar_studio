@@ -162,6 +162,31 @@
   cursor: pointer;
 }
 
+.categoryMenu span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  height: 60px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  font-family: 'Mulish', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.categoryMenu span:hover {
+  background-color: #e5097f;
+  border: 1px solid #e5097f;
+}
+
+.active {
+  border: 1px solid #e5097f !important;
+  background-color: #e5097f;
+}
+
 /* Основной стиль для десктопа */
 .containerLogo img:nth-of-type(1) {
   height: 146px;
@@ -216,12 +241,31 @@
   cursor: pointer;
 }
 
+.casesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  gap: 30px 0;
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1609px;
+}
+
+.caseBox {
+  display: flex;
+  width: 32%;
+  /* height: 200px; */
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  /* outline: 1px solid red; */
+}
+
 @media (max-width: 1280px) {
   .container {
     padding: 0 50px;
   }
-
- 
 
   .containerCase {
     max-width: 1280px;
@@ -248,86 +292,85 @@
     max-width: 1301px;
   }
 
-.containerLogo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 150px;
-  gap: 40px;
-}
+  .containerLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 150px;
+    gap: 40px;
+  }
 
-/* logoA сверху вниз */
-.containerLogo img:nth-of-type(1) {
-  height: 146px;
-  animation: slideDown 1s ease forwards;
-}
+  /* logoA сверху вниз */
+  .containerLogo img:nth-of-type(1) {
+    height: 146px;
+    animation: slideDown 1s ease forwards;
+  }
 
-/* центральные логотипы */
-.containerLogoCenter {
-  display: flex;
-  gap: 45px;
-}
+  /* центральные логотипы */
+  .containerLogoCenter {
+    display: flex;
+    gap: 45px;
+  }
 
-/* logoAlazar слева направо */
-.containerLogoCenter img:nth-of-type(1) {
-  height: 79px;
-  animation: slideLeft 1s ease forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
-}
+  /* logoAlazar слева направо */
+  .containerLogoCenter img:nth-of-type(1) {
+    height: 79px;
+    animation: slideLeft 1s ease forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
 
-/* logoStudio справа налево */
-.containerLogoCenter img:nth-of-type(2) {
-  height: 79px;
-  animation: slideRight 1s ease forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
-}
+  /* logoStudio справа налево */
+  .containerLogoCenter img:nth-of-type(2) {
+    height: 79px;
+    animation: slideRight 1s ease forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
 
-/* span снизу вверх */
-.containerLogo span {
-  font-size: 24px;
-  font-weight: 500;
-  animation: slideUp 1s ease forwards;
-  animation-delay: 1s;
-  opacity: 0;
-  font-family: 'Mulish', sans-serif;
-}
+  /* span снизу вверх */
+  .containerLogo span {
+    font-size: 24px;
+    font-weight: 500;
+    animation: slideUp 1s ease forwards;
+    animation-delay: 1s;
+    opacity: 0;
+    font-family: 'Mulish', sans-serif;
+  }
 }
 
 @media (max-width: 768px) {
-
   .container {
     padding: 0 20px;
   }
-  
+
   .containerLogo {
     margin-top: 120px;
     gap: 20px;
   }
-  
+
   /* logoA сверху вниз */
   .containerLogo img:nth-of-type(1) {
     height: 79px !important;
   }
-  
+
   /* центральные логотипы */
   .containerLogoCenter {
     gap: 12px;
   }
-  
+
   /* logoAlazar слева направо */
   .containerLogoCenter img:nth-of-type(1) {
     height: 29px !important;
   }
-  
+
   /* logoStudio справа налево */
   .containerLogoCenter img:nth-of-type(2) {
     height: 29px !important;
   }
-  
+
   /* span снизу вверх */
   .containerLogo span {
     display: flex;
@@ -336,11 +379,11 @@
     font-size: 16px !important;
     padding: 0 50px;
   }
-  
+
   .containerCase {
     margin-top: 15px;
   }
-  
+
   .containerCaseTop {
     display: flex;
     align-items: center;
@@ -348,28 +391,46 @@
     width: 100%;
     max-width: 1301px;
   }
-  
+
   .containerCaseTopName {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
-  
+
   .containerCaseTopName span:nth-of-type(1) {
     font-size: 40px;
   }
-  
+
   .containerCaseTopName span:nth-of-type(2) {
     font-size: 40px;
   }
-  
+
   .containerCaseTop img {
     width: 60px;
     cursor: pointer;
   }
-  
+
   .categoryMenu {
     display: none;
   }
 
+  .casesContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0;
+    gap: 15px 0;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .caseBox {
+    display: flex;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    /* outline: 1px solid red; */
+  }
 }

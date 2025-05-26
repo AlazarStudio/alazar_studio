@@ -1,85 +1,53 @@
 // src/components/ui/CaseModal/CaseModal.jsx
 import React, { useEffect, useRef, useState } from 'react';
-import classes from './CaseModal.module.css';
+import {
+  Box,
+  Typography,
+  IconButton,
+  Avatar,
+  Drawer,
+  Button,
+  Popover,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from '@mui/material';
+import styles from './CaseModal.module.css';
 import uploadsConfig from '../../../uploadsConfig';
 import DiscussionModal from '../DiscussionModal/DiscussionModal';
 import serverConfig from '../../../serverConfig';
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function CaseModal({ caseId, onClose }) {
-  const [caseData, setCaseData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isHiding, setIsHiding] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+export default function CaseModal({
+  open,
+  onClose,
+  caseItem,
+  allDevelopers,
+  allCategories,
+}) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [copied, setCopied] = useState(false);
+  const [showDiscussion, setShowDiscussion] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const menuRef = useRef(null);
-  const buttonRef = useRef(null);
+  if (!caseItem) return null;
 
-  const toggleMenu = () => {
-    setShowMenu((prev) => !prev);
-  };
+  const caseCategories = allCategories.filter((cat) =>
+    caseItem.categoryIds.includes(cat.id)
+  );
+  const caseDevelopers = allDevelopers.filter((dev) =>
+    caseItem.developerIds.includes(dev.id)
+  );
 
-  const handleContactClick = (type) => {
-    if (type === 'telegram') {
-      window.open('https://t.me/alazarstudio', '_blank');
-    } else if (type === 'whatsapp') {
-      window.open('https://wa.me/+79283995384', '_blank');
-    } else if (type === 'email') {
-      window.location.href = 'mailto:info@alazarstudio.ru';
-    } else if (type === 'form') {
-      setShowMenu(false);
-      setShowForm(true);
+  useEffect(() => {
+    if (caseItem) {
+      setIsLoading(true);
+      // Даем время на "рендер", можно позже заменить на реальные async операции
+      const timeout = setTimeout(() => setIsLoading(false), 300); // 300 мс можно заменить
+      return () => clearTimeout(timeout);
     }
-  };
-
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const handleOutsideClick = (e) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(e.target) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(e.target)
-      ) {
-        setShowMenu(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [showMenu]); // теперь следим только при активном меню
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  useEffect(() => {
-    const fetchCase = async () => {
-      try {
-        const res = await fetch(`${serverConfig}/casesHome/${caseId}`);
-        const data = await res.json();
-        setCaseData(data);
-      } catch (err) {
-        console.error('Ошибка загрузки кейса:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (caseId) fetchCase();
-  }, [caseId]);
+  }, [caseItem]);
 
   const handleClose = () => {
     setIsHiding(true); // активируем анимацию исчезновения
@@ -88,167 +56,256 @@ export default function CaseModal({ caseId, onClose }) {
     }, 400); // время должно совпадать с duration анимации
   };
 
+  const handleCopyUrl = () => {
+    const decodedUrl = decodeURIComponent(window.location.href);
+    navigator.clipboard.writeText(decodedUrl).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   return (
-    <div className={classes.modalOverlay} onClick={handleClose}>
-      <button className={classes.closeButton} onClick={handleClose}>
-        ×
-      </button>
+    <Drawer
+      anchor="bottom"
+      open={open}
+      // onClose={onClose}
+      ModalProps={{
+        BackdropProps: {
+          sx: {
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          },
+        },
+      }}
+      PaperProps={{
+        sx: {
+          background: 'none',
+          boxShadow: 'none',
+          overflow: 'hidden',
+        },
+      }}
+    >
+      <Box className={styles.modalRoot}>
+        {/* Кнопка закрытия */}
+        {/* <IconButton onClick={onClose} className={styles.closeButton}>
+          <Close />
+        </IconButton> */}
+        <div onClick={onClose} className={styles.closeButton}>
+          {/* <IconButton onClick={onClose} className={styles.closeButton}> */}
+          <CloseIcon fontSize="large" />
+          {/* </IconButton> */}
+        </div>
+        {/* Контент */}
 
-      <div
-        className={`${classes.modalContent} ${isHiding ? classes.hide : ''}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {loading ? (
-          <p>Загрузка...</p>
-        ) : caseData ? (
-          <>
-            <div className={classes.info}>
-              <div className={classes.infoLeft}>
-                <span className={classes.title}>{caseData.name}</span>
-                <div className={classes.categoriesList}>
-                  {caseData.categories.map((el) => (
-                    <span key={el.id} className={classes.category}>
-                      {el.title}
-                    </span>
-                  ))}
-                </div>
-                <span className={classes.date}>
-                  {caseData.date &&
-                    new Date(caseData.date).toLocaleDateString()}
-                </span>
-              </div>
-              <div className={classes.infoRight}>
-                <div>
-                  {caseData.developers && caseData.developers.length === 1 && (
-                    <div className={classes.developersList}>
-                      {caseData.developers.map((developer, index) => (
-                        <div key={index} className={classes.developer}>
-                          <img
-                            src={`${uploadsConfig}${developer.img[0]}`}
-                            alt={developer.name}
-                          />
-                          <div className={classes.developerInfo}>
-                            <span>{developer.name}</span>
-                            <span>{developer.position}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+        {isLoading ? (
+          <Box className={styles.preloaderWrapper}>
+            <div className={styles.spinner}></div>
+          </Box>
+        ) : (
+          // основной контент модалки
 
-                  {caseData.developers && caseData.developers.length === 2 && (
-                    <div className={classes.developersListAll}>
-                      {caseData.developers.map((developer, index) => (
-                        <div key={index} className={classes.developerAll}>
-                          <img
-                            src={`${uploadsConfig}${developer.img[0]}`}
-                            alt={developer.name}
+          <Box className={styles.container}>
+            <Box className={styles.topRow}>
+              <Box>
+                <Typography className={styles.title}>
+                  {caseItem.title}
+                </Typography>
+                <Box className={styles.categories}>
+                  {caseCategories.map((cat) => cat.name).join(' • ')}
+                </Box>
+              </Box>
+
+              {/* Разработчики */}
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                {caseDevelopers.length === 1 ? (
+                  // Один разработчик — показываем просто
+                  <Box className={styles.popoverList1}>
+                    {caseDevelopers.map((dev) => (
+                      <ListItem key={dev.id}>
+                        <ListItemAvatar>
+                          <Avatar
+                            src={
+                              dev.avatar
+                                ? `${uploadsConfig}/uploads/${dev.avatar}`
+                                : ''
+                            }
                           />
-                        </div>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={dev.name}
+                          secondary={dev.position || 'Без должности'}
+                          secondaryTypographyProps={{
+                            className: styles.devRole,
+                          }}
+                        />
+                      </ListItem>
+                    ))}
+                  </Box>
+                ) : (
+                  // Несколько — кнопка с аватарками и поповером
+                  <button
+                    onClick={(e) => setAnchorEl(e.currentTarget)}
+                    className={styles.devButton}
+                  >
+                    <Box className={styles.devAvatars}>
+                      {caseDevelopers.map((dev, i) => (
+                        <Avatar
+                          key={i}
+                          src={
+                            dev.avatar
+                              ? `${uploadsConfig}/uploads/${dev.avatar}`
+                              : ''
+                          }
+                          style={{
+                            marginLeft: i !== 0 ? '-15px' : 0,
+                            zIndex: caseDevelopers.length - i,
+                          }}
+                        />
                       ))}
-                      <span
-                        className={classes.developersListAllSpan}
-                        onClick={toggleMenu}
-                        ref={buttonRef}
-                      >
-                        Разработчики проекта 🠋
-                      </span>{' '}
-                      {showMenu && (
-                        <div
-                          ref={menuRef}
-                          className={`${classes.developersMenu} ${
-                            showMenu ? classes.show : ''
-                          }`}
-                        >
-                          {caseData.developers.map((developer, index) => (
-                            <div
-                              key={index}
-                              className={classes.developersMenuEl}
-                            >
-                              <img
-                                src={`${uploadsConfig}${developer.img[0]}`}
-                                alt={developer.name}
-                              />
-                              <div className={classes.developersMenuElInfo}>
-                                <span>{developer.name}</span>
-                                <span>{developer.position}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
+                    </Box>
+                    Разработчики проекта ▾
+                  </button>
+                )}
+              </Box>
+            </Box>
+
+            {/* Поповер с разработчиками */}
+            <Popover
+              open={Boolean(anchorEl)}
+              anchorEl={anchorEl}
+              onClose={() => setAnchorEl(null)}
+              anchorOrigin={{ vertical: 'bottom' }}
+            >
+              <List className={styles.popoverList}>
+                {caseDevelopers.map((dev) => (
+                  <ListItem key={dev.id}>
+                    <ListItemAvatar>
+                      <Avatar
+                        src={
+                          dev.avatar
+                            ? `${uploadsConfig}/uploads/${dev.avatar}`
+                            : ''
+                        }
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={dev.name}
+                      secondary={dev.position || 'Без должности'}
+                      secondaryTypographyProps={{ className: styles.devRole }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Popover>
+
+            {/* Изображения кейса */}
+            <Box className={styles.imagesWrapper}>
+              {/* {caseItem.images.map((img, index) => (
+              <Box key={index} className={styles.imageBox}>
+                <img
+                  src={`${uploadsConfig}/uploads/${img}`}
+                  alt={`case-img-${index}`}
+                  className={styles.image}
+                />
+              </Box>
+            ))} */}
+
+              <div className={styles.block_text}>
+                {caseItem.taskDescription.replace(/<[^>]*>/g, '')}
               </div>
-            </div>
-            <div className={classes.images}>
-              {showForm && (
-                <DiscussionModal onClose={() => setShowForm(false)} />
+              <div className={styles.block_text}>
+                {caseItem.clientDescription.replace(/<[^>]*>/g, '')}
+              </div>
+              <div className={styles.block_text}>
+                {caseItem.serviceDescription.replace(/<[^>]*>/g, '')}
+              </div>
+              {caseItem.contentBlocks.map((block, i) =>
+                block.type === 'text' ? (
+                  <div
+                    key={i}
+                    dangerouslySetInnerHTML={{ __html: block.value }}
+                    className={styles.block_text}
+                  />
+                ) : (
+                  <img
+                    key={i}
+                    src={`${uploadsConfig}/uploads/${block.value}`}
+                    alt="block"
+                    className={styles.img}
+                  />
+                )
               )}
 
-              <div
-                className={classes.contacts}
-                onClick={(e) => e.stopPropagation()}
+              <List className={styles.popoverListMobile}>
+                {caseDevelopers.map((dev) => (
+                  <ListItem key={dev.id}>
+                    <ListItemAvatar>
+                      <Avatar
+                        src={
+                          dev.avatar
+                            ? `https://backend.alazarstudio.ru/uploads/${dev.avatar}`
+                            : ''
+                        }
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={dev.name}
+                      secondary={dev.position || 'Без должности'}
+                      secondaryTypographyProps={{ className: styles.devRole }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+              <Box className={styles.messengerBlock}>
+                {/* <a
+                href="mailto:info@alazarstudio.ru"
+                target="_blank"
+                rel="noreferrer"
               >
-                <span onClick={() => handleContactClick('telegram')}>
-                  <img src="/images/telegram.svg" />
-                </span>
-                <span onClick={() => handleContactClick('whatsapp')}>
-                  <img src="/images/whatsapp.svg" />
-                </span>
-                <span onClick={() => handleContactClick('form')}>
-                  <img src="/images/convert.svg" />
-                </span>
-              </div>
+                <img src="/images/mail.png" alt="email" width={50} />
+              </a> */}
+                <button
+                  onClick={() => setShowDiscussion(true)}
+                  className={styles.iconButton}
+                >
+                  <img src="/images/mail.png" alt="email" width={50} />
+                </button>
 
-              {caseData.img.map((img, idx) => (
-                <img key={idx} src={`${uploadsConfig}${img}`} alt="case" />
-              ))}
-            </div>
-            <div className={classes.developersTitleBottom}>
-              <span>РАЗРАБОТЧИКИ</span>
-              <span>ПРОЕКТА</span>
-            </div>
-            <div className={classes.developersListBottom}>
-              {caseData.developers.map((developer, index) => (
-                <div key={index} className={classes.developerBottom}>
-                  <img
-                    src={`${uploadsConfig}${developer.img[0]}`}
-                    alt={developer.name}
-                  />
-                  <div className={classes.developerInfo}>
-                    <span>{developer.name} </span>
-                    <span>{developer.position} </span>
+                <a
+                  href="https://wa.me/79283995384"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="/images/whatsapp.png" alt="whatsapp" width={50} />
+                </a>
+                <a
+                  href="https://t.me/alazarstudio"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="/images/telegram.png" alt="telegram" width={50} />
+                </a>
+                {/* Кнопка копирования */}
+                <button onClick={handleCopyUrl} className={styles.copyButton}>
+                  <img src="/images/telegram.png" alt="copy link" width={50} />
+                </button>
+
+                {/* Всплывающее уведомление */}
+                {copied && (
+                  <div className={styles.toast}>
+                    <span>URL скопирован</span>
                   </div>
-                </div>
-              ))}
-            </div>
-            <div
-              className={classes.contactsMobile}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className={classes.contactsMobileTitle}>
-                <span>СВЯЗАТЬСЯ </span>
-                <span>С НАМИ </span>
-              </div>
-              <div className={classes.contactsMobileIcons}>
-                <span onClick={() => handleContactClick('telegram')}>
-                  <img src="/images/telegram.svg" />
-                </span>
-                <span onClick={() => handleContactClick('whatsapp')}>
-                  <img src="/images/whatsapp.svg" />
-                </span>
-                <span onClick={() => handleContactClick('form')}>
-                  <img src="/images/convert.svg" />
-                </span>
-              </div>
-            </div>
-          </>
-        ) : (
-          <p>Кейс не найден</p>
+                )}
+                {showDiscussion && (
+                  <DiscussionModal
+                    open={showDiscussion}
+                    onClose={() => setShowDiscussion(false)}
+                  />
+                )}
+              </Box>
+            </Box>
+          </Box>
         )}
-      </div>
-    </div>
+      </Box>
+    </Drawer>
   );
 }

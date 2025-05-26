@@ -1,0 +1,101 @@
+/* CategoriesPage.module.css */
+
+.wrapper {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.searchInput {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.addButton {
+  background-color: #f40087;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addButton:hover {
+  background-color: #d10075;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.table th,
+.table td {
+  padding: 12px 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  color: #333;
+}
+
+.table th.sortable:hover {
+  text-decoration: underline;
+}
+
+.table th {
+  background-color: #757575;
+}
+
+.table td {
+  background-color: #333;
+}
+
+
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 8px;
+  color: #fff;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pageButton {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pageButton:hover {
+  background-color: #e0e0e0;
+}
+
+.activePage {
+  background-color: #f40087;
+  color: white;
+}

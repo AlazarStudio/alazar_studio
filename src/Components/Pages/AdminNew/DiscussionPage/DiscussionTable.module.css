@@ -1,0 +1,80 @@
+.wrapper {
+  padding: 20px;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.searchInput {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  color: #333;
+}
+
+.table th.sortable:hover {
+  text-decoration: underline;
+}
+
+.table th {
+  background-color: #757575;
+}
+
+.table td {
+  background-color: #333;
+}
+
+.sortable {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.actionButton {
+  margin-right: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+
+}
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.pageButton {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #eee;
+  font-weight: bold;
+}

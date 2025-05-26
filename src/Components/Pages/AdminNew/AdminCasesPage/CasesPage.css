@@ -1,0 +1,101 @@
+.cases-container {
+  padding: 24px;
+}
+
+.cases-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cases-header input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.cases-header button {
+  background-color: #f40087;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cases-header button:hover {
+  background-color: #d10075;
+}
+
+.cases-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.cases-table th,
+.cases-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.cases-table th {
+  background-color: #757575;
+}
+
+.cases-table td {
+  background-color: #333;
+}
+
+.content-preview img{
+  width: 50px;
+}
+
+.cases-table td button {
+  /* display: flex; */
+  width: 25px;
+  height: 25px;
+  font-size: 24px;
+  color: #fff;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.case-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 4px;
+}
+
+.cases-pagination {
+  display: flex;
+  gap: 4px;
+}
+
+.cases-pagination button {
+  padding: 6px 10px;
+  background-color: #505050;
+  border: 1px solid #505050;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.cases-pagination button:hover {
+    background-color: #e5097f;
+}
+
+.cases-pagination button.active {
+  /* font-weight: bold; */
+  background-color: #e5097f;
+  border: 1px solid #e5097f;
+}

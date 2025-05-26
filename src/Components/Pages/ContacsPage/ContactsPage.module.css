@@ -1,0 +1,138 @@
+.container {
+  width: 100%;
+
+}
+
+.containerTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1032px;
+  max-height: 100%;
+  background-image: url('/images/az 1.png');
+  background-size: 100% ;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  outline: 1px solid #fff;
+    /* outline: 1px solid red; */
+}
+
+.containerTopBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  max-width: 1400px;
+  padding-left: 40px;
+}
+
+.title {
+  font-size: 96px;
+  font-weight: 500;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.info span:nth-of-type(1) {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ed3a86;
+}
+
+.massenger {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.massengerEl {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.massengerEl span {
+  font-size: 32px;
+  font-weight: 500;
+  color: #ed3a86;
+  cursor: pointer;
+}
+
+.containerCenter{
+  outline: none;
+}
+
+@media (max-width: 760px) {
+
+.container {
+  width: 100%;
+
+}
+
+.containerTop {
+  min-height: 700px;
+  background-size: 150% 50% !important;
+  background-size: cover;
+  background-position: bottom;
+    /* outline: 1px solid red; */
+}
+
+.containerTopBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  max-width: 1400px;
+  padding-left: 30px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.info span:nth-of-type(1) {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ed3a86;
+}
+
+.massenger {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.massengerEl {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.massengerEl span {
+  font-size: 24px;
+  font-weight: 500;
+  color: #ed3a86;
+  cursor: pointer;
+}
+
+.containerCenter{
+  outline: none;
+}
+
+}

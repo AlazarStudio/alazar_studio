@@ -28,6 +28,7 @@
 
 .logo {
   height: 49px;
+  cursor: pointer;
 }
 
 ul {
@@ -47,8 +48,14 @@ li a {
   font-weight: 500;
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: all 0.3s ease-in-out;
   font-family: 'Mulish', sans-serif;
+  padding-bottom: 5px;
+}
+
+li a:hover {
+  color: #f40087;
+  border-bottom: 1px solid #f40087;
 }
 
 .containerNavMobile {

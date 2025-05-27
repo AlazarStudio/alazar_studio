@@ -263,31 +263,45 @@ export default function CaseModal({
               >
                 <img src="/images/mail.png" alt="email" width={50} />
               </a> */}
-                <button
-                  onClick={() => setShowDiscussion(true)}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowDiscussion(true);
+                  }}
                   className={styles.iconButton}
                 >
-                  <img src="/images/mail.png" alt="email" width={50} />
-                </button>
+                  <img src="/images/em.svg" alt="email" width={50} />
+                </a>
 
                 <a
                   href="https://wa.me/79283995384"
                   target="_blank"
                   rel="noreferrer"
+                  className={styles.iconButton}
                 >
-                  <img src="/images/whatsapp.png" alt="whatsapp" width={50} />
+                  <img src="/images/wh.svg" alt="whatsapp" width={50} />
                 </a>
+
                 <a
                   href="https://t.me/alazarstudio"
                   target="_blank"
                   rel="noreferrer"
+                  className={styles.iconButton}
                 >
-                  <img src="/images/telegram.png" alt="telegram" width={50} />
+                  <img src="/images/te.svg" alt="telegram" width={50} />
                 </a>
-                {/* Кнопка копирования */}
-                <button onClick={handleCopyUrl} className={styles.copyButton}>
-                  <img src="/images/telegram.png" alt="copy link" width={50} />
-                </button>
+
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCopyUrl();
+                  }}
+                  className={styles.copyButton}
+                >
+                  <img src="/images/link.svg" alt="copy link" width={50} />
+                </a>
 
                 {/* Всплывающее уведомление */}
                 {copied && (

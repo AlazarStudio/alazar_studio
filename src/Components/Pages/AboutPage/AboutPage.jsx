@@ -28,14 +28,14 @@ export default function AboutPage() {
   }, []);
 
   const socialIcons = {
-    telegram: '/images/socials/telegram.svg',
-    instagram: '/images/socials/instagram.svg',
-    whatsapp: '/images/socials/whatsapp.svg',
-    vk: '/images/socials/vk.svg',
-    tiktok: '/images/socials/tiktok.svg',
-    behance: '/images/socials/behance.svg',
-    pinterest: '/images/socials/pinterest.svg',
-    artstation: '/images/socials/artstation.svg',
+    telegram: '/images/socials/devTg.svg',
+    instagram: '/images/socials/devIn.svg',
+    whatsapp: '/images/socials/devWh.svg',
+    vk: '/images/socials/devVk.svg',
+    tiktok: '/images/socials/devTik.svg',
+    behance: '/images/socials/devBe.svg',
+    pinterest: '/images/socials/devPin.svg',
+    artstation: '/images/socials/devArt.svg',
   };
 
   return (
@@ -147,49 +147,49 @@ export default function AboutPage() {
                     <div className={classes.connect}>
                       {dev.telegram && (
                         <span>
-                          <img src="/images/tg.png" alt="" />
+                          <img src="/images/devTg.svg" alt="" />
                           {dev.telegram}
                         </span>
                       )}
                       {dev.instagram && (
                         <span>
-                          <img src="/images/inst4.svg" alt="" />
+                          <img src="/images/devIn.svg" alt="" />
                           {dev.instagram}
                         </span>
                       )}
                       {dev.whatsapp && (
                         <span>
-                          <img src="/images/whatsApp.png" alt="" />
+                          <img src="/images/devWh.svg" alt="" />
                           {dev.whatsapp}
                         </span>
                       )}
                       {dev.vk && (
                         <span>
-                          <img src="/images/vk (1).png" alt="" />
+                          <img src="/images/devVk.svg" alt="" />
                           {dev.vk}
                         </span>
                       )}
                       {dev.tiktok && (
                         <span>
-                          <img src="/images/tiktok.png" alt="" />
+                          <img src="/images/devTik.svg" alt="" />
                           {dev.tiktok}
                         </span>
                       )}
                       {dev.behance && (
                         <span>
-                          <img src="/images/" alt="" />
+                          <img src="/images/devBe.svg" alt="" />
                           {dev.behance}
                         </span>
                       )}
                       {dev.pinterest && (
                         <span>
-                          <img src="/images/" alt="" />
+                          <img src="/images/devPin.svg" alt="" />
                           {dev.pinterest}
                         </span>
                       )}
                       {dev.artstation && (
                         <span>
-                          <img src="/images/artstation.png" alt="" />
+                          <img src="/images/devArt.svg" alt="" />
                           {dev.artstation}
                         </span>
                       )}

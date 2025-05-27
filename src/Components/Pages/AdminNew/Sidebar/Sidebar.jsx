@@ -13,6 +13,7 @@ const Sidebar = () => {
     { text: 'Разработчики', path: '/admin/developers' },
     { text: 'Кейсы', path: '/admin/cases' },
     { text: 'Заявки', path: '/admin/discussion' },
+    { text: 'Магазин', path: '/admin/casesShop' },
   ];
 
   return (

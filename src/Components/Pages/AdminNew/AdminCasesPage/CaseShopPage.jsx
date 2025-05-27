@@ -6,7 +6,7 @@ import uploadsConfig from '../../../../uploadsConfig';
 
 const ITEMS_PER_PAGE = 5;
 
-const CasesPage = () => {
+const CaseShopPage = () => {
   const [cases, setCases] = useState([]);
   const [developers, setDevelopers] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -38,7 +38,7 @@ const CasesPage = () => {
   }, []);
 
 const filtered = cases
-  .filter((c) => c.shop === false)
+  .filter((c) => c.shop === true)
   .filter((c) => c.title.toLowerCase().includes(search.toLowerCase()));
 
   const paged = filtered.slice(
@@ -196,4 +196,4 @@ const filtered = cases
   );
 };
 
-export default CasesPage;
+export default CaseShopPage;

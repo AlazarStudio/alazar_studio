@@ -1,6 +1,6 @@
 // src/components/pages/HomePage/HomePage.jsx
 import React, { useEffect, useState } from 'react';
-import classes from './HomePage.module.css';
+import classes from './AllCasesPage.module.css';
 import serverConfig from '../../../serverConfig';
 import CaseHomeCard from '../../ui/HomePage/CaseHomeCard';
 import CaseModal from '../../ui/CaseModal/CaseModal';
@@ -51,13 +51,26 @@ function transliterate(str) {
     .join('');
 }
 
-export default function HomePage() {
+export default function AllCasesPage() {
   const [cases, setCases] = useState([]);
   const [categories, setCategories] = useState([]);
   const [developers, setDevelopers] = useState([]);
   const [selectedCase, setSelectedCase] = useState(null);
   const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 400); // 300 мс задержка
+
+    return () => {
+      clearTimeout(handler); // отмена, если пользователь продолжает ввод
+    };
+  }, [searchTerm]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -81,8 +94,12 @@ export default function HomePage() {
   // Анализ pathname → category / case
   useEffect(() => {
     if (!categories.length || !cases.length) return;
+    if (!location.pathname.startsWith('/cases')) return;
 
-    const path = decodeURIComponent(location.pathname).slice(1);
+    const path = decodeURIComponent(location.pathname).replace(
+      /^\/cases\/?/,
+      ''
+    );
     const parts = path.split('/').filter(Boolean);
     const [part1, part2] = parts;
 
@@ -104,7 +121,7 @@ export default function HomePage() {
 
     if (targetCase) {
       setSelectedCase(targetCase);
-      setDrawerVisible(true); // теперь drawer открывается ТОЛЬКО здесь
+      setDrawerVisible(true);
     }
   }, [location.pathname, categories, cases]);
 
@@ -112,7 +129,11 @@ export default function HomePage() {
     activeCategoryId
       ? cases.filter((c) => c.categoryIds.includes(activeCategoryId))
       : cases
-  ).filter((c) => c.shop === false); // ✅ отсекаем shop:true
+  )
+    .filter((c) => c.shop === false)
+    .filter((c) =>
+      c.title.toLowerCase().includes(debouncedSearchTerm.trim().toLowerCase())
+    );
 
   const handleCategorySelect = (id) => {
     const category = categories.find((cat) => cat.id === id);
@@ -131,13 +152,12 @@ export default function HomePage() {
     const currentPath = decodeURIComponent(location.pathname);
 
     const targetPath = category
-      ? `/${transliterate(category.name.toLowerCase())}/${caseSlug}`
-      : `/${caseSlug}`;
+      ? `/cases/${transliterate(category.name.toLowerCase())}/${caseSlug}`
+      : `/cases/${caseSlug}`;
 
     if (currentPath !== targetPath) {
-      navigate(targetPath); // URL обновится, useEffect сработает
+      navigate(targetPath); // ✅ теперь маршрут остаётся внутри /shop
     } else {
-      // если URL не меняется, принудительно обнови state
       setSelectedCase(c);
       setDrawerVisible(true);
     }
@@ -148,9 +168,9 @@ export default function HomePage() {
 
     // Сначала навигируем на URL без кейса
     if (category) {
-      navigate(`/${transliterate(category.name.toLowerCase())}`);
+      navigate(`/cases/${transliterate(category.name.toLowerCase())}`);
     } else {
-      navigate(`/`);
+      navigate(`/cases`);
     }
 
     // После этого скрываем модалку и сбрасываем selectedCase
@@ -182,14 +202,14 @@ export default function HomePage() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.containerLogo}>
+      {/* <div className={classes.containerLogo}>
         <img src="/images/logoA.png" alt="Logo A" />
         <div className={classes.containerLogoCenter}>
           <img src="/images/logoAlazar.png" alt="Logo Alazar" />
           <img src="/images/logoStudio.png" alt="Logo Studio" />
         </div>
         <span>СТУДИЯ WEB-РАЗРАБОТКИ И ГРАФИЧЕСКОГО ДИЗАЙНА</span>
-      </div>
+      </div> */}
 
       <div className={classes.containerCase}>
         <div className={classes.containerCaseTop}>
@@ -197,10 +217,19 @@ export default function HomePage() {
             <span>НАШИ</span>
             <span>КЕЙСЫ</span>
           </div>
-          <img
+          {/* <img
             src="/images/Arrow 1.png"
             onClick={() => navigate('cases')}
             alt="Arrow"
+          /> */}
+        </div>
+        <div className={classes.searchInput}>
+          <input
+            type="text"
+            placeholder="ПОИСК"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={classes.input}
           />
         </div>
 

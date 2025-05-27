@@ -17,6 +17,9 @@ import AboutPage from './Components/Pages/AboutPage/AboutPage';
 import { ContactPage } from '@mui/icons-material';
 import ContactsPage from './Components/Pages/ContacsPage/ContactsPage';
 import DiscussionTable from './Components/Pages/AdminNew/DiscussionPage/DiscussionTable';
+import CaseShopPage from './Components/Pages/AdminNew/AdminCasesPage/CaseShopPage';
+import AllCasesPage from './Components/Pages/AllCasesPage/AllCasesPage';
+import ShopsPage from './Components/Pages/ShopsPage/ShopsPage';
 
 function App() {
   return (
@@ -27,11 +30,12 @@ function App() {
           <Route path="/:categoryTitle" element={<HomePage />} />
           <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} />
           <Route path="/case/:caseTitle" element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
+          {/* <Route path="/shop" element={<ShopPage />} /> */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
-          {/* <Route path="/cases" element={<CasesPage />} />
-          <Route path="/cases/:categoryTitle" element={<CasesPage />} />
+          <Route path="/cases/*" element={<AllCasesPage />} />
+          <Route path="/shop/*" element={<ShopsPage />} />
+          {/* <Route path="/cases/:categoryTitle" element={<CasesPage />} />
           <Route path="/cases/:id" element={<CasesPage />} /> */}
 
           <Route path="/service" element={<ServicePage />} />
@@ -53,6 +57,7 @@ function App() {
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="developers" element={<DevelopersPage />} />
           <Route path="cases" element={<CasesPage />} />
+          <Route path="casesShop" element={<CaseShopPage />} />
           <Route path="discussion" element={<DiscussionTable />} />
         </Route>
       </Routes>

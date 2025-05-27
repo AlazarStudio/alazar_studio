@@ -75,6 +75,7 @@ const CaseFormDialog = ({
   const [taskDescription, setTaskDescription] = useState('');
   const [clientDescription, srtClientDescription] = useState('');
   const [serviceDescription, setServiceDescription] = useState('');
+  const [shop, setShop] = useState(false);
 
   const [contentBlocks, setContentBlocks] = useState([]);
 
@@ -93,6 +94,7 @@ const CaseFormDialog = ({
       setTaskDescription(item.taskDescription || '');
       srtClientDescription(item.clientDescription || '');
       setServiceDescription(item.serviceDescription || '');
+      setShop(item.shop || false);
     } else {
       setTitle('');
       setPrice('');
@@ -107,6 +109,7 @@ const CaseFormDialog = ({
       setTaskDescription('');
       srtClientDescription('');
       setServiceDescription('');
+      setShop(false);
     }
   }, [item]);
 
@@ -122,6 +125,7 @@ const CaseFormDialog = ({
     formData.append('taskDescription', taskDescription);
     formData.append('clientDescription', clientDescription);
     formData.append('serviceDescription', serviceDescription);
+    formData.append('shop', shop ? true : false);
 
     // 🔁 contentBlocks
     formData.append(
@@ -172,6 +176,14 @@ const CaseFormDialog = ({
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle>{item ? 'Редактировать кейс' : 'Добавить кейс'}</DialogTitle>
       <DialogContent>
+        <Box sx={{ mt: 2 }}>
+          <Checkbox
+            checked={shop}
+            onChange={(e) => setShop(e.target.checked)}
+          />
+          <span>Добавить в магазин</span>
+        </Box>
+
         <TextField
           fullWidth
           label="Название"

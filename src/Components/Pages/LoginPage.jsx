@@ -19,15 +19,20 @@ const LoginPage = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" mt={10}>
+    <Box display="flex" flexDirection="column" alignItems="center" mt={10}  sx={{ backgroundColor: 'gray' }}>
       <Typography variant="h5">Вход в админ-панель</Typography>
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2, width: 300 }}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{ mt: 2, width: 300, color: '#fff' }}
+      >
         <TextField
           label="Логин"
           fullWidth
           margin="normal"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+         
         />
         <TextField
           label="Пароль"

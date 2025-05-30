@@ -83,7 +83,7 @@ function Header() {
         <ul>
           <li>
             <img
-              src="/images/headerLogo.png"
+              src="/images/LogoNew.svg"
               alt="Логотип"
               className={classes.logo}
               onClick={() => navigate('/')}
@@ -98,9 +98,9 @@ function Header() {
           <li>
             <Link to="/cases">КЕЙСЫ</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/shop">МАГАЗИН</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/about">О НАС</Link>
           </li>
@@ -152,11 +152,11 @@ function Header() {
                 КЕЙСЫ
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/shop" onClick={closeMenu}>
                 МАГАЗИН
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/about" onClick={closeMenu}>
                 О НАС

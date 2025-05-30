@@ -115,7 +115,7 @@ function ServicePage({ children, ...props }) {
             </div>
           </div>
         </div>
-        <DiscussionProject />
+        {/* <DiscussionProject /> */}
       </div>
     </>
   );

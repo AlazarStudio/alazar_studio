@@ -37,9 +37,9 @@ const CasesPage = () => {
     fetchAll();
   }, []);
 
-const filtered = cases
-  .filter((c) => c.shop === false)
-  .filter((c) => c.title.toLowerCase().includes(search.toLowerCase()));
+  const filtered = cases
+    .filter((c) => c.shop === false)
+    .filter((c) => c.title.toLowerCase().includes(search.toLowerCase()));
 
   const paged = filtered.slice(
     (page - 1) * ITEMS_PER_PAGE,
@@ -86,11 +86,11 @@ const filtered = cases
             <th>Категории</th>
             <th>Разработчики</th>
             <th>№ в топе</th>
-            <th>Изображения</th>
-            <th>Описание задачи</th>
+            {/* <th>Изображения</th> */}
+            {/* <th>Описание задачи</th>
             <th>Описание клиента</th>
-            <th>Описание услуг</th>
-            <th>Контент</th>
+            <th>Описание услуг</th> */}
+            {/* <th>Контент</th> */}
             <th>Действия</th>
           </tr>
         </thead>
@@ -117,45 +117,48 @@ const filtered = cases
                   .join(', ')}
               </td>
               <td>{c.positionTop}</td>
-              <td>
+              {/* <td>
                 {c.images?.length}
-                {/* {c.images?.map((img, i) => (
+                {c.images?.map((img, i) => (
                   <img
                     key={i}
                     src={`${uploadsConfig}/uploads/${img}`}
                     alt=""
                     className="case-img"
                   />
-                ))} */}
-              </td>
-              <td>{c.taskDescription}</td>
+                ))}
+              </td> */}
+              {/* <td>{c.taskDescription}</td>
               <td>{c.clientDescription}</td>
-              <td>{c.serviceDescription}</td>
-              <td>
-  {Array.isArray(c.contentBlocks) && c.contentBlocks.length > 0 ? (
-    <div className="content-preview">
-      {c.contentBlocks.slice(0, 3).map((block, i) =>
-        block.type === 'text' ? (
-          <div
-            key={i}
-            dangerouslySetInnerHTML={{ __html: block.value }}
-            className="block-text"
-          />
-        ) : (
-          <img
-            key={i}
-            src={`${uploadsConfig}/uploads/${block.value}`}
-            alt="block"
-            className="block-img"
-          />
-        )
-      )}
-      {c.contentBlocks.length > 3 && <span>…</span>}
-    </div>
-  ) : (
-    '—'
-  )}
-</td>
+              <td>{c.serviceDescription}</td> */}
+              {/* <td>
+                {Array.isArray(c.contentBlocks) &&
+                c.contentBlocks.length > 0 ? (
+                  <div className="content-preview">
+                    {c.contentBlocks
+                      .slice(0, 3)
+                      .map((block, i) =>
+                        block.type === 'text' ? (
+                          <div
+                            key={i}
+                            dangerouslySetInnerHTML={{ __html: block.value }}
+                            className="block-text"
+                          />
+                        ) : (
+                          <img
+                            key={i}
+                            src={`${uploadsConfig}/uploads/${block.value}`}
+                            alt="block"
+                            className="block-img"
+                          />
+                        )
+                      )}
+                    {c.contentBlocks.length > 3 && <span>…</span>}
+                  </div>
+                ) : (
+                  '—'
+                )}
+              </td> */}
 
               <td>
                 <button onClick={() => handleEdit(c)}>✎</button>

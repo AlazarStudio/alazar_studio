@@ -7,7 +7,8 @@
   left: 0;
   width: 100%;
   z-index: 90;
-  transition: background 0.3s ease-in-out;
+   background: #0f0f0f;
+  /* transition: background 0.3s ease-in-out; */
 }
 
 .containerNav {
@@ -18,12 +19,13 @@
   /* outline: 1px solid red; */
   height: 98px;
   background: transparent; /* Начально прозрачный */
-  transition: background 0.3s ease-in-out;
+  /* transition: background 0.3s ease-in-out; */
   padding: 0;
+   background: #0f0f0f;
 }
 
 .scrolled {
-  background: #131313; /* Черный фон при скролле */
+   background: #0f0f0f; /* Черный фон при скролле */
 }
 
 .logo {
@@ -106,7 +108,7 @@ li a:hover {
     right: -100%;
     width: 75%;
     height: 100%;
-    background: #131313;
+   background: #0f0f0f;
     transition: right 0.3s ease-in-out;
     display: flex;
     justify-content: center;

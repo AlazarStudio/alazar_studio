@@ -17,15 +17,31 @@ export default function ContactsPage() {
             <span>+7 928 399-53-54</span>
           </div>
           <div className={classes.massenger}>
-            <div className={classes.massengerEl}>
+            <a
+              href="https://t.me/alazarstudio"
+              target="_blank"
+              rel="noreferrer"
+              className={classes.massengerEl}
+            >
               <span>TELEGRAM</span> <img src="/images/tg4.svg" />
-            </div>
-            <div className={classes.massengerEl}>
+            </a>
+            <a
+              href="https://www.instagram.com/alazarstudio.ru?igsh=MWJweXFkcnh3bmJyZA=="
+              target="_blank"
+              rel="noreferrer"
+              className={classes.massengerEl}
+            >
               <span>INSTAGRAM</span> <img src="/images/inst4.svg" />
-            </div>
-            <div className={classes.massengerEl}>
+            </a>
+
+            <a
+              href=" https://vk.com/alazar.studio"
+              target="_blank"
+              rel="noreferrer"
+              className={classes.massengerEl}
+            >
               <span>ВКОНТАКТЕ</span> <img src="/images/vk4.svg" />
-            </div>
+            </a>
           </div>
           <div className={classes.info}>
             <span>E-MAIL</span>
@@ -77,7 +93,7 @@ export default function ContactsPage() {
           ></iframe>
         </div>
       </div>
-      <DiscussionProject />
+      {/* <DiscussionProject /> */}
     </div>
   );
 }

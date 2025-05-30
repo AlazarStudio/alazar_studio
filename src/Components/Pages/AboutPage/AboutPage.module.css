@@ -351,6 +351,7 @@
   height: 309px;
   border-radius: 0 60px;
   margin-left: 40px;
+  outline: 1px solid red;
 }
 
 .poligon {
@@ -465,7 +466,7 @@
   .poligon {
     position: absolute;
     top: 40px;
-    left: 162px;
+    left: 142px;
     height: 15px;
   }
 

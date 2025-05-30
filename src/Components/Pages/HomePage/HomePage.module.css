@@ -257,7 +257,7 @@
   display: flex;
   width: 32%;
   /* height: 200px; */
-  aspect-ratio: 1 / 1;
+  /* aspect-ratio: 1 / 1; */
   cursor: pointer;
   /* outline: 1px solid red; */
 }
@@ -429,7 +429,7 @@
   .caseBox {
     display: flex;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    /* aspect-ratio: 1 / 1; */
     cursor: pointer;
     /* outline: 1px solid red; */
   }

@@ -64,6 +64,10 @@ export default function CaseModal({
     });
   };
 
+  const formattedTitle = caseItem.title
+    .replace(/["']/g, '«') // заменяем открывающие кавычки
+    .replace(/«(.*?)«/g, '«$1»'); // заменяем вторую кавычку на закрывающую
+
   return (
     <Drawer
       anchor="bottom"
@@ -84,16 +88,17 @@ export default function CaseModal({
         },
       }}
     >
+      <div onClick={onClose} className={styles.closeButton}>
+        {/* <IconButton onClick={onClose} className={styles.closeButton}> */}
+        <CloseIcon />
+        {/* </IconButton> */}
+      </div>
       <Box className={styles.modalRoot}>
         {/* Кнопка закрытия */}
         {/* <IconButton onClick={onClose} className={styles.closeButton}>
           <Close />
         </IconButton> */}
-        <div onClick={onClose} className={styles.closeButton}>
-          {/* <IconButton onClick={onClose} className={styles.closeButton}> */}
-          <CloseIcon fontSize="large" />
-          {/* </IconButton> */}
-        </div>
+
         {/* Контент */}
 
         {isLoading ? (
@@ -107,7 +112,7 @@ export default function CaseModal({
             <Box className={styles.topRow}>
               <Box>
                 <Typography className={styles.title}>
-                  {caseItem.title}
+                 {formattedTitle}
                 </Typography>
                 <Box className={styles.categories}>
                   {caseCategories.map((cat) => cat.name).join(' • ')}
@@ -208,22 +213,44 @@ export default function CaseModal({
                 />
               </Box>
             ))} */}
-
-              <div className={styles.block_text}>
-                {caseItem.taskDescription.replace(/<[^>]*>/g, '')}
-              </div>
-              <div className={styles.block_text}>
-                {caseItem.clientDescription.replace(/<[^>]*>/g, '')}
-              </div>
-              <div className={styles.block_text}>
-                {caseItem.serviceDescription.replace(/<[^>]*>/g, '')}
+              <div className={styles.blockTop}>
+                <div className={styles.block_text}>
+                  <span>Общая информация</span>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: caseItem.clientDescription,
+                    }}
+                  >
+                    {/* {caseItem.clientDescription.replace(/<[^>]*>/g, '')} */}
+                  </div>
+                </div>
+                <div className={styles.block_text}>
+                  <span>Задача</span>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: caseItem.taskDescription,
+                    }}
+                  >
+                    {/* {caseItem.taskDescription.replace(/<[^>]*>/g, '')} */}
+                  </div>
+                </div>
+                <div className={styles.block_text}>
+                  <span>Какие услуги были оказаны</span>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: caseItem.serviceDescription,
+                    }}
+                  >
+                    {/* {caseItem.serviceDescription.replace(/<[^>]*>/g, '')} */}
+                  </div>
+                </div>
               </div>
               {caseItem.contentBlocks.map((block, i) =>
                 block.type === 'text' ? (
                   <div
                     key={i}
                     dangerouslySetInnerHTML={{ __html: block.value }}
-                    className={styles.block_text}
+                    className={styles.descText}
                   />
                 ) : (
                   <img
@@ -263,7 +290,7 @@ export default function CaseModal({
               >
                 <img src="/images/mail.png" alt="email" width={50} />
               </a> */}
-                <a
+                {/* <a
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -271,8 +298,8 @@ export default function CaseModal({
                   }}
                   className={styles.iconButton}
                 >
-                  <img src="/images/em.svg" alt="email" width={50} />
-                </a>
+                  <img src="../images/em.svg" alt="email" width={50} />
+                </a> */}
 
                 <a
                   href="https://wa.me/79283995384"
@@ -280,7 +307,7 @@ export default function CaseModal({
                   rel="noreferrer"
                   className={styles.iconButton}
                 >
-                  <img src="/images/wh.svg" alt="whatsapp" width={50} />
+                  <img src="../images/wh.svg" alt="whatsapp" width={50} />
                 </a>
 
                 <a
@@ -289,7 +316,7 @@ export default function CaseModal({
                   rel="noreferrer"
                   className={styles.iconButton}
                 >
-                  <img src="/images/te.svg" alt="telegram" width={50} />
+                  <img src="../images/te.svg" alt="telegram" width={50} />
                 </a>
 
                 <a
@@ -300,7 +327,7 @@ export default function CaseModal({
                   }}
                   className={styles.copyButton}
                 >
-                  <img src="/images/link.svg" alt="copy link" width={50} />
+                  <img src="../images/link.svg" alt="copy link" width={50} />
                 </a>
 
                 {/* Всплывающее уведомление */}
@@ -309,12 +336,12 @@ export default function CaseModal({
                     <span>URL скопирован</span>
                   </div>
                 )}
-                {showDiscussion && (
+                {/* {showDiscussion && (
                   <DiscussionModal
                     open={showDiscussion}
                     onClose={() => setShowDiscussion(false)}
                   />
-                )}
+                )} */}
               </Box>
             </Box>
           </Box>

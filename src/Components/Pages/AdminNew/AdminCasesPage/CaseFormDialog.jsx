@@ -84,7 +84,7 @@ const CaseFormDialog = ({
       setTitle(item.title || '');
       setPrice(item.price || '');
       setLink(item.link || '');
-      setDate(item.date || '');
+      setDate(item.date ? item.date.slice(0, 10) : '');
       setPositionTop(item.positionTop || '');
       setCategoryIds(item.categoryIds || []);
       setDeveloperIds(item.developerIds || []);
@@ -95,6 +95,7 @@ const CaseFormDialog = ({
       srtClientDescription(item.clientDescription || '');
       setServiceDescription(item.serviceDescription || '');
       setShop(item.shop || false);
+      setContentBlocks(item.contentBlocks || []);
     } else {
       setTitle('');
       setPrice('');
@@ -110,13 +111,14 @@ const CaseFormDialog = ({
       srtClientDescription('');
       setServiceDescription('');
       setShop(false);
+      setContentBlocks([]);
     }
-  }, [item]);
+  }, [item, open]); // 👈 добавили open
 
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('price', price);
+    formData.append('price', price ? price : '');
     formData.append('link', link);
     formData.append('date', date);
     formData.append('positionTop', positionTop);
@@ -135,6 +137,8 @@ const CaseFormDialog = ({
           type: b.type,
           value:
             b.type === 'text'
+              ? b.value
+              : typeof b.value === 'string'
               ? b.value
               : `block-${Math.random().toString(36).slice(2)}`,
         }))
@@ -353,9 +357,13 @@ const CaseFormDialog = ({
                     setContentBlocks(updated);
                   }}
                 />
-                {block.value && typeof block.value === 'object' && (
+                {block.value && (
                   <img
-                    src={URL.createObjectURL(block.value)}
+                    src={
+                      typeof block.value === 'string'
+                        ? `${uploadsConfig}/uploads/${block.value}`
+                        : URL.createObjectURL(block.value)
+                    }
                     alt={`image-${index}`}
                     style={{ maxWidth: 200, marginTop: 10 }}
                   />

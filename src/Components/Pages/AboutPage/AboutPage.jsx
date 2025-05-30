@@ -200,7 +200,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-        <DiscussionProject />
+        {/* <DiscussionProject /> */}
       </div>
     </div>
   );

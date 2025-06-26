@@ -139,8 +139,8 @@ export default function LogoParticles({ scaleX = 1, scaleY = 1 }) {
       for (let p of particlesRef.current) {
         const dx = p.destX - p.x;
         const dy = p.destY - p.y;
-        p.vx += dx * 0.004; // Ускорение по оси X
-        p.vy += dy * 0.004; // Ускорение по оси Y
+        p.vx += dx * 0.005; // Ускорение по оси X
+        p.vy += dy * 0.005; // Ускорение по оси Y
 
         // Реакция на мышь
         if (mouse.current.x !== null && mouse.current.y !== null) {

@@ -19,6 +19,9 @@ import DiscussionModal from '../DiscussionModal/DiscussionModal';
 import serverConfig from '../../../serverConfig';
 import CloseIcon from '@mui/icons-material/Close';
 
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 export default function CaseModal({
   open,
   onClose,
@@ -119,6 +122,104 @@ export default function CaseModal({
   const formattedTitle = caseItem.title
     .replace(/["']/g, '«')
     .replace(/«(.*?)«/g, '«$1»');
+
+  const handleDownloadPDF = async () => {
+    const doc = new jsPDF('p', 'pt', 'a4'); // A4 в поинтах
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 30;
+    const maxWidth = pageWidth - margin * 2;
+
+    const addTextPage = async (htmlContent) => {
+      const div = document.createElement('div');
+      div.innerHTML = htmlContent;
+      div.style.width = `${maxWidth}px`;
+      div.style.padding = '20px';
+      div.style.fontSize = '14px';
+      div.style.lineHeight = '1.5';
+      div.style.color = '#000';
+      div.style.backgroundColor = '#fff';
+
+      document.body.appendChild(div);
+
+      const canvas = await html2canvas(div, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#fff',
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      const imgHeight = (canvas.height * maxWidth) / canvas.width;
+
+      doc.addImage(imgData, 'PNG', margin, margin, maxWidth, imgHeight);
+      doc.addPage();
+
+      document.body.removeChild(div);
+    };
+
+    const addImagePage = async (url) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = url;
+
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+
+      const ratio = img.width / img.height;
+      const imgWidth = maxWidth;
+      const imgHeight = imgWidth / ratio;
+
+      // Если изображение слишком высокое — уменьшим его до высоты страницы
+      let finalWidth = imgWidth;
+      let finalHeight = imgHeight;
+      if (imgHeight > pageHeight - margin * 2) {
+        finalHeight = pageHeight - margin * 2;
+        finalWidth = finalHeight * ratio;
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+      doc.addImage(
+        imgData,
+        'JPEG',
+        (pageWidth - finalWidth) / 2,
+        (pageHeight - finalHeight) / 2,
+        finalWidth,
+        finalHeight
+      );
+      doc.addPage();
+    };
+
+    // Добавим описание (через canvas)
+    await addTextPage(`<h2>Общая информация</h2>${caseItem.clientDescription}`);
+    await addTextPage(`<h2>Задача</h2>${caseItem.taskDescription}`);
+    await addTextPage(`<h2>Услуги</h2>${caseItem.serviceDescription}`);
+
+    // Динамичные блоки
+    for (const block of caseItem.contentBlocks) {
+      if (block.type === 'text') {
+        await addTextPage(block.value);
+      } else if (block.type === 'image') {
+        await addImagePage(`${uploadsConfig}/uploads/${block.value}`);
+      }
+    }
+
+    // Удаляем последнюю пустую страницу
+    if (doc.getNumberOfPages() > 1) {
+      doc.deletePage(doc.getNumberOfPages());
+    }
+
+    doc.save(`${caseItem.title || 'case'}.pdf`);
+  };
 
   return (
     <Drawer
@@ -392,6 +493,20 @@ export default function CaseModal({
                   data-cursor-color="#434575"
                 >
                   <img src="../images/link.svg" alt="copy link" width={50} />
+                </a>
+                <a
+                  href="#"
+                  onClick={handleDownloadPDF}
+                  className={styles.copyButton}
+                  data-cursor-hover
+                  data-cursor-text="Скачать"
+                  data-cursor-color="#ff5d00"
+                >
+                  <img
+                    src="../images/download.svg"
+                    alt="copy link"
+                    width={50}
+                  />
                 </a>
 
                 {/* Всплывающее уведомление */}

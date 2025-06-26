@@ -73,7 +73,8 @@ export default function LogoParticles({ scaleX = 1, scaleY = 1 }) {
                 destY: y + offsetY,
                 vx: 0,
                 vy: 0,
-                size: Math.random() * 3 + 1, // Размер частиц
+                // size: Math.random() * 3 + 1, // Размер частиц
+                size: 3, // Размер частиц
                 color,
               });
             }
@@ -138,14 +139,17 @@ export default function LogoParticles({ scaleX = 1, scaleY = 1 }) {
       for (let p of particlesRef.current) {
         const dx = p.destX - p.x;
         const dy = p.destY - p.y;
-        p.vx += dx * 0.005; // Ускорение по оси X
-        p.vy += dy * 0.005; // Ускорение по оси Y
+        p.vx += dx * 0.004; // Ускорение по оси X
+        p.vy += dy * 0.004; // Ускорение по оси Y
 
         // Реакция на мышь
         if (mouse.current.x !== null && mouse.current.y !== null) {
           const dist = Math.hypot(mouse.current.x - p.x, mouse.current.y - p.y);
           if (dist < mouse.current.radius) {
-            const angle = Math.atan2(p.y - mouse.current.y, p.x - mouse.current.x);
+            const angle = Math.atan2(
+              p.y - mouse.current.y,
+              p.x - mouse.current.x
+            );
             const force = (mouse.current.radius - dist) * 5.2;
             p.vx += Math.cos(angle) * force;
             p.vy += Math.sin(angle) * force;

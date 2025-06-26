@@ -5,7 +5,7 @@ import styles from './DeveloperTable.module.css';
 import serverConfig from '../../../../serverConfig';
 import uploadsConfig from '../../../../uploadsConfig';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 14;
 
 const DeveloperTable = () => {
   const [developers, setDevelopers] = useState([]);

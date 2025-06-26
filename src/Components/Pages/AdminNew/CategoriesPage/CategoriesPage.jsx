@@ -4,7 +4,7 @@ import CategoryFormDialog from './CategoryFormDialog';
 import styles from './CategoriesPage.module.css';
 import serverConfig from '../../../../serverConfig';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const CategoriesPage = () => {
   const [categories, setCategories] = useState([]);

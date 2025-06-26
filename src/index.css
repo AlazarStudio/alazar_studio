@@ -1,28 +1,35 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Mulish', sans-serif;
-    scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Mulish', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 a {
-    text-decoration: none;
-}
-
-:root {
-    /* --blockWidth: 1300px; */
+  text-decoration: none;
 }
 
 body {
-    background-color: #131313;
-    color: #fff;
-    width: 100%; /* Сделаем тело на всю ширину */
-    
-    /* margin-top: 0px; */
+  background-color: #131313;
+  color: #fff;
+  width: 100%;
+}
+
+html,
+body {
+  min-height: 100%;
+  overflow: auto; /* Важно! Не hidden */
+  scroll-behavior: auto;
 }
 
 main {
- 
-    padding: 0; /* Убираем лишние отступы */
+  padding: 0;
+}
+
+:root {
+  /* --blockWidth: 1300px; */
 }

@@ -1,54 +1,19 @@
-// src/components/pages/HomePage/HomePage.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classes from './HomePage.module.css';
 import serverConfig from '../../../serverConfig';
 import CaseHomeCard from '../../ui/HomePage/CaseHomeCard';
 import CaseModal from '../../ui/CaseModal/CaseModal';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import LogoParticles from '../../ui/HomePage/LogoParticles/LogoParticles';
 
 function transliterate(str) {
   const ru = {
-    а: 'a',
-    б: 'b',
-    в: 'v',
-    г: 'g',
-    д: 'd',
-    е: 'e',
-    ё: 'yo',
-    ж: 'zh',
-    з: 'z',
-    и: 'i',
-    й: 'y',
-    к: 'k',
-    л: 'l',
-    м: 'm',
-    н: 'n',
-    о: 'o',
-    п: 'p',
-    р: 'r',
-    с: 's',
-    т: 't',
-    у: 'u',
-    ф: 'f',
-    х: 'kh',
-    ц: 'ts',
-    ч: 'ch',
-    ш: 'sh',
-    щ: 'shch',
-    ы: 'y',
-    ь: "'",
-    э: 'e',
-    ю: 'yu',
-    я: 'ya',
-    ' ': '-',
-    ь: "'",
-    ъ: '',
-    ё: 'yo',
+    а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'yo', ж: 'zh', з: 'z',
+    и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's',
+    т: 't', у: 'u', ф: 'f', х: 'kh', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'shch', ы: 'y',
+    ь: "'", э: 'e', ю: 'yu', я: 'ya', ' ': '-', ъ: '',
   };
-  return str
-    .split('')
-    .map((char) => ru[char.toLowerCase()] || char)
-    .join('');
+  return str.split('').map((char) => ru[char.toLowerCase()] || char).join('');
 }
 
 export default function HomePage() {
@@ -56,16 +21,21 @@ export default function HomePage() {
   const [categories, setCategories] = useState([]);
   const [developers, setDevelopers] = useState([]);
   const [selectedCase, setSelectedCase] = useState(null);
-  const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [activeCategoryId, setActiveCategoryId] = useState(null);
+  const [caseSlugFromURL, setCaseSlugFromURL] = useState(null);
 
+  const scrollYRef = useRef(0);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const encodeSlug = (str) => str.replace(/\s+/g, '-');
-  const decodeSlug = (str) => str.replace(/-/g, ' ');
+  useEffect(() => {
+    const path = decodeURIComponent(location.pathname).slice(1);
+    const parts = path.split('/').filter(Boolean);
+    const slug = parts.length === 2 ? parts[1] : parts[0] || null;
+    setCaseSlugFromURL(slug);
+  }, [location.pathname]);
 
-  // Загрузка данных
   useEffect(() => {
     Promise.all([
       fetch(`${serverConfig}/cases`).then((res) => res.json()),
@@ -78,110 +48,70 @@ export default function HomePage() {
     });
   }, []);
 
-  // Анализ pathname → category / case
   useEffect(() => {
-    if (!categories.length || !cases.length) return;
+    if (!cases.length || !caseSlugFromURL) return;
 
-    const path = decodeURIComponent(location.pathname).slice(1);
-    const parts = path.split('/').filter(Boolean);
-    const [part1, part2] = parts;
+    const timer = setTimeout(() => {
+      const foundCase = cases.find(
+        (c) =>
+          transliterate(c.title.toLowerCase().replace(/["'«»„“]/g, '')) ===
+          caseSlugFromURL.toLowerCase()
+      );
+      if (foundCase) {
+        setSelectedCase(foundCase);
+        setDrawerVisible(true);
+      }
+    }, 100);
 
-    const category = categories.find(
-      (cat) => transliterate(cat.name.toLowerCase()) === part1?.toLowerCase()
-    );
-    const caseFromFirst = cases.find(
-      (c) => transliterate(c.title.toLowerCase()) === part1?.toLowerCase()
-    );
-    const caseFromSecond = cases.find(
-      (c) => transliterate(c.title.toLowerCase()) === part2?.toLowerCase()
-    );
-
-    if (category && activeCategoryId !== category.id) {
-      setActiveCategoryId(category.id);
-    }
-
-    const targetCase = caseFromSecond || caseFromFirst;
-
-    if (targetCase) {
-      setSelectedCase(targetCase);
-      setDrawerVisible(true); // теперь drawer открывается ТОЛЬКО здесь
-    }
-  }, [location.pathname, categories, cases]);
-
-  const filteredCases = (
-    activeCategoryId
-      ? cases.filter((c) => c.categoryIds.includes(activeCategoryId))
-      : cases
-  ).filter((c) => c.shop === false); // ✅ отсекаем shop:true
+    return () => clearTimeout(timer);
+  }, [cases, caseSlugFromURL]);
 
   const handleCategorySelect = (id) => {
     const category = categories.find((cat) => cat.id === id);
     if (!category) return;
-
-    // СРАЗУ ставим активную категорию
+    scrollYRef.current = window.scrollY;
     setActiveCategoryId(id);
-
-    // Навигация нужна только если хотим синхронизировать URL
     navigate(`/${transliterate(category.name.toLowerCase())}`);
   };
 
   const handleCaseClick = (c) => {
-    const caseSlug = transliterate(c.title.toLowerCase());
+    const cleanTitle = c.title.replace(/["'«»„“]/g, '');
+    const caseSlug = transliterate(cleanTitle.toLowerCase());
     const category = categories.find((cat) => cat.id === activeCategoryId);
-    const currentPath = decodeURIComponent(location.pathname);
 
     const targetPath = category
       ? `/${transliterate(category.name.toLowerCase())}/${caseSlug}`
       : `/${caseSlug}`;
 
-    if (currentPath !== targetPath) {
-      navigate(targetPath); // URL обновится, useEffect сработает
-    } else {
-      // если URL не меняется, принудительно обнови state
-      setSelectedCase(c);
-      setDrawerVisible(true);
-    }
+    scrollYRef.current = window.scrollY;
+    setSelectedCase(c);
+    setDrawerVisible(true);
+    navigate(targetPath);
   };
 
   const handleCloseModal = () => {
     const category = categories.find((cat) => cat.id === activeCategoryId);
+    if (category) navigate(`/${transliterate(category.name.toLowerCase())}`);
+    else navigate(`/`);
 
-    // Сначала навигируем на URL без кейса
-    if (category) {
-      navigate(`/${transliterate(category.name.toLowerCase())}`);
-    } else {
-      navigate(`/`);
-    }
-
-    // После этого скрываем модалку и сбрасываем selectedCase
     setTimeout(() => {
       setDrawerVisible(false);
       setSelectedCase(null);
-    }, 300); // длительность анимации
+    }, 300);
   };
 
-  const pseudoRandom = (id) => {
-    const str = String(id);
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = (hash << 5) - hash + str.charCodeAt(i);
-      hash |= 0;
-    }
-    return Math.abs(hash % 10000);
-  };
-
-  const pinnedCases = filteredCases
-    .filter((c) => c.positionTop && !isNaN(Number(c.positionTop)))
-    .sort((a, b) => Number(a.positionTop) - Number(b.positionTop));
-
-  const unpinnedCases = filteredCases
-    .filter((c) => !c.positionTop || isNaN(Number(c.positionTop)))
-    .sort((a, b) => pseudoRandom(a.id) - pseudoRandom(b.id));
-
-  const finalCases = [...pinnedCases, ...unpinnedCases];
+  const filteredCases = (
+    activeCategoryId
+      ? cases.filter((c) => c.categoryIds.includes(activeCategoryId))
+      : cases
+  ).filter((c) => !c.shop);
 
   return (
     <div className={classes.container}>
+      <div className={classes.containerLogoCanvas}>
+        <LogoParticles scaleX={1} scaleY={1.4} />
+      </div>
+
       <div className={classes.containerLogo}>
         <img src="/images/logoA.png" alt="Logo A" />
         <div className={classes.containerLogoCenter}>
@@ -201,6 +131,8 @@ export default function HomePage() {
             src="/images/Arrow 1.png"
             onClick={() => navigate('cases')}
             alt="Arrow"
+            data-cursor-hover
+            data-cursor-text="Перейти"
           />
         </div>
 
@@ -209,6 +141,8 @@ export default function HomePage() {
             className={`${classes.categoryItem} ${
               activeCategoryId === null ? classes.active : ''
             }`}
+            data-cursor-hover
+            data-cursor-text="Показать"
             onClick={() => {
               setActiveCategoryId(null);
               navigate('/');
@@ -222,6 +156,8 @@ export default function HomePage() {
               className={`${classes.categoryItem} ${
                 activeCategoryId === cat.id ? classes.active : ''
               }`}
+              data-cursor-hover
+              data-cursor-text="Показать"
               onClick={() => handleCategorySelect(cat.id)}
             >
               {cat.name}
@@ -229,11 +165,12 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
       <div className={classes.casesContainer}>
-        {finalCases.map((c) => (
+        {filteredCases.map((c) => (
           <div
             key={c.id}
-            className={classes.caseBox}
+            className={`${classes.caseBox}`}
             onClick={() => handleCaseClick(c)}
           >
             <CaseHomeCard caseItem={c} allCategories={categories} />

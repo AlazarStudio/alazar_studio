@@ -47,15 +47,29 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
+  scroll-behavior: unset;
+  overflow-x: hidden;
+}
+
+.containerLogoCanvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 650px;
+  height: 100%;
+  max-height: 750px;
+  position: relative;
 }
 
 .containerLogo {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 150px;
+  min-height: 100px;
+  /* margin-top: 150px; */
   gap: 40px;
 }
 
@@ -135,7 +149,7 @@
 
 .containerCaseTop img {
   width: 106px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .categoryMenu {
@@ -293,7 +307,7 @@
   }
 
   .containerLogo {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -347,6 +361,7 @@
   }
 
   .containerLogo {
+    display: flex;
     margin-top: 120px;
     gap: 20px;
   }
@@ -432,5 +447,9 @@
     /* aspect-ratio: 1 / 1; */
     cursor: pointer;
     /* outline: 1px solid red; */
+  }
+
+  .containerLogoCanvas {
+    display: none;
   }
 }

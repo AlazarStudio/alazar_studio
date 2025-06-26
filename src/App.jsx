@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Non_Found_Page from './Components/Pages/Non_Found_Page';
 import Layout from './Components/Standart/Layout/Layout';
 // import AdminPage from './Components/Pages/AdminPage/AdminPage';
@@ -20,47 +20,58 @@ import DiscussionTable from './Components/Pages/AdminNew/DiscussionPage/Discussi
 import CaseShopPage from './Components/Pages/AdminNew/AdminCasesPage/CaseShopPage';
 import AllCasesPage from './Components/Pages/AllCasesPage/AllCasesPage';
 import ShopsPage from './Components/Pages/ShopsPage/ShopsPage';
+// import MusicPlayer from './Components/ui/MusicPlayer';
+import CustomCursor from './Components/ui/CustomCursor/CustomCursor';
+// import Lenis from '@studio-freight/lenis';
+import { useLenisScroll } from './useLenisScroll';
 
 function App() {
+  // useLenisScroll();
+
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/:categoryTitle" element={<HomePage />} />
-          <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} />
-          <Route path="/case/:caseTitle" element={<HomePage />} />
-          {/* <Route path="/shop" element={<ShopPage />} /> */}
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contacts" element={<ContactsPage />} />
-          <Route path="/cases/*" element={<AllCasesPage />} />
-          <Route path="/shop/*" element={<ShopsPage />} />
-          {/* <Route path="/cases/:categoryTitle" element={<CasesPage />} />
+      {/* <MusicPlayer /> */}
+      <CustomCursor />
+
+      <div data-lenis-scroll>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/:categoryTitle" element={<HomePage />} />
+            <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} />
+            <Route path="/case/:caseTitle" element={<HomePage />} />
+            {/* <Route path="/shop" element={<ShopPage />} /> */}
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contacts" element={<ContactsPage />} />
+            <Route path="/cases/*" element={<AllCasesPage />} />
+            <Route path="/shop/*" element={<ShopsPage />} />
+            {/* <Route path="/cases/:categoryTitle" element={<CasesPage />} />
           <Route path="/cases/:id" element={<CasesPage />} /> */}
 
-          <Route path="/service" element={<ServicePage />} />
+            <Route path="/service" element={<ServicePage />} />
 
-          {/* <Route path="/case/:id" element={<OneCasePage />} /> */}
-          <Route path="/login" element={<LoginPage />} />
+            {/* <Route path="/case/:id" element={<OneCasePage />} /> */}
+            <Route path="/login" element={<LoginPage />} />
 
-          <Route path="*" element={<Non_Found_Page />} />
-        </Route>
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminPage />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<CategoriesPage />} />
-          <Route path="categories" element={<CategoriesPage />} />
-          <Route path="developers" element={<DevelopersPage />} />
-          <Route path="cases" element={<CasesPage />} />
-          <Route path="casesShop" element={<CaseShopPage />} />
-          <Route path="discussion" element={<DiscussionTable />} />
-        </Route>
-      </Routes>
+            <Route path="*" element={<Non_Found_Page />} />
+          </Route>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<CategoriesPage />} />
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="developers" element={<DevelopersPage />} />
+            <Route path="cases" element={<CasesPage />} />
+            <Route path="casesShop" element={<CaseShopPage />} />
+            <Route path="discussion" element={<DiscussionTable />} />
+          </Route>
+        </Routes>
+      </div>
     </>
   );
 }

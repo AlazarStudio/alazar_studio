@@ -1,10 +1,9 @@
-// src/components/pages/HomePage/HomePage.jsx
 import React, { useEffect, useState } from 'react';
 import classes from './AllCasesPage.module.css';
 import serverConfig from '../../../serverConfig';
 import CaseHomeCard from '../../ui/HomePage/CaseHomeCard';
 import CaseModal from '../../ui/CaseModal/CaseModal';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function transliterate(str) {
   const ru = {
@@ -36,14 +35,17 @@ function transliterate(str) {
     ш: 'sh',
     щ: 'shch',
     ы: 'y',
-    ь: "'",
+    ь: '',
     э: 'e',
     ю: 'yu',
     я: 'ya',
     ' ': '-',
-    ь: "'",
     ъ: '',
-    ё: 'yo',
+    '’': '',
+    '“': '',
+    '”': '',
+    '«': '',
+    '»': '',
   };
   return str
     .split('')
@@ -58,43 +60,38 @@ export default function AllCasesPage() {
   const [selectedCase, setSelectedCase] = useState(null);
   const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
-
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedSearchTerm(searchTerm);
-    }, 400); // 300 мс задержка
-
-    return () => {
-      clearTimeout(handler); // отмена, если пользователь продолжает ввод
-    };
-  }, [searchTerm]);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const encodeSlug = (str) => str.replace(/\s+/g, '-');
-  const decodeSlug = (str) => str.replace(/-/g, ' ');
+  // Задержка поиска
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   // Загрузка данных
   useEffect(() => {
-    Promise.all([
-      fetch(`${serverConfig}/cases`).then((res) => res.json()),
-      fetch(`${serverConfig}/categories`).then((res) => res.json()),
-      fetch(`${serverConfig}/developers`).then((res) => res.json()),
-    ]).then(([caseData, categoryData, developerData]) => {
-      setCases(caseData);
-      setCategories(categoryData);
-      setDevelopers(developerData);
-    });
+    const load = async () => {
+      const [resCases, resCategories, resDevs] = await Promise.all([
+        fetch(`${serverConfig}/cases`),
+        fetch(`${serverConfig}/categories`),
+        fetch(`${serverConfig}/developers`),
+      ]);
+      setCases(await resCases.json());
+      setCategories(await resCategories.json());
+      setDevelopers(await resDevs.json());
+    };
+    load();
   }, []);
 
-  // Анализ pathname → category / case
+  // Парсинг URL и открытие кейса
   useEffect(() => {
-    if (!categories.length || !cases.length) return;
-    if (!location.pathname.startsWith('/cases')) return;
+    if (!cases.length || !categories.length) return;
 
     const path = decodeURIComponent(location.pathname).replace(
       /^\/cases\/?/,
@@ -103,125 +100,90 @@ export default function AllCasesPage() {
     const parts = path.split('/').filter(Boolean);
     const [part1, part2] = parts;
 
-    const category = categories.find(
-      (cat) => transliterate(cat.name.toLowerCase()) === part1?.toLowerCase()
+    const categorySlug = part2 ? part1 : null;
+    const caseSlug = part2 || part1;
+
+    const matchedCategory = categories.find(
+      (cat) => transliterate(cat.name.toLowerCase()) === categorySlug
     );
-    const caseFromFirst = cases.find(
-      (c) => transliterate(c.title.toLowerCase()) === part1?.toLowerCase()
-    );
-    const caseFromSecond = cases.find(
-      (c) => transliterate(c.title.toLowerCase()) === part2?.toLowerCase()
+    const matchedCase = cases.find(
+      (c) =>
+        transliterate(c.title.replace(/["'«»„“]/g, '').toLowerCase()) ===
+        caseSlug
     );
 
-    if (category && activeCategoryId !== category.id) {
-      setActiveCategoryId(category.id);
-    }
-
-    const targetCase = caseFromSecond || caseFromFirst;
-
-    if (targetCase) {
-      setSelectedCase(targetCase);
+    if (matchedCategory) setActiveCategoryId(matchedCategory.id);
+    if (matchedCase) {
+      setSelectedCase(matchedCase);
       setDrawerVisible(true);
     }
-  }, [location.pathname, categories, cases]);
+  }, [location.pathname, cases, categories]);
 
+  // Фильтрация
   const filteredCases = (
     activeCategoryId
       ? cases.filter((c) => c.categoryIds.includes(activeCategoryId))
       : cases
   )
-    .filter((c) => c.shop === false)
+    .filter((c) => !c.shop)
     .filter((c) =>
-      c.title.toLowerCase().includes(debouncedSearchTerm.trim().toLowerCase())
+      c.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
 
-  const handleCategorySelect = (id) => {
-    const category = categories.find((cat) => cat.id === id);
-    if (!category) return;
-
-    // СРАЗУ ставим активную категорию
-    setActiveCategoryId(id);
-
-    // Навигация нужна только если хотим синхронизировать URL
-    navigate(`/${transliterate(category.name.toLowerCase())}`);
-  };
-
-  const handleCaseClick = (c) => {
-    const caseSlug = transliterate(c.title.toLowerCase());
-    const category = categories.find((cat) => cat.id === activeCategoryId);
-    const currentPath = decodeURIComponent(location.pathname);
-
-    const targetPath = category
-      ? `/cases/${transliterate(category.name.toLowerCase())}/${caseSlug}`
-      : `/cases/${caseSlug}`;
-
-    if (currentPath !== targetPath) {
-      navigate(targetPath); // ✅ теперь маршрут остаётся внутри /shop
-    } else {
-      setSelectedCase(c);
-      setDrawerVisible(true);
-    }
-  };
-
-  const handleCloseModal = () => {
-    const category = categories.find((cat) => cat.id === activeCategoryId);
-
-    // Сначала навигируем на URL без кейса
-    if (category) {
-      navigate(`/cases/${transliterate(category.name.toLowerCase())}`);
-    } else {
-      navigate(`/cases`);
-    }
-
-    // После этого скрываем модалку и сбрасываем selectedCase
-    setTimeout(() => {
-      setDrawerVisible(false);
-      setSelectedCase(null);
-    }, 300); // длительность анимации
-  };
-
   const pseudoRandom = (id) => {
-    const str = String(id);
     let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = (hash << 5) - hash + str.charCodeAt(i);
+    for (let i = 0; i < id.length; i++) {
+      hash = (hash << 5) - hash + id.charCodeAt(i);
       hash |= 0;
     }
     return Math.abs(hash % 10000);
   };
 
-  const pinnedCases = filteredCases
-    .filter((c) => c.positionTop && !isNaN(Number(c.positionTop)))
-    .sort((a, b) => Number(a.positionTop) - Number(b.positionTop));
+  const sortedCases = [
+    ...filteredCases
+      .filter((c) => c.positionTop)
+      .sort((a, b) => a.positionTop - b.positionTop),
+    ...filteredCases
+      .filter((c) => !c.positionTop)
+      .sort((a, b) => pseudoRandom(a.id) - pseudoRandom(b.id)),
+  ];
 
-  const unpinnedCases = filteredCases
-    .filter((c) => !c.positionTop || isNaN(Number(c.positionTop)))
-    .sort((a, b) => pseudoRandom(a.id) - pseudoRandom(b.id));
+  const handleCategorySelect = (id) => {
+    const category = categories.find((cat) => cat.id === id);
+    setActiveCategoryId(id);
+    navigate(`/cases/${transliterate(category.name.toLowerCase())}`);
+  };
 
-  const finalCases = [...pinnedCases, ...unpinnedCases];
+  const handleCaseClick = (c) => {
+    const slug = transliterate(c.title.replace(/["'«»„“]/g, '').toLowerCase());
+    const category = categories.find((cat) => cat.id === activeCategoryId);
+    const path = category
+      ? `/cases/${transliterate(category.name.toLowerCase())}/${slug}`
+      : `/cases/${slug}`;
+    navigate(path);
+  };
+
+  const handleCloseModal = () => {
+    const category = categories.find((cat) => cat.id === activeCategoryId);
+    navigate(
+      category
+        ? `/cases/${transliterate(category.name.toLowerCase())}`
+        : `/cases`
+    );
+    setTimeout(() => {
+      setDrawerVisible(false);
+      setSelectedCase(null);
+    }, 300);
+  };
 
   return (
     <div className={classes.container}>
-      {/* <div className={classes.containerLogo}>
-        <img src="/images/logoA.png" alt="Logo A" />
-        <div className={classes.containerLogoCenter}>
-          <img src="/images/logoAlazar.png" alt="Logo Alazar" />
-          <img src="/images/logoStudio.png" alt="Logo Studio" />
-        </div>
-        <span>СТУДИЯ WEB-РАЗРАБОТКИ И ГРАФИЧЕСКОГО ДИЗАЙНА</span>
-      </div> */}
-
       <div className={classes.containerCase}>
         <div className={classes.containerCaseTop}>
           <div className={classes.containerCaseTopName}>
             <span>НАШИ</span>
             <span>КЕЙСЫ</span>
           </div>
-          {/* <img
-            src="/images/Arrow 1.png"
-            onClick={() => navigate('cases')}
-            alt="Arrow"
-          /> */}
         </div>
         <div className={classes.searchInput}>
           <input
@@ -232,7 +194,6 @@ export default function AllCasesPage() {
             className={classes.input}
           />
         </div>
-
         <div className={classes.categoryMenu}>
           <span
             className={`${classes.categoryItem} ${
@@ -240,8 +201,10 @@ export default function AllCasesPage() {
             }`}
             onClick={() => {
               setActiveCategoryId(null);
-              navigate('/');
+              navigate('/cases');
             }}
+            data-cursor-hover
+            data-cursor-text="Показать"
           >
             Все
           </span>
@@ -252,14 +215,17 @@ export default function AllCasesPage() {
                 activeCategoryId === cat.id ? classes.active : ''
               }`}
               onClick={() => handleCategorySelect(cat.id)}
+              data-cursor-hover
+              data-cursor-text="Показать"
             >
               {cat.name}
             </span>
           ))}
         </div>
       </div>
+
       <div className={classes.casesContainer}>
-        {finalCases.map((c) => (
+        {sortedCases.map((c) => (
           <div
             key={c.id}
             className={classes.caseBox}

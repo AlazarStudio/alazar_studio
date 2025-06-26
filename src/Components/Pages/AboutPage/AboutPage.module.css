@@ -334,6 +334,9 @@
   justify-content: space-between;
   display: flex;
   width: 100%;
+  max-width: 1400px;
+  flex-wrap: wrap;
+  gap: 100px;
   margin-top: 100px;
 }
 
@@ -344,6 +347,7 @@
   width: 46%;
   background-color: #e5097f33;
   height: 247px;
+  margin-bottom: 40px;
 }
 
 .avatar {
@@ -351,7 +355,8 @@
   height: 309px;
   border-radius: 0 60px;
   margin-left: 40px;
-  outline: 1px solid red;
+  object-fit: cover;
+  /* outline: 1px solid red; */
 }
 
 .poligon {

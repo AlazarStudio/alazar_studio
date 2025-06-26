@@ -16,6 +16,21 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- <audio id="global-audio" src="/music/track1.mp3" loop autoplay></audio> -->
+    <!-- <script>
+      window.addEventListener(
+        'click',
+        () => {
+          const audio = document.getElementById('global-audio');
+          if (audio && audio.paused) {
+            audio.play().catch((e) => {
+              console.warn('Autoplay error:', e);
+            });
+          }
+        },
+        { once: true }
+      );
+    </script> -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 .modalRoot {
   height: 100vh;
   overflow-y: auto;
+  scroll-behavior: auto;
   transition: transform 0.3s ease, opacity 0.3s ease;
   transform: translateY(0);
   opacity: 1;
@@ -8,6 +9,14 @@
   color: #fff;
 }
 
+
+
+.modalRoot {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: unset; /* ВАЖНО */
+  -webkit-overflow-scrolling: touch;
+}
 .hiding {
   transform: translateY(100%);
   opacity: 0;
@@ -20,6 +29,41 @@
   height: 80vh;
 }
 
+.descText ul,
+.block_text ul {
+  padding-left: 1.2rem;
+  /* margin-bottom: 1rem; */
+  list-style: disc;
+}
+
+.descText ol,
+.block_text ol {
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+  list-style: decimal;
+}
+
+.descText li,
+.block_text li {
+  margin-bottom: 0.4rem;
+}
+
+.block_text ul,
+.block_text ol {
+  display: block; /* обязательно */
+  flex-direction: column; /* на всякий случай */
+  /* padding-left: 1.5rem; */
+  /* margin: 1rem 0; */
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.block_text li {
+  display: list-item !important; /* принудительно делаем блок */
+  margin-bottom: 0.5rem;
+  /* line-height: 1.5; */
+}
+
 .spinner {
   width: 50px;
   height: 50px;
@@ -29,13 +73,37 @@
   animation: spin 1s linear infinite;
 }
 
+.modalRoot {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.modalRoot::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
+.descText1 {
+  color: #000;
+  padding: 20px 70px;
+}
+
 .title {
+}
+
+@keyframes rotateOnClick {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.2);
+  }
 }
 
 .closeButton {
@@ -54,13 +122,16 @@
   z-index: 9999;
   transition: all 0.3s ease;
   cursor: pointer;
-  /* outline: 1px solid red !important; */
   padding-bottom: 1px;
 }
 
 .closeButton:hover {
   background-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(90deg); /* добавим вращение */
+}
+
+.closeButton.clicked {
+  animation: rotateOnClick 0.5s ease-out;
 }
 
 .container {
@@ -123,54 +194,71 @@
   color: #f40087 !important;
 }
 
+.contBlock {
+  display: flex;
+  width: 100%;
+  background-color: #fff !important;
+}
+
 .imagesWrapper {
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
   margin-top: 24px;
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 .blockTop {
   display: flex;
   width: 100%;
+  padding: 50px;
+  padding-bottom: 70px;
+  /* outline: 1px solid red; */
+  /* min-height: 500px; */
 }
 
 .block_text {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: #fff !important;
   color: #000;
   /* padding: 10px; */
-  width: 33.33333333333333%;
-  border-bottom: 1px solid #000;
+  /* width: 33.33333333333333%; */
+  /* border-bottom: 1px solid #000; */
 }
 
 .block_text span:nth-of-type(1) {
   font-size: 20px;
   font-weight: 700;
-  border-bottom: 1px solid #000;
+  /* border-bottom: 1px solid #000; */
   padding: 10px 20px;
 }
 
 .block_text div {
   /* display: flex; */
   width: 100%;
+  /* height: 600px; */
   padding: 10px 20px;
 }
 
 .block_text:nth-of-type(1),
 .block_text:nth-of-type(2) {
-  border-right: 1px solid #000;
+  width: 35%;
+  /* border-right: 1px solid #000; */
+}
+
+.block_text:nth-of-type(3) {
+  width: 33.3333333%;
 }
 
 .block_img {
   width: 100%;
+  background-color: #fff !important;
 }
 
 .imageBox {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 .image {
@@ -187,7 +275,7 @@
   color: #000;
   /* padding: 10px; */
   width: 100%;
-  padding: 30px;
+  padding: 50px;
   line-height: 150%;
 }
 
@@ -323,6 +411,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 10px;
   }
 
   .block_text {
@@ -331,8 +420,8 @@
     background-color: #fff;
     color: #000;
     /* padding: 10px; */
-    width: 100%;
-    border-bottom: 1px solid #000;
+    width: 100% !important;
+    /* border-bottom: 1px solid #000; */
   }
 
   .block_text span:nth-of-type(1) {
@@ -362,10 +451,6 @@
     line-height: 150%;
   }
 
-  .block_text:nth-of-type(1),
-  .block_text:nth-of-type(2) {
-    border-right: 1px solid #000;
-  }
 
   .imagesWrapper {
     display: flex;
@@ -398,6 +483,11 @@
     flex-direction: column;
     gap: 8px;
   }
+
+  .descText1 {
+  color: #000;
+  padding: 20px;
+}
 
   .messengerBlock {
     display: flex;

@@ -39,7 +39,7 @@
   /* align-items: center; */
   flex-direction: column;
   justify-content: space-between;
-  height: 110px !important;
+  /* height: 110px !important; */
   padding-top: 8px;
   gap: 8px;
   /* border: 1px solid red; */

@@ -16,7 +16,7 @@ export default function CaseHomeCard({ caseItem, allCategories }) {
     .replace(/«(.*?)«/g, '«$1»'); // заменяем вторую кавычку на закрывающую
 
   return (
-    <div className={classes.card}>
+    <div className={classes.card} data-cursor-hover data-cursor-text="Смотреть">
       <img src={`${uploadsConfig}/uploads/${caseItem.preview}`} />
       <div className={classes.containerText}>
         <span className={classes.title}>{formattedTitle}</span>

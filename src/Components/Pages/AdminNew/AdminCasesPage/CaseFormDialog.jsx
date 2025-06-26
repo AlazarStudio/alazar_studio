@@ -243,6 +243,21 @@ const CaseFormDialog = ({
               })
               .join(', ')
           }
+          MenuProps={{
+            PaperProps: {
+              style: {
+                maxHeight: 300,
+                maxWidth: 320, // ✅ ограничиваем ширину
+                overflowY: 'auto',
+              },
+            },
+            MenuListProps: {
+              sx: {
+                display: 'flex',
+                flexDirection: 'column', // ✅ вертикально
+              },
+            },
+          }}
         >
           {allCategories.map((cat) => (
             <MenuItem key={cat.id} value={cat.id}>
@@ -267,6 +282,21 @@ const CaseFormDialog = ({
               })
               .join(', ')
           }
+          MenuProps={{
+            PaperProps: {
+              style: {
+                maxHeight: 300,
+                maxWidth: 320, // ✅ ограничиваем ширину
+                overflowY: 'auto',
+              },
+            },
+            MenuListProps: {
+              sx: {
+                display: 'flex',
+                flexDirection: 'column', // ✅ вертикально
+              },
+            },
+          }}
         >
           {allDevelopers.map((dev) => (
             <MenuItem key={dev.id} value={dev.id}>

@@ -89,7 +89,8 @@ function Header() {
               onClick={() => navigate('/')}
             />
           </li>
-          <li>
+          <li >
+            
             <Link to="/">ГЛАВНАЯ</Link>
           </li>
           <li>

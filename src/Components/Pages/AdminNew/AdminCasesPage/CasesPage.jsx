@@ -4,7 +4,7 @@ import serverConfig from '../../../../serverConfig';
 import './CasesPage.css';
 import uploadsConfig from '../../../../uploadsConfig';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const CasesPage = () => {
   const [cases, setCases] = useState([]);
@@ -37,11 +37,16 @@ const CasesPage = () => {
     fetchAll();
   }, []);
 
+  // Фильтрация по поиску и по статусу shop === false
   const filtered = cases
     .filter((c) => c.shop === false)
     .filter((c) => c.title.toLowerCase().includes(search.toLowerCase()));
 
-  const paged = filtered.slice(
+  // Разворачиваем массив кейсов перед пагинацией
+  const reversedCases = [...filtered].reverse();
+
+  // Пагинация
+  const paged = reversedCases.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE
   );
@@ -86,11 +91,6 @@ const CasesPage = () => {
             <th>Категории</th>
             <th>Разработчики</th>
             <th>№ в топе</th>
-            {/* <th>Изображения</th> */}
-            {/* <th>Описание задачи</th>
-            <th>Описание клиента</th>
-            <th>Описание услуг</th> */}
-            {/* <th>Контент</th> */}
             <th>Действия</th>
           </tr>
         </thead>
@@ -117,49 +117,6 @@ const CasesPage = () => {
                   .join(', ')}
               </td>
               <td>{c.positionTop}</td>
-              {/* <td>
-                {c.images?.length}
-                {c.images?.map((img, i) => (
-                  <img
-                    key={i}
-                    src={`${uploadsConfig}/uploads/${img}`}
-                    alt=""
-                    className="case-img"
-                  />
-                ))}
-              </td> */}
-              {/* <td>{c.taskDescription}</td>
-              <td>{c.clientDescription}</td>
-              <td>{c.serviceDescription}</td> */}
-              {/* <td>
-                {Array.isArray(c.contentBlocks) &&
-                c.contentBlocks.length > 0 ? (
-                  <div className="content-preview">
-                    {c.contentBlocks
-                      .slice(0, 3)
-                      .map((block, i) =>
-                        block.type === 'text' ? (
-                          <div
-                            key={i}
-                            dangerouslySetInnerHTML={{ __html: block.value }}
-                            className="block-text"
-                          />
-                        ) : (
-                          <img
-                            key={i}
-                            src={`${uploadsConfig}/uploads/${block.value}`}
-                            alt="block"
-                            className="block-img"
-                          />
-                        )
-                      )}
-                    {c.contentBlocks.length > 3 && <span>…</span>}
-                  </div>
-                ) : (
-                  '—'
-                )}
-              </td> */}
-
               <td>
                 <button onClick={() => handleEdit(c)}>✎</button>
                 <button onClick={() => handleDelete(c.id)}>🗑</button>

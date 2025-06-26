@@ -4,7 +4,7 @@ import serverConfig from '../../../../serverConfig';
 import './CasesPage.css';
 import uploadsConfig from '../../../../uploadsConfig';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const CaseShopPage = () => {
   const [cases, setCases] = useState([]);

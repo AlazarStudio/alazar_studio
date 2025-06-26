@@ -1,13 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App.jsx'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
+import './index.css';
+import ScrollWrapper from './Components/ScrollWrapper.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      {/* <ScrollWrapper> */}
+        <App />
+      {/* </ScrollWrapper> */}
     </BrowserRouter>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

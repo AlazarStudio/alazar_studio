@@ -1,5 +1,5 @@
-// src/components/ui/CaseModal/CaseModal.jsx
 import React, { useEffect, useRef, useState } from 'react';
+import Lenis from '@studio-freight/lenis';
 import {
   Box,
   Typography,
@@ -26,7 +26,7 @@ export default function CaseModal({
   allDevelopers,
   allCategories,
 }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [copied, setCopied] = useState(false);
   const [showDiscussion, setShowDiscussion] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,20 +40,72 @@ export default function CaseModal({
     caseItem.developerIds.includes(dev.id)
   );
 
+  const modalScrollRef = useRef(null);
+  const modalLenisRef = useRef(null);
+
+  useEffect(() => {
+    if (open) {
+      // Блокировка прокрутки на фоне
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.overflow = ''; // Восстановление прокрутки при закрытии
+      };
+    }
+  }, [open]);
+
+  useEffect(() => {
+    let lenis;
+
+    if (open) {
+      const timeout = setTimeout(() => {
+        if (!modalScrollRef.current) return;
+
+        lenis = new Lenis({
+          wrapper: modalScrollRef.current,
+          content: modalScrollRef.current.firstChild || modalScrollRef.current,
+          duration: 0.6, // Плавная но быстрая
+          easing: (t) => t, // линейная
+          smooth: true,
+          smoothTouch: true,
+          touchMultiplier: 1.4,
+          wheelMultiplier: 0.5, // шаг чуть меньше
+          gestureOrientation: 'vertical',
+          direction: 'vertical',
+          autoResize: true,
+        });
+
+        modalLenisRef.current = lenis;
+
+        const raf = (time) => {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        };
+
+        requestAnimationFrame(raf);
+        document.body.setAttribute('data-lenis-prevent', 'true');
+      }, 100);
+
+      return () => {
+        clearTimeout(timeout);
+        if (lenis) lenis.destroy();
+        document.body.removeAttribute('data-lenis-prevent');
+      };
+    }
+  }, [open]);
+
   useEffect(() => {
     if (caseItem) {
       setIsLoading(true);
-      // Даем время на "рендер", можно позже заменить на реальные async операции
-      const timeout = setTimeout(() => setIsLoading(false), 300); // 300 мс можно заменить
+      const timeout = setTimeout(() => setIsLoading(false), 500);
       return () => clearTimeout(timeout);
     }
   }, [caseItem]);
 
   const handleClose = () => {
-    setIsHiding(true); // активируем анимацию исчезновения
     setTimeout(() => {
-      onClose(); // вызываем родительское закрытие
-    }, 400); // время должно совпадать с duration анимации
+      onClose();
+    }, 0);
   };
 
   const handleCopyUrl = () => {
@@ -65,14 +117,13 @@ export default function CaseModal({
   };
 
   const formattedTitle = caseItem.title
-    .replace(/["']/g, '«') // заменяем открывающие кавычки
-    .replace(/«(.*?)«/g, '«$1»'); // заменяем вторую кавычку на закрывающую
+    .replace(/["']/g, '«')
+    .replace(/«(.*?)«/g, '«$1»');
 
   return (
     <Drawer
       anchor="bottom"
       open={open}
-      // onClose={onClose}
       ModalProps={{
         BackdropProps: {
           sx: {
@@ -88,12 +139,14 @@ export default function CaseModal({
         },
       }}
     >
-      <div onClick={onClose} className={styles.closeButton}>
-        {/* <IconButton onClick={onClose} className={styles.closeButton}> */}
+      <div onClick={handleClose} className={styles.closeButton}>
         <CloseIcon />
-        {/* </IconButton> */}
       </div>
-      <Box className={styles.modalRoot}>
+      <Box
+        className={styles.modalRoot}
+        // data-lenis-scroll="true"
+        // ref={modalScrollRef}
+      >
         {/* Кнопка закрытия */}
         {/* <IconButton onClick={onClose} className={styles.closeButton}>
           <Close />
@@ -112,7 +165,7 @@ export default function CaseModal({
             <Box className={styles.topRow}>
               <Box>
                 <Typography className={styles.title}>
-                 {formattedTitle}
+                  {formattedTitle}
                 </Typography>
                 <Box className={styles.categories}>
                   {caseCategories.map((cat) => cat.name).join(' • ')}
@@ -178,7 +231,7 @@ export default function CaseModal({
               open={Boolean(anchorEl)}
               anchorEl={anchorEl}
               onClose={() => setAnchorEl(null)}
-              anchorOrigin={{ vertical: 'bottom' }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} // Указываем значения для обоих
             >
               <List className={styles.popoverList}>
                 {caseDevelopers.map((dev) => (
@@ -235,7 +288,7 @@ export default function CaseModal({
                   </div>
                 </div>
                 <div className={styles.block_text}>
-                  <span>Какие услуги были оказаны</span>
+                  <span>Услуги</span>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: caseItem.serviceDescription,
@@ -245,16 +298,18 @@ export default function CaseModal({
                   </div>
                 </div>
               </div>
+
               {caseItem.contentBlocks.map((block, i) =>
                 block.type === 'text' ? (
                   <div
                     key={i}
                     dangerouslySetInnerHTML={{ __html: block.value }}
-                    className={styles.descText}
+                    className={styles.descText1}
                   />
                 ) : (
                   <img
                     key={i}
+                    loading="lazy"
                     src={`${uploadsConfig}/uploads/${block.value}`}
                     alt="block"
                     className={styles.img}
@@ -306,6 +361,9 @@ export default function CaseModal({
                   target="_blank"
                   rel="noreferrer"
                   className={styles.iconButton}
+                  data-cursor-hover
+                  data-cursor-text="WhatsApp"
+                  data-cursor-color="#0bda51"
                 >
                   <img src="../images/wh.svg" alt="whatsapp" width={50} />
                 </a>
@@ -315,6 +373,9 @@ export default function CaseModal({
                   target="_blank"
                   rel="noreferrer"
                   className={styles.iconButton}
+                  data-cursor-hover
+                  data-cursor-text="Telegram"
+                  data-cursor-color="#0084f0"
                 >
                   <img src="../images/te.svg" alt="telegram" width={50} />
                 </a>
@@ -326,6 +387,9 @@ export default function CaseModal({
                     handleCopyUrl();
                   }}
                   className={styles.copyButton}
+                  data-cursor-hover
+                  data-cursor-text="Ссылка"
+                  data-cursor-color="#434575"
                 >
                   <img src="../images/link.svg" alt="copy link" width={50} />
                 </a>

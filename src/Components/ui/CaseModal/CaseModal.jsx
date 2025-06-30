@@ -494,7 +494,7 @@ export default function CaseModal({
                 >
                   <img src="../images/link.svg" alt="copy link" width={50} />
                 </a>
-                <a
+                {/* <a
                   href="#"
                   onClick={handleDownloadPDF}
                   className={styles.copyButton}
@@ -507,7 +507,7 @@ export default function CaseModal({
                     alt="copy link"
                     width={50}
                   />
-                </a>
+                </a> */}
 
                 {/* Всплывающее уведомление */}
                 {copied && (

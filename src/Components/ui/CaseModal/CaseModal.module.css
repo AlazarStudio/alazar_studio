@@ -299,12 +299,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  /* position: absolute; */
-  right: -65px;
-  top: 0;
+  position: absolute;
+  right: -615px;
+  top: -30px;
   display: flex;
   padding: 30px;
-  /* flex-direction: column; */
+  flex-direction: column;
   gap: 28px;
 }
 

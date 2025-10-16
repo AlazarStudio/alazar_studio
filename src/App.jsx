@@ -24,6 +24,7 @@ import ShopsPage from './Components/Pages/ShopsPage/ShopsPage';
 import CustomCursor from './Components/ui/CustomCursor/CustomCursor';
 // import Lenis from '@studio-freight/lenis';
 import { useLenisScroll } from './useLenisScroll';
+import Zaglushka from './Components/Pages/zaglushka/Zaglushka';
 
 function App() {
   // useLenisScroll();
@@ -36,22 +37,22 @@ function App() {
       <div data-lenis-scroll>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/:categoryTitle" element={<HomePage />} />
-            <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} />
-            <Route path="/case/:caseTitle" element={<HomePage />} />
+            <Route path="/" element={<Zaglushka />} />
+            {/* <Route path="/:categoryTitle" element={<HomePage />} /> */}
+            {/* <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} /> */}
+            {/* <Route path="/case/:caseTitle" element={<HomePage />} /> */}
             {/* <Route path="/shop" element={<ShopPage />} /> */}
-            <Route path="/about" element={<AboutPage />} />
+            {/* <Route path="/about" element={<AboutPage />} />
             <Route path="/contacts" element={<ContactsPage />} />
             <Route path="/cases/*" element={<AllCasesPage />} />
-            <Route path="/shop/*" element={<ShopsPage />} />
+            <Route path="/shop/*" element={<ShopsPage />} /> */}
             {/* <Route path="/cases/:categoryTitle" element={<CasesPage />} />
           <Route path="/cases/:id" element={<CasesPage />} /> */}
 
-            <Route path="/service" element={<ServicePage />} />
+            {/* <Route path="/service" element={<ServicePage />} /> */}
 
             {/* <Route path="/case/:id" element={<OneCasePage />} /> */}
-            <Route path="/login" element={<LoginPage />} />
+            {/* <Route path="/login" element={<LoginPage />} />
 
             <Route path="*" element={<Non_Found_Page />} />
           </Route>
@@ -68,7 +69,7 @@ function App() {
             <Route path="developers" element={<DevelopersPage />} />
             <Route path="cases" element={<CasesPage />} />
             <Route path="casesShop" element={<CaseShopPage />} />
-            <Route path="discussion" element={<DiscussionTable />} />
+            <Route path="discussion" element={<DiscussionTable />} /> */}
           </Route>
         </Routes>
       </div>

@@ -1,12 +1,97 @@
-.container {
+/* Глобально отключаем прокрутку страницы */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Контейнеры не скроллятся, паддинги внутри не увеличивают высоту */
+* {
+  box-sizing: border-box;
+}
+
+.container,
+.container1 {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100dvh;
+  height: 100vh; /* было 100% у .container1 — меняем на 100vh */
+  overflow: hidden; /* обрезаем, без полос прокрутки */
 }
 
+/* это и даёт лишнюю высоту → убрать */
+.blockBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+  gap: 60px;
+}
 
-.container img{
-    width: 300px;
+.blockBottomEl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.blockBottomEl img {
+  width: 25px;
+}
+
+.blockBottomEl a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* если где-то всё же появляется полоса — класс для скрытия */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.logo {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    display: flex;
+  }
+
+  .blockBottom {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .blockBottomEl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .blockBottomEl img {
+    width: 25px;
+  }
+
+  .blockBottomEl a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .top {
+    display: none !important;
+  }
 }

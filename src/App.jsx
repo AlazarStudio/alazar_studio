@@ -52,11 +52,12 @@ function App() {
             {/* <Route path="/service" element={<ServicePage />} /> */}
 
             {/* <Route path="/case/:id" element={<OneCasePage />} /> */}
-            {/* <Route path="/login" element={<LoginPage />} />
+            {/* <Route path="/login" element={<LoginPage />} /> */}
 
-            <Route path="*" element={<Non_Found_Page />} />
+            {/* <Route path="*" element={<Non_Found_Page />} /> */}
+            <Route path="*" element={<Zaglushka />} />
           </Route>
-          <Route
+          {/* <Route
             path="/admin"
             element={
               <ProtectedRoute>
@@ -69,8 +70,8 @@ function App() {
             <Route path="developers" element={<DevelopersPage />} />
             <Route path="cases" element={<CasesPage />} />
             <Route path="casesShop" element={<CaseShopPage />} />
-            <Route path="discussion" element={<DiscussionTable />} /> */}
-          </Route>
+            <Route path="discussion" element={<DiscussionTable />} />
+          </Route> */}
         </Routes>
       </div>
     </>

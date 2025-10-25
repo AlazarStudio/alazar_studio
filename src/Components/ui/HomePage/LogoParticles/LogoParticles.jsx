@@ -182,11 +182,11 @@ export default function LogoParticles({ scaleX = 1, scaleY = 1 }) {
     <canvas
       ref={canvasRef}
       style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        zIndex: 0,
-        pointerEvents: 'none', // Скрыть курсор
+        // position: 'absolute',
+        // top: 0,
+        // left: 0,
+        // zIndex: 0,
+        // pointerEvents: 'none', // Скрыть курсор
       }}
     />
   );

@@ -37,27 +37,27 @@ function App() {
       <div data-lenis-scroll>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Zaglushka />} />
-            {/* <Route path="/:categoryTitle" element={<HomePage />} /> */}
-            {/* <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} /> */}
-            {/* <Route path="/case/:caseTitle" element={<HomePage />} /> */}
-            {/* <Route path="/shop" element={<ShopPage />} /> */}
-            {/* <Route path="/about" element={<AboutPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/:categoryTitle" element={<HomePage />} />
+            <Route path="/:categoryTitle/:caseTitle" element={<HomePage />} />
+            <Route path="/case/:caseTitle" element={<HomePage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/contacts" element={<ContactsPage />} />
             <Route path="/cases/*" element={<AllCasesPage />} />
-            <Route path="/shop/*" element={<ShopsPage />} /> */}
-            {/* <Route path="/cases/:categoryTitle" element={<CasesPage />} />
-          <Route path="/cases/:id" element={<CasesPage />} /> */}
+            <Route path="/shop/*" element={<ShopsPage />} />
+            <Route path="/cases/:categoryTitle" element={<CasesPage />} />
+            <Route path="/cases/:id" element={<CasesPage />} />
 
-            {/* <Route path="/service" element={<ServicePage />} /> */}
+            <Route path="/service" element={<ServicePage />} />
 
-            {/* <Route path="/case/:id" element={<OneCasePage />} /> */}
-            {/* <Route path="/login" element={<LoginPage />} /> */}
+            <Route path="/case/:id" element={<OneCasePage />} />
+            <Route path="/login" element={<LoginPage />} />
 
-            {/* <Route path="*" element={<Non_Found_Page />} /> */}
+            <Route path="*" element={<Non_Found_Page />} />
             <Route path="*" element={<Zaglushka />} />
           </Route>
-          {/* <Route
+          <Route
             path="/admin"
             element={
               <ProtectedRoute>
@@ -71,7 +71,7 @@ function App() {
             <Route path="cases" element={<CasesPage />} />
             <Route path="casesShop" element={<CaseShopPage />} />
             <Route path="discussion" element={<DiscussionTable />} />
-          </Route> */}
+          </Route>
         </Routes>
       </div>
     </>

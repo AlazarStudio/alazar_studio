@@ -1,15 +1,15 @@
 /* Глобально отключаем прокрутку страницы */
-html,
+/* html,
 body {
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
-}
+} */
 
 /* Контейнеры не скроллятся, паддинги внутри не увеличивают высоту */
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 .container,
 .container1 {

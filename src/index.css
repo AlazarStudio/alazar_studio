@@ -19,12 +19,7 @@ body {
   width: 100%;
 }
 
-html,
-body {
-  min-height: 100%;
-  overflow: auto; /* Важно! Не hidden */
-  scroll-behavior: auto;
-}
+
 
 main {
   padding: 0;

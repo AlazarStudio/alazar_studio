@@ -1,8 +1,0 @@
-.container {
-    display: grid;
-    justify-content: space-between;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    outline: 3px solid red;
-}
-

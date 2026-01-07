@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from '../AboutPage/AboutPage.module.css';
 import DiscussionProject from '../../ui/DiscussionProject/DiscussionProject';
-import serverConfig from '../../../serverConfig';
-import uploadsConfig from '../../../uploadsConfig';
+import jsonApiConfig from '../../../jsonApiConfig';
 
 export default function AboutPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -10,11 +9,15 @@ export default function AboutPage() {
 
   // Загрузка данных
   useEffect(() => {
-    Promise.all([
-      fetch(`${serverConfig}/developers`).then((res) => res.json()),
-    ]).then(([developerData]) => {
-      setDevelopers(developerData);
-    });
+    fetch(`${jsonApiConfig.api}/developers`)
+      .then((res) => res.json())
+      .then((developerData) => {
+        setDevelopers(developerData);
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки разработчиков:', error);
+        setDevelopers([]);
+      });
   }, []);
 
   useEffect(() => {
@@ -132,7 +135,7 @@ export default function AboutPage() {
               {developers.map((dev) => (
                 <div key={dev.id} className={classes.devBlockEl}>
                   <img
-                    src={`${uploadsConfig}/uploads/${dev.avatar}`}
+                    src={dev.avatar ? `${jsonApiConfig.uploads}/${dev.avatar}` : '/images/default-avatar.png'}
                     alt="avatar"
                     className={classes.avatar}
                   />

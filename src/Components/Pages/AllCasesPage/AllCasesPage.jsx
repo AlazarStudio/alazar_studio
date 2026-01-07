@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classes from './AllCasesPage.module.css';
-import serverConfig from '../../../serverConfig';
+import jsonApiConfig from '../../../jsonApiConfig';
 import CaseHomeCard from '../../ui/HomePage/CaseHomeCard';
 import CaseModal from '../../ui/CaseModal/CaseModal';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -78,11 +78,18 @@ export default function AllCasesPage() {
   useEffect(() => {
     const load = async () => {
       const [resCases, resCategories, resDevs] = await Promise.all([
-        fetch(`${serverConfig}/cases`),
-        fetch(`${serverConfig}/categories`),
-        fetch(`${serverConfig}/developers`),
+        fetch(`${jsonApiConfig.api}/cases`),
+        fetch(`${jsonApiConfig.api}/categories`),
+        fetch(`${jsonApiConfig.api}/developers`),
       ]);
-      setCases(await resCases.json());
+      const casesData = await resCases.json();
+      // Сортируем по order (по убыванию, чтобы больший order был сверху)
+      casesData.sort((a, b) => {
+        const orderA = a.order !== undefined ? a.order : a.id || 0;
+        const orderB = b.order !== undefined ? b.order : b.id || 0;
+        return orderB - orderA;
+      });
+      setCases(casesData);
       setCategories(await resCategories.json());
       setDevelopers(await resDevs.json());
     };
@@ -98,6 +105,14 @@ export default function AllCasesPage() {
       ''
     );
     const parts = path.split('/').filter(Boolean);
+    
+    if (parts.length === 0) {
+      // Просто /cases - ничего не открываем
+      setDrawerVisible(false);
+      setSelectedCase(null);
+      return;
+    }
+
     const [part1, part2] = parts;
 
     const categorySlug = part2 ? part1 : null;
@@ -108,7 +123,7 @@ export default function AllCasesPage() {
     );
     const matchedCase = cases.find(
       (c) =>
-        transliterate(c.title.replace(/["'«»„“]/g, '').toLowerCase()) ===
+        transliterate(c.title.replace(/["'«»„"]/g, '').toLowerCase()) ===
         caseSlug
     );
 
@@ -116,37 +131,25 @@ export default function AllCasesPage() {
     if (matchedCase) {
       setSelectedCase(matchedCase);
       setDrawerVisible(true);
+    } else {
+      setDrawerVisible(false);
+      setSelectedCase(null);
     }
   }, [location.pathname, cases, categories]);
 
   // Фильтрация
   const filteredCases = (
     activeCategoryId
-      ? cases.filter((c) => c.categoryIds.includes(activeCategoryId))
+      ? cases.filter((c) => c.categoryIds?.includes(activeCategoryId))
       : cases
   )
     .filter((c) => !c.shop)
     .filter((c) =>
-      c.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+      c.title?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
 
-  const pseudoRandom = (id) => {
-    let hash = 0;
-    for (let i = 0; i < id.length; i++) {
-      hash = (hash << 5) - hash + id.charCodeAt(i);
-      hash |= 0;
-    }
-    return Math.abs(hash % 10000);
-  };
-
-  const sortedCases = [
-    ...filteredCases
-      .filter((c) => c.positionTop)
-      .sort((a, b) => a.positionTop - b.positionTop),
-    ...filteredCases
-      .filter((c) => !c.positionTop)
-      .sort((a, b) => pseudoRandom(a.id) - pseudoRandom(b.id)),
-  ];
+  // Кейсы уже отсортированы по order при загрузке, просто используем их
+  const sortedCases = filteredCases;
 
   const handleCategorySelect = (id) => {
     const category = categories.find((cat) => cat.id === id);
@@ -155,11 +158,18 @@ export default function AllCasesPage() {
   };
 
   const handleCaseClick = (c) => {
-    const slug = transliterate(c.title.replace(/["'«»„“]/g, '').toLowerCase());
+    console.log('Case clicked:', c);
+    const cleanTitle = c.title.replace(/["'«»„"]/g, '');
+    const slug = transliterate(cleanTitle.toLowerCase());
     const category = categories.find((cat) => cat.id === activeCategoryId);
     const path = category
       ? `/cases/${transliterate(category.name.toLowerCase())}/${slug}`
       : `/cases/${slug}`;
+    
+    console.log('Setting case:', c);
+    console.log('Path:', path);
+    setSelectedCase(c);
+    setDrawerVisible(true);
     navigate(path);
   };
 
@@ -236,14 +246,16 @@ export default function AllCasesPage() {
         ))}
       </div>
 
-      <CaseModal
-        key={selectedCase?.id}
-        open={drawerVisible}
-        onClose={handleCloseModal}
-        caseItem={selectedCase}
-        allDevelopers={developers}
-        allCategories={categories}
-      />
+      {selectedCase && (
+        <CaseModal
+          key={selectedCase.id}
+          open={drawerVisible}
+          onClose={handleCloseModal}
+          caseItem={selectedCase}
+          allDevelopers={developers}
+          allCategories={categories}
+        />
+      )}
     </div>
   );
 }

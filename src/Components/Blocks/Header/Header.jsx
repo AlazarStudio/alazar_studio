@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Header.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import serverConfig from '../../../serverConfig';
 
 function transliterate(str) {
@@ -51,6 +51,17 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Определяем активную страницу
+  const isActive = (path) => {
+    if (path === '/') {
+      // Для главной страницы проверяем точное совпадение
+      return location.pathname === '/' || location.pathname === '';
+    }
+    // Для остальных страниц проверяем, что путь начинается с path
+    return location.pathname.startsWith(path) && location.pathname !== '/';
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,24 +100,48 @@ function Header() {
               onClick={() => navigate('/')}
             />
           </li>
-          <li >
-            
-            <Link to="/">ГЛАВНАЯ</Link>
+          <li>
+            <Link 
+              to="/" 
+              className={isActive('/') ? classes.active : ''}
+            >
+              ГЛАВНАЯ
+            </Link>
           </li>
           <li>
-            <Link to="/service">УСЛУГИ</Link>
+            <Link 
+              to="/service" 
+              className={isActive('/service') ? classes.active : ''}
+            >
+              УСЛУГИ
+            </Link>
           </li>
           <li>
-            <Link to="/cases">КЕЙСЫ</Link>
+            <Link 
+              to="/cases" 
+              className={isActive('/cases') ? classes.active : ''}
+            >
+              КЕЙСЫ
+            </Link>
           </li>
           {/* <li>
             <Link to="/shop">МАГАЗИН</Link>
           </li> */}
           <li>
-            <Link to="/about">О НАС</Link>
+            <Link 
+              to="/about" 
+              className={isActive('/about') ? classes.active : ''}
+            >
+              О НАС
+            </Link>
           </li>
           <li>
-            <Link to="/contacts">КОНТАКТЫ</Link>
+            <Link 
+              to="/contacts" 
+              className={isActive('/contacts') ? classes.active : ''}
+            >
+              КОНТАКТЫ
+            </Link>
           </li>
         </ul>
       </div>
@@ -139,17 +174,29 @@ function Header() {
         >
           <ul>
             <li>
-              <Link to="/" onClick={closeMenu}>
+              <Link 
+                to="/" 
+                onClick={closeMenu}
+                className={isActive('/') ? classes.active : ''}
+              >
                 ГЛАВНАЯ
               </Link>
             </li>
             <li>
-              <Link to="/service" onClick={closeMenu}>
+              <Link 
+                to="/service" 
+                onClick={closeMenu}
+                className={isActive('/service') ? classes.active : ''}
+              >
                 УСЛУГИ
               </Link>
             </li>
             <li>
-              <Link to="/cases" onClick={closeMenu}>
+              <Link 
+                to="/cases" 
+                onClick={closeMenu}
+                className={isActive('/cases') ? classes.active : ''}
+              >
                 КЕЙСЫ
               </Link>
             </li>
@@ -159,12 +206,20 @@ function Header() {
               </Link>
             </li> */}
             <li>
-              <Link to="/about" onClick={closeMenu}>
+              <Link 
+                to="/about" 
+                onClick={closeMenu}
+                className={isActive('/about') ? classes.active : ''}
+              >
                 О НАС
               </Link>
             </li>
             <li>
-              <Link to="/contacts" onClick={closeMenu}>
+              <Link 
+                to="/contacts" 
+                onClick={closeMenu}
+                className={isActive('/contacts') ? classes.active : ''}
+              >
                 КОНТАКТЫ
               </Link>
             </li>

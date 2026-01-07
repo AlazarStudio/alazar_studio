@@ -33,7 +33,7 @@
   cursor: pointer;
 }
 
-ul {
+.container ul {
   display: flex;
   width: 100%;
   max-width: 1400px;
@@ -56,6 +56,11 @@ li a {
 }
 
 li a:hover {
+  color: #f40087;
+  border-bottom: 1px solid #f40087;
+}
+
+li a.active {
   color: #f40087;
   border-bottom: 1px solid #f40087;
 }

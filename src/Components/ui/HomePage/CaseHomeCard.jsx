@@ -1,10 +1,9 @@
 import classes from './CaseHomeCard.module.css';
-import serverConfig from '../../../serverConfig';
-import uploadsConfig from '../../../uploadsConfig';
+import jsonApiConfig from '../../../jsonApiConfig';
 
 export default function CaseHomeCard({ caseItem, allCategories }) {
   const bg = caseItem.preview
-    ? `url(${uploadsConfig}/uploads/${caseItem.preview})`
+    ? `url(${jsonApiConfig.uploads}/${caseItem.preview})`
     : undefined;
 
   const matchedCategories = allCategories.filter((cat) =>
@@ -17,7 +16,7 @@ export default function CaseHomeCard({ caseItem, allCategories }) {
 
   return (
     <div className={classes.card} data-cursor-hover data-cursor-text="Смотреть">
-      <img src={`${uploadsConfig}/uploads/${caseItem.preview}`} />
+      <img src={`${jsonApiConfig.uploads}/${caseItem.preview}`} />
       <div className={classes.containerText}>
         <span className={classes.title}>{formattedTitle}</span>
         <div className={classes.categories}>

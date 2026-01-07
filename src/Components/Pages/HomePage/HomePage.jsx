@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from './HomePage.module.css';
-import serverConfig from '../../../serverConfig';
+import jsonApiConfig from '../../../jsonApiConfig';
 import CaseHomeCard from '../../ui/HomePage/CaseHomeCard';
 import CaseModal from '../../ui/CaseModal/CaseModal';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -38,14 +38,29 @@ export default function HomePage() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`${serverConfig}/cases`).then((res) => res.json()),
-      fetch(`${serverConfig}/categories`).then((res) => res.json()),
-      fetch(`${serverConfig}/developers`).then((res) => res.json()),
-    ]).then(([caseData, categoryData, developerData]) => {
-      setCases(caseData);
-      setCategories(categoryData);
-      setDevelopers(developerData);
-    });
+      fetch(`${jsonApiConfig.api}/cases`).then((res) => res.json()),
+      fetch(`${jsonApiConfig.api}/categories`).then((res) => res.json()),
+      fetch(`${jsonApiConfig.api}/developers`).then((res) => res.json()),
+    ])
+      .then(([caseData, categoryData, developerData]) => {
+        // Сортируем кейсы по order (по убыванию, чтобы больший order был сверху)
+        // Если order отсутствует, используем id как fallback
+        const sortedCases = caseData.sort((a, b) => {
+          const orderA = a.order !== undefined ? a.order : a.id || 0;
+          const orderB = b.order !== undefined ? b.order : b.id || 0;
+          return orderB - orderA; // По убыванию
+        });
+        setCases(sortedCases);
+        setCategories(categoryData);
+        setDevelopers(developerData);
+      })
+      .catch((error) => {
+        console.error('Ошибка при загрузке данных:', error);
+        // Устанавливаем пустые массивы при ошибке
+        setCases([]);
+        setCategories([]);
+        setDevelopers([]);
+      });
   }, []);
 
   useEffect(() => {
@@ -75,7 +90,7 @@ export default function HomePage() {
   };
 
   const handleCaseClick = (c) => {
-    const cleanTitle = c.title.replace(/["'«»„“]/g, '');
+    const cleanTitle = c.title.replace(/["'«»„"]/g, '');
     const caseSlug = transliterate(cleanTitle.toLowerCase());
     const category = categories.find((cat) => cat.id === activeCategoryId);
 
@@ -83,10 +98,10 @@ export default function HomePage() {
       ? `/${transliterate(category.name.toLowerCase())}/${caseSlug}`
       : `/${caseSlug}`;
 
-    scrollYRef.current = window.scrollY;
     setSelectedCase(c);
     setDrawerVisible(true);
     navigate(targetPath);
+    // Не трогаем скролл - он остается на месте
   };
 
   const handleCloseModal = () => {
@@ -97,6 +112,7 @@ export default function HomePage() {
     setTimeout(() => {
       setDrawerVisible(false);
       setSelectedCase(null);
+      // Не трогаем скролл - он остается на месте
     }, 300);
   };
 

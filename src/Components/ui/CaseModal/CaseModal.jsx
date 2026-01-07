@@ -14,9 +14,8 @@ import {
   ListItemText,
 } from '@mui/material';
 import styles from './CaseModal.module.css';
-import uploadsConfig from '../../../uploadsConfig';
+import jsonApiConfig from '../../../jsonApiConfig';
 import DiscussionModal from '../DiscussionModal/DiscussionModal';
-import serverConfig from '../../../serverConfig';
 import CloseIcon from '@mui/icons-material/Close';
 
 import jsPDF from 'jspdf';
@@ -37,10 +36,10 @@ export default function CaseModal({
   if (!caseItem) return null;
 
   const caseCategories = allCategories.filter((cat) =>
-    caseItem.categoryIds.includes(cat.id)
+    (caseItem.categoryIds || []).includes(cat.id)
   );
   const caseDevelopers = allDevelopers.filter((dev) =>
-    caseItem.developerIds.includes(dev.id)
+    (caseItem.developerIds || []).includes(dev.id)
   );
 
   const modalScrollRef = useRef(null);
@@ -50,10 +49,19 @@ export default function CaseModal({
     if (open) {
       // Блокировка прокрутки на фоне
       document.body.style.overflow = 'hidden';
-
-      return () => {
-        document.body.style.overflow = ''; // Восстановление прокрутки при закрытии
-      };
+    } else {
+      // Восстановление прокрутки при закрытии с задержкой
+      // чтобы MUI успел завершить анимацию закрытия
+      const timer = setTimeout(() => {
+        document.body.style.overflow = '';
+        document.body.removeAttribute('data-lenis-prevent');
+        // Дополнительная проверка через небольшую задержку
+        setTimeout(() => {
+          document.body.style.overflow = '';
+        }, 100);
+      }, 300);
+      
+      return () => clearTimeout(timer);
     }
   }, [open]);
 
@@ -106,9 +114,16 @@ export default function CaseModal({
   }, [caseItem]);
 
   const handleClose = () => {
+    onClose();
+    // Восстанавливаем скролл после закрытия с задержкой
     setTimeout(() => {
-      onClose();
-    }, 0);
+      document.body.style.overflow = '';
+      document.body.removeAttribute('data-lenis-prevent');
+      // Дополнительная проверка
+      setTimeout(() => {
+        document.body.style.overflow = '';
+      }, 100);
+    }, 300);
   };
 
   const handleCopyUrl = () => {
@@ -205,11 +220,11 @@ export default function CaseModal({
     await addTextPage(`<h2>Услуги</h2>${caseItem.serviceDescription}`);
 
     // Динамичные блоки
-    for (const block of caseItem.contentBlocks) {
+    for (const block of (caseItem.contentBlocks || [])) {
       if (block.type === 'text') {
         await addTextPage(block.value);
       } else if (block.type === 'image') {
-        await addImagePage(`${uploadsConfig}/uploads/${block.value}`);
+        await addImagePage(`${jsonApiConfig.uploads}/${block.value}`);
       }
     }
 
@@ -226,6 +241,7 @@ export default function CaseModal({
       anchor="bottom"
       open={open}
       ModalProps={{
+        disableScrollLock: true, // Отключаем автоматическое управление скроллом MUI
         BackdropProps: {
           sx: {
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
@@ -284,7 +300,7 @@ export default function CaseModal({
                           <Avatar
                             src={
                               dev.avatar
-                                ? `${uploadsConfig}/uploads/${dev.avatar}`
+                                ? `${jsonApiConfig.uploads}/${dev.avatar}`
                                 : ''
                             }
                           />
@@ -311,7 +327,7 @@ export default function CaseModal({
                           key={i}
                           src={
                             dev.avatar
-                              ? `${uploadsConfig}/uploads/${dev.avatar}`
+                              ? `${jsonApiConfig.uploads}/${dev.avatar}`
                               : ''
                           }
                           style={{
@@ -341,7 +357,7 @@ export default function CaseModal({
                       <Avatar
                         src={
                           dev.avatar
-                            ? `${uploadsConfig}/uploads/${dev.avatar}`
+                            ? `${jsonApiConfig.uploads}/${dev.avatar}`
                             : ''
                         }
                       />
@@ -361,7 +377,7 @@ export default function CaseModal({
               {/* {caseItem.images.map((img, index) => (
               <Box key={index} className={styles.imageBox}>
                 <img
-                  src={`${uploadsConfig}/uploads/${img}`}
+                  src={`${jsonApiConfig.uploads}/${img}`}
                   alt={`case-img-${index}`}
                   className={styles.image}
                 />
@@ -400,7 +416,7 @@ export default function CaseModal({
                 </div>
               </div>
 
-              {caseItem.contentBlocks.map((block, i) =>
+              {(caseItem.contentBlocks || []).map((block, i) =>
                 block.type === 'text' ? (
                   <div
                     key={i}
@@ -411,7 +427,7 @@ export default function CaseModal({
                   <img
                     key={i}
                     loading="lazy"
-                    src={`${uploadsConfig}/uploads/${block.value}`}
+                    src={`${jsonApiConfig.uploads}/${block.value}`}
                     alt="block"
                     className={styles.img}
                   />

@@ -25,6 +25,10 @@ main {
   padding: 0;
 }
 
+*{
+  outline: none !important;
+}
+
 :root {
   /* --blockWidth: 1300px; */
 }

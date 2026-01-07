@@ -8,7 +8,7 @@ function Footer({ children, ...props }) {
     <>
 
           <div className={classes.container}>
-            <span>©2024 ALAZAR STUDIO. ALL RIGHT RESERVED.</span>
+            <span>©{new Date().getFullYear()} ALAZAR STUDIO. ALL RIGHT RESERVED.</span>
           </div>
 
     </>

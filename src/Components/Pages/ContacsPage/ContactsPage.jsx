@@ -85,7 +85,7 @@ export default function ContactsPage() {
             Оборудование для 3D-печати в Черкесске
           </a>
           <iframe
-            src="https://yandex.ru/map-widget/v1/?ll=42.059418%2C44.216094&mode=search&oid=75256571169&ol=biz&utm_source=ntp_chrome&z=15.83"
+            src="https://yandex.ru/map-widget/v1/?ll=42.059418%2C44.214004&mode=search&oid=75256571169&ol=biz&utm_source=ntp_chrome&z=15.83"
             width="100%"
             height="600"
             allowFullScreen={true}

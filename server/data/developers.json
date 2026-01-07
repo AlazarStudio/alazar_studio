@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Чагарова Амина",
+    "position": "UI/UX дизайнер",
+    "email": "amina@mail.ru",
+    "avatar": "7c3e1cfa-0500-4901-9d04-1ca8d7bbbe40.webp",
+    "telegram": "123",
+    "instagram": "",
+    "whatsapp": "",
+    "vk": "",
+    "tiktok": "",
+    "behance": "",
+    "pinterest": "",
+    "artstation": "",
+    "id": 1
+  },
+  {
+    "name": "Кубанов Муса",
+    "position": "Frontend программист",
+    "email": "musa@mail.ru",
+    "avatar": "ac717687-6be3-4641-a6a8-c4f6389da789.webp",
+    "telegram": "",
+    "instagram": "",
+    "whatsapp": "",
+    "vk": "",
+    "tiktok": "",
+    "behance": "",
+    "pinterest": "",
+    "artstation": "",
+    "id": 2
+  }
+]
